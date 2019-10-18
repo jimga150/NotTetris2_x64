@@ -1,11 +1,11 @@
 function love.load()
 	--requires--
-	require "gameB.lua"
-	require "gameBmulti.lua"
-	require "gameA.lua"
-	require "menu.lua"
-	require "failed.lua"
-	require "rocket.lua"
+	require "gameB"
+	require "gameBmulti"
+	require "gameA"
+	require "menu"
+	require "failed"
+	require "rocket"
 	
 	vsync = true
 	
