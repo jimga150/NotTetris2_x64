@@ -8,6 +8,8 @@ function love.load()
 	require "rocket"
 	
 	vsync = true
+
+	love.graphics.setDefaultFilter("nearest", "nearest", 1 )
 	
 	autosize()
 	
@@ -443,20 +445,21 @@ end
 function newPaddedImageFont(filename, glyphs)
     local source = newImageData(filename)
     local w, h = source:getWidth(), source:getHeight()
-   
+
     -- Find closest power-of-two.
     local wp = math.pow(2, math.ceil(math.log(w)/math.log(2)))
     local hp = math.pow(2, math.ceil(math.log(h)/math.log(2)))
-   
+
     -- Only pad if needed:
     if wp ~= w or hp ~= h then
         local padded = love.image.newImageData(wp, hp)
         padded:paste(source, 0, 0)
-		local image = love.graphics.newImage(padded)
-		image:setFilter("nearest", "nearest")
-        return love.graphics.newImageFont(image, glyphs)
-    end
-	
+		-- local image = love.graphics.newImage(padded)
+		-- image:setFilter("nearest", "nearest")
+		-- replaced by setting default image padding in inittioalization
+        return love.graphics.newImageFont(padded, glyphs)
+	end
+
     return love.graphics.newImageFont(source, glyphs)
 end
 
