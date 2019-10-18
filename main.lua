@@ -572,7 +572,7 @@ function saveoptions()
 end
 
 function autosize()
-	local modes = love.graphics.getModes()
+	local modes = love.window.getFullscreenModes()
 	desktopwidth, desktopheight = modes[1]["width"], modes[1]["height"]
 end
 
