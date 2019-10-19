@@ -240,7 +240,7 @@ function menu_update(dt)
 	
 	if gamestate == "menu" or gamestate == "multimenu" or gamestate == "options" then
 		currenttime = love.timer.getTime()
-		if currenttime - oldtime > selectblinkrate then
+		if currenttime - oldtime > selectblinkrate then -- TODO: error about oldtime being nil here sometimes
 			selectblink = not selectblink
 			oldtime = currenttime
 		end
