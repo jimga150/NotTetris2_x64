@@ -1014,7 +1014,7 @@ function love.keypressed( key, unicode )
 				love.audio.play(pausesound)
 			else
 				if musicno < 4 then
-					love.audio.resume(music[musicno])
+					love.audio.play(music[musicno])
 				end
 			end
 		end
