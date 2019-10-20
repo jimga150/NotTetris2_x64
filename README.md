@@ -11,7 +11,3 @@ Todo:
 --Normal gamemode only drops 1 piece
 
 --error when exiting normal gamemode
-
---error when resuming normal gamemode
-
---rotational and lateral velocity is too low
