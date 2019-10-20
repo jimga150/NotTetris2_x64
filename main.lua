@@ -169,6 +169,8 @@ function love.load()
 	blockrot = 10
 	blockrestitution = 0.1
 	minmass = 1
+	blocktorque = 70000
+	blocklatforce = 2000
 	
 	optionschoices = {"volume", "color", "scale", "fullscrn"}
 	

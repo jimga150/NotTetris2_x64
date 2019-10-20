@@ -198,22 +198,22 @@ function gameB_update(dt)
 	if gamestate == "gameB" then
 		if love.keyboard.isDown( "x" ) then
 			if tetribodies[1]:getAngularVelocity() < 3 then
-				tetribodies[1]:applyTorque( 70 )
+				tetribodies[1]:applyTorque( blocktorque )
 			end
 		end
 		if love.keyboard.isDown( "y" ) or love.keyboard.isDown( "z" ) or love.keyboard.isDown( "w" ) then
 			if tetribodies[1]:getAngularVelocity() > -3 then
-				tetribodies[1]:applyTorque( -70 )
+				tetribodies[1]:applyTorque( -blocktorque )
 			end
 		end
 	
 		if love.keyboard.isDown( "left" ) then
 			local x, y = tetribodies[1]:getWorldCenter()
-			tetribodies[1]:applyForce( -70, 0, x, y )
+			tetribodies[1]:applyForce( -blocklatforce, 0, x, y )
 		end
 		if love.keyboard.isDown( "right" ) then
 			local x, y = tetribodies[1]:getWorldCenter()
-			tetribodies[1]:applyForce( 70, 0, x, y )
+			tetribodies[1]:applyForce( blocklatforce, 0, x, y )
 		end
 		
 		local x, y = tetribodies[1]:getLinearVelocity( )
