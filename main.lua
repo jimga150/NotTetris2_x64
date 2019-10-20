@@ -754,7 +754,7 @@ function love.keypressed( key, unicode )
 				optionsselection = 1
 			end
 		elseif key == "escape" then
-			love.event.push("q")
+			love.event.push("quit")
 		elseif key == "left" and playerselection > 1 then
 			playerselection = playerselection - 1
 		elseif key == "right" and playerselection < 3 then
