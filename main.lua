@@ -110,8 +110,8 @@ function love.load()
 	changevolume(volume)
 	
 	--IMAGES THAT WON'T CHANGE HUE:
-	rainbowgradient = love.graphics.newImage("graphics/rainbow.png")rainbowgradient:setFilter("nearest", "nearest")
-	
+	rainbowgradient = love.graphics.newImage("graphics/rainbow.png")
+
 	--Whitelist for highscorenames--
 	whitelist = {}
 	for i = 48, 57 do -- 0 - 9
@@ -241,7 +241,7 @@ function loadimages()
 	luigicry2 = newPaddedImage("graphics/versus/luigicry2.png")
 	
 	--rockets--
-	rocket1 = newPaddedImage("graphics/rocket1.png");rocket1:setFilter( "nearest", "nearest" )
+	rocket1 = newPaddedImage("graphics/rocket1.png");
 	rocket2 = newPaddedImage("graphics/rocket2.png")
 	rocket3 = newPaddedImage("graphics/rocket3.png")
 	spaceshuttle = newPaddedImage("graphics/spaceshuttle.png")
@@ -273,49 +273,7 @@ function loadimages()
 	tetrisfont = newPaddedImageFont("graphics/font.png", "0123456789abcdefghijklmnopqrstTuvwxyz.,'C-#_>:<! ")
 	whitefont = newPaddedImageFont("graphics/fontwhite.png", "0123456789abcdefghijklmnopqrstTuvwxyz.,'C-#_>:<!+ ")
 	love.graphics.setFont(tetrisfont)
-	
-	--filters!
-	stabyourselflogo:setFilter("nearest", "nearest")
-	logo:setFilter( "nearest", "nearest" )
-	title:setFilter( "nearest", "nearest" )
-	gametype:setFilter( "nearest", "nearest" )
-	mpmenu:setFilter( "nearest", "nearest" )
-	optionsmenu:setFilter( "nearest", "nearest" )
-	volumeslider:setFilter( "nearest", "nearest" )
-	gamebackground:setFilter( "nearest", "nearest" )
-	gamebackgroundcutoff:setFilter( "nearest", "nearest" )
-	gamebackgroundmulti:setFilter( "nearest", "nearest" )
-	multiresults:setFilter( "nearest", "nearest" )
-	number1:setFilter( "nearest", "nearest" )
-	number2:setFilter( "nearest", "nearest" )
-	number3:setFilter( "nearest", "nearest" )
-	gameover:setFilter( "nearest", "nearest" )
-	gameovercutoff:setFilter( "nearest", "nearest" )
-	pausegraphic:setFilter( "nearest", "nearest" )
-	pausegraphiccutoff:setFilter( "nearest", "nearest" )
-	marioidle:setFilter( "nearest", "nearest" )
-	mariojump:setFilter( "nearest", "nearest" )
-	mariocry1:setFilter( "nearest", "nearest" )
-	mariocry2:setFilter( "nearest", "nearest" )
-	luigiidle:setFilter( "nearest", "nearest" )
-	luigijump:setFilter( "nearest", "nearest" )
-	luigicry1:setFilter( "nearest", "nearest" )
-	luigicry2:setFilter( "nearest", "nearest" )
-	rocket2:setFilter( "nearest", "nearest" )
-	rocket3:setFilter( "nearest", "nearest" )
-	spaceshuttle:setFilter( "nearest", "nearest" )
-	rocketbackground:setFilter( "nearest", "nearest" )
-	bigrocketbackground:setFilter( "nearest", "nearest" )
-	bigrockettakeoffbackground:setFilter( "nearest", "nearest" )
-	smoke1left:setFilter( "nearest", "nearest" )
-	smoke1right:setFilter( "nearest", "nearest" )
-	smoke2left:setFilter( "nearest", "nearest" )
-	smoke2right:setFilter( "nearest", "nearest" )
-	fire1:setFilter( "nearest", "nearest" )
-	fire2:setFilter( "nearest", "nearest" )
-	firebig1:setFilter( "nearest", "nearest" )
-	firebig2:setFilter( "nearest", "nearest" )
-	congratsline:setFilter( "nearest", "nearest" )
+
 end
 
 function love.update(dt)
@@ -957,8 +915,8 @@ function love.keypressed( key, unicode )
 				changevolume(volume)
 			elseif optionsselection == 2 then
 				hue = 0.08
-				optionsmenu = newPaddedImage("graphics/options.png");optionsmenu:setFilter( "nearest", "nearest" )
-				volumeslider = newPaddedImage("graphics/volumeslider.png");volumeslider:setFilter( "nearest", "nearest" )
+				optionsmenu = newPaddedImage("graphics/options.png")
+				volumeslider = newPaddedImage("graphics/volumeslider.png")
 			elseif optionsselection == 3 then
 				if fullscreen == false then
 					if scale ~= suggestedscale then
