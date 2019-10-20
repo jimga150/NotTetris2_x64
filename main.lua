@@ -141,7 +141,7 @@ function love.load()
 
 	skipupdate = true
 	soundenabled = true
-	startdelay = 1
+	startdelay = 0 -- changed from 1, fixes oldtime = nil error
 	logoduration = 1.5
 	logodelay = 1
 	creditsdelay = 2
