@@ -142,6 +142,9 @@ function calcMassInertia(fixtureArray, body)
     center_x = center_x/totalMass
     center_y = center_y/totalMass
 
+	-- adjust inertia for true center of mass
+	totalInertia = totalInertia - totalMass*(center_x*center_x + center_y*center_y)
+
     body:setMassData(center_x, center_y, totalMass, totalInertia)
     return body
 end
