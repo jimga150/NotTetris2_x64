@@ -210,7 +210,7 @@ function gameA_draw()
 	
 	--line density counter
 	for i = 1, 18 do
-		local fullness = linearea[i] / 1024 / linecleartreshold
+		local fullness = linearea[i] / 1024 / lineclearthreshold
 		if fullness > 1 then
 			fullness = 1
 		end
@@ -898,7 +898,7 @@ function checklinedensity(active) --checks all 18 lines and, if active == true, 
 		linesremoved = {}
 		
 		for i = 1, 18 do
-			if linearea[i] > 1024 * linecleartreshold then
+			if linearea[i] > 1024 * lineclearthreshold then
 				if removedlines == false then
 					cuttingtimer = 0
 					removedlines = true

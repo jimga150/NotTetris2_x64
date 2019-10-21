@@ -177,7 +177,8 @@ function love.load()
 	colorizeduration = 3 --seconds
 	lineclearduration = 1.2 --seconds
 	lineclearblinks = 7 --i
-	linecleartreshold = 8.1 --in blocks
+	--noinspection GlobalCreationOutsideO
+	lineclearthreshold = 8.1 --in blocks
 	densityupdateinterval = 1 / 30 --in seconds
 	nextpiecerotspeed = 1 --rad per seconnd
 	minfps = 1 / 50 --dt doesn't go higher than this
