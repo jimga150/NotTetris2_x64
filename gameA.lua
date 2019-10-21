@@ -802,8 +802,8 @@ function checklinedensity(active) --checks all 18 lines and, if active == true, 
 						
 						--remove all points above the line
 						local coi = 2
-						local lastcutoff = nil
-						while coi <= #coords do
+						local lastcutoff
+                        while coi <= #coords do
 							if coords[coi] <= (line - 1) * 32 then
 								table.remove(coords, coi)
 								table.remove(coords, coi - 1)
@@ -832,7 +832,7 @@ function checklinedensity(active) --checks all 18 lines and, if active == true, 
 						
 						--remove all points below the line
 						local coi = 2
-						local lastcutoff = nil
+						local lastcutoff
 						while coi <= #coords do
 							if coords[coi] >= (line) * 32 then
 								table.remove(coords, coi)
