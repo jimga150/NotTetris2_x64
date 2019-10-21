@@ -587,9 +587,7 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 						shapegroups[a] = 0
 						local currentcoords = getPoints2table(b:getShape())
 						for shapecounter = 1, a - 1 do --Through all previously set groups
-                            --print("accessing fixture at ", shapecounter)
 							local coords = getPoints2table(tetrifixturescopy[shapecounter]:getShape())
-                            --print("Does exist")
 							for currentcoordsvar = 1, #currentcoords / 2 do --through all coords in the current shape
 								for coordsvar = 1, #coords / 2 do --through all coords in all previously set groups (Holy shit 6 stacked "for" loops; I code like an asshole!)
 									if math.abs(currentcoords[currentcoordsvar * 2 - 1] - coords[coordsvar * 2 - 1]) < 2 and math.abs(currentcoords[currentcoordsvar * 2] - coords[coordsvar * 2]) < 2 then
@@ -609,6 +607,13 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 					
 					for a = 1, numberofgroups do
 						if a == 1 then --reassign the old bodyid
+							local cotable
+							for b, c in pairs(tetrifixturescopy) do
+								if shapegroups[b] == a then
+									cotable = getPoints2table(c:getShape())
+								end
+							end
+							
 							local rotation = tetribodies[i - ioffset]:getAngle()
 							local bodyx, bodyy, bodymass = tetribodies[i - ioffset]:getX(), tetribodies[i - ioffset]:getY(), tetribodies[i - ioffset]:getMass()
 							tetribodies[i - ioffset]:destroy()
@@ -616,11 +621,9 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 							tetribodies[i - ioffset]:setAngle(rotation)
 							tetribodies[i - ioffset]:setMass(bodymass)
 							tetrifixtures[i - ioffset] = {}
+							
 							for b, c in pairs(tetrifixturescopy) do
 								if shapegroups[b] == a then
-                                    --print("accessing fixture at ", b)
-									local cotable = getPoints2table(tetrifixturescopy[b]:getShape()) -- TODO: destroyed fixture here
-                                    --print("does exist")
 									for var = 1, #cotable, 2 do
 										cotable[var], cotable[var + 1] = tetribodies[i - ioffset]:getLocalPoint(cotable[var], cotable[var + 1])
 									end
