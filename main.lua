@@ -17,25 +17,35 @@ function love.load()
 	fsaa = 16
 	
 	--noinspection GlobalCreationOutsideO
-	game_height_pixels = 144
+	game_height_pixels = 144 --number of pixels in the game height, to be scaled by an integer factor before display
 	--noinspection GlobalCreationOutsideO
-	game_width_pixels = 160
+	game_sp_width_pixels = 160 --number of pixels in the game width
+	--noinspection GlobalCreationOutsideO
+	game_mp_width_pixels = 274 --number of pixels in the game width for multiplayer mode
+	
+	--noinspection GlobalCreationOutsideO
+	heightcorrection = 0
+	--noinspection GlobalCreationOutsideO
+	widthcorrection = 0
+	
+	--noinspection GlobalCreationOutsideO
+	max_initial_suggestedscale = 5
 	
 	autosize() -- sets desktopheight and desktopwidth to the first possible mode that appears
 
-	suggestedscale = math.min(math.floor((desktopheight - 50) / game_height_pixels), math.floor((desktopwidth - 10) / game_width_pixels))
-	if suggestedscale > 5 then
-		suggestedscale = 5
+	suggestedscale = math.min(math.floor((desktopheight - heightcorrection) / game_height_pixels), math.floor((desktopwidth - widthcorrection) / game_sp_width_pixels))
+	if suggestedscale > max_initial_suggestedscale then
+		suggestedscale = max_initial_suggestedscale
 	end
 	
 	loadoptions()
 	
-	maxscale = math.min(math.floor(desktopheight / game_height_pixels), math.floor(desktopwidth / game_width_pixels))
-	maxmpscale = math.min(math.floor(desktopheight / game_height_pixels), math.floor(desktopwidth / 274))
+	maxscale = math.min(math.floor(desktopheight / game_height_pixels), math.floor(desktopwidth / game_sp_width_pixels))
+	maxmpscale = math.min(math.floor(desktopheight / game_height_pixels), math.floor(desktopwidth / game_mp_width_pixels))
 	
 	if fullscreen == false then
-		if scale ~= 5 then
-			love.graphics.setMode(game_width_pixels * scale, game_height_pixels * scale, false, vsync, fsaa)
+		if scale ~= max_initial_suggestedscale then
+			love.graphics.setMode(game_sp_width_pixels * scale, game_height_pixels * scale, false, vsync, fsaa)
 		end
 	else
 		love.graphics.setMode(0, 0, true, vsync, fsaa)
@@ -43,15 +53,15 @@ function love.load()
 		desktopwidth, desktopheight = love.graphics.getWidth(), love.graphics.getHeight()
 		saveoptions()
 		
-		suggestedscale = math.floor((desktopheight - 50) / game_height_pixels)
-		if suggestedscale > 5 then
-			suggestedscale = 5
+		suggestedscale = math.floor((desktopheight - heightcorrection) / game_height_pixels)
+		if suggestedscale > max_initial_suggestedscale then
+			suggestedscale = max_initial_suggestedscale
 		end
-		maxscale = math.min(math.floor(desktopheight / game_height_pixels), math.floor(desktopwidth / game_width_pixels))
+		maxscale = math.min(math.floor(desktopheight / game_height_pixels), math.floor(desktopwidth / game_sp_width_pixels))
 		
 		scale = maxscale
 		
-		fullscreenoffsetX = (desktopwidth - game_width_pixels * scale) / 2
+		fullscreenoffsetX = (desktopwidth - game_sp_width_pixels * scale) / 2
 		fullscreenoffsetY = (desktopheight - game_height_pixels * scale) / 2
 	end
 	
@@ -588,21 +598,21 @@ function togglefullscreen(fullscr)
 	if fullscr == false then
 		scale = suggestedscale
 		physicsscale = scale / 4
-		love.graphics.setMode(game_width_pixels * scale, game_height_pixels * scale, false, vsync, fsaa)
+		love.graphics.setMode(game_sp_width_pixels * scale, game_height_pixels * scale, false, vsync, fsaa)
 	else
 		love.graphics.setMode(0, 0, true, vsync, fsaa)
 		desktopwidth, desktopheight = love.graphics.getWidth(), love.graphics.getHeight()
-		suggestedscale = math.min(math.floor((desktopheight - 50) / game_height_pixels), math.floor((desktopwidth - 10) / game_width_pixels))
-		suggestedscale = math.min(math.floor((desktopheight - 50) / game_height_pixels), math.floor((desktopwidth - 10) / game_width_pixels))
-		if suggestedscale > 5 then
-			suggestedscale = 5
+		suggestedscale = math.min(math.floor((desktopheight - heightcorrection) / game_height_pixels), math.floor((desktopwidth - widthcorrection) / game_sp_width_pixels))
+		suggestedscale = math.min(math.floor((desktopheight - heightcorrection) / game_height_pixels), math.floor((desktopwidth - widthcorrection) / game_sp_width_pixels))
+		if suggestedscale > max_initial_suggestedscale then
+			suggestedscale = max_initial_suggestedscale
 		end
-		maxscale = math.min(math.floor(desktopheight / game_height_pixels), math.floor(desktopwidth / game_width_pixels))
+		maxscale = math.min(math.floor(desktopheight / game_height_pixels), math.floor(desktopwidth / game_sp_width_pixels))
 		
 		scale = maxscale
 		physicsscale = scale / 4
 		
-		fullscreenoffsetX = (desktopwidth - game_width_pixels * scale) / 2
+		fullscreenoffsetX = (desktopwidth - game_sp_width_pixels * scale) / 2
 		fullscreenoffsetY = (desktopheight - game_height_pixels * scale) / 2
 	end
 end
@@ -664,7 +674,7 @@ function savehighscores()
 end
 
 function changescale(i)
-	love.graphics.setMode(game_width_pixels * i, game_height_pixels * i, false, vsync, fsaa)
+	love.graphics.setMode(game_sp_width_pixels * i, game_height_pixels * i, false, vsync, fsaa)
 	nextpieceimg = {}
 	for j = 1, 7 do
 		nextpieceimg[j] = newPaddedImage("graphics/pieces/" .. j .. ".png", i)
@@ -1083,7 +1093,7 @@ function love.keypressed(key, unicode)
 	elseif gamestate == "gameBmulti" and gamestarted == false then
 		if key == "escape" then
 			if not fullscreen then
-				love.graphics.setMode(game_width_pixels * scale, game_height_pixels * scale, false, vsync, 0)
+				love.graphics.setMode(game_sp_width_pixels * scale, game_height_pixels * scale, false, vsync, 0)
 			end
 			gamestate = "multimenu"
 			if musicno < 4 then
@@ -1093,7 +1103,7 @@ function love.keypressed(key, unicode)
 	elseif gamestate == "gameBmulti" and gamestarted == true then
 		if key == "escape" then
 			if not fullscreen then
-				love.graphics.setMode(game_width_pixels * scale, game_height_pixels * scale, false, vsync, 0)
+				love.graphics.setMode(game_sp_width_pixels * scale, game_height_pixels * scale, false, vsync, 0)
 			end
 			gamestate = "multimenu"
 		end
@@ -1118,7 +1128,7 @@ function love.keypressed(key, unicode)
 				love.audio.play(music[musicno])
 			end
 			if not fullscreen then
-				love.graphics.setMode(game_width_pixels * scale, game_height_pixels * scale, false, vsync, 0)
+				love.graphics.setMode(game_sp_width_pixels * scale, game_height_pixels * scale, false, vsync, 0)
 			end
 			gamestate = "multimenu"
 		end

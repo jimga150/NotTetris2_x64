@@ -11,7 +11,7 @@ function failed_draw()
 		love.graphics.translate(fullscreenoffsetX, fullscreenoffsetY)
 		
 		--scissor
-		love.graphics.setScissor(fullscreenoffsetX, fullscreenoffsetY, game_width_pixels * scale, game_height_pixels * scale)
+		love.graphics.setScissor(fullscreenoffsetX, fullscreenoffsetY, game_sp_width_pixels * scale, game_height_pixels * scale)
 	end
 	
 	if gameno == 1 then
