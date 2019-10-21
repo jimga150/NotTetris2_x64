@@ -1,7 +1,7 @@
 function menu_load()
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	gamestate = "logo"
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	creditstext = {
 		"'Tm and C2011 sy,not",
 		"tetris 2 licensed to",
@@ -20,11 +20,11 @@ function menu_load()
 		" design and program ",
 		"by alexey pazhitnov#"
 	}
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	logotime = 0
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	bootsoundplayed = false
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	oldtime = love.timer.getTime()
 end
 
@@ -152,10 +152,10 @@ function menu_draw()
 				--name
 				love.graphics.print(string.lower(string.sub(highscorename[i], 1, 6)), 33 * scale, 110 * scale + 8 * scale * (i - 1), 0, scale)
 				--score
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				offsetX = 0
 				for i = 1, string.sub(tostring(highscore[i]), 1, 6):len() - 1 do
-					--noinspection GlobalCreationOutsideO
+					-- TODO: Justify global
 					offsetX = offsetX - 8 * scale
 				end
 				love.graphics.print(string.sub(tostring(highscore[i]), 1, 6), 137 * scale + offsetX, 110 * scale + 8 * scale * (i - 1), 0, scale)
@@ -165,10 +165,10 @@ function menu_draw()
 	
 	if gamestate == "highscoreentry" then
 		if highscorename[highscoreno]:len() < 6 then
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			offsetX = 0
 			for i = 1, highscorename[highscoreno]:len() do
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				offsetX = offsetX + 8 * scale
 			end
 			if cursorblink == true then
@@ -222,29 +222,29 @@ end
 
 function menu_update(dt)
 	if gamestate == "logo" then
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		logotime = logotime + dt
 		
 		if logotime >= logoduration and bootsoundplayed == false then
 			love.audio.stop(boot)
 			love.audio.play(boot)
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			bootsoundplayed = true
 		end
 		
 		if logotime >= logoduration + logodelay then
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			oldtime = love.timer.getTime()
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			gamestate = "credits"
 		end
 	end
 	
 	if gamestate == "credits" then
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		currenttime = love.timer.getTime()
 		if currenttime - oldtime > creditsdelay then
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			gamestate = "title"
 			love.graphics.setBackgroundColor(0, 0, 0)
 			love.audio.play(musictitle)
@@ -252,12 +252,12 @@ function menu_update(dt)
 	end
 	
 	if gamestate == "menu" or gamestate == "multimenu" or gamestate == "options" then
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		currenttime = love.timer.getTime()
 		if currenttime - oldtime > selectblinkrate then
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			selectblink = not selectblink
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			oldtime = currenttime
 		end
 	end
@@ -266,19 +266,19 @@ function menu_update(dt)
 		if optionsselection == 2 then
 			if love.keyboard.isDown("left") then
 				if hue > 0 then
-					--noinspection GlobalCreationOutsideO
+					-- TODO: Justify global
 					hue = hue - 0.5 * dt
 					if hue < 0 then
-						--noinspection GlobalCreationOutsideO
+						-- TODO: Justify global
 						hue = 0
 					end
 				end
 			elseif love.keyboard.isDown("right") then
 				if hue < 1 then
-					--noinspection GlobalCreationOutsideO
+					-- TODO: Justify global
 					hue = hue + 0.5 * dt
 					if hue > 1 then
-						--noinspection GlobalCreationOutsideO
+						-- TODO: Justify global
 						hue = 1
 					end
 				end
@@ -287,17 +287,17 @@ function menu_update(dt)
 	end
 	
 	if gamestate == "highscoreentry" then
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		currenttime = love.timer.getTime()
 		if currenttime - oldtime > cursorblinkrate then
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			cursorblink = not cursorblink
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			oldtime = currenttime
 		end
 		if currenttime - highscoremusicstart > 1.2 then
 			if musicchanged == false then
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				musicchanged = true
 				love.audio.stop(highscoreintro)
 				love.audio.play(musichighscore)

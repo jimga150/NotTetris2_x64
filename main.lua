@@ -7,48 +7,48 @@ function love.load()
 	require "failed.lua"
 	require "rocket.lua"
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	oldtime = love.timer.getTime()
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	vsync = true
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	fsaa = 16
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	game_height_pixels = 144 --number of pixels in the game height, to be scaled by an integer factor before display
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	game_sp_width_pixels = 160 --number of pixels in the game width
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	game_mp_width_pixels = 274 --number of pixels in the game width for multiplayer mode
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	physics_scale_factor = 4 -- factor by which to divide the scale by to get the physics scale, purely a visual fix
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	heightcorrection = 0
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	widthcorrection = 0
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	max_initial_suggestedscale = 5
 	
 	autosize() -- sets desktopheight and desktopwidth to the first possible mode that appears
 
 	-- scale to default to, based on the desktop width and height
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	suggestedscale = math.min(math.floor((desktopheight - heightcorrection) / game_height_pixels), math.floor((desktopwidth - widthcorrection) / game_sp_width_pixels))
 	if suggestedscale > max_initial_suggestedscale then
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		suggestedscale = max_initial_suggestedscale
 	end
 	
 	loadoptions()
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	maxscale = math.min(math.floor(desktopheight / game_height_pixels), math.floor(desktopwidth / game_sp_width_pixels))
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	maxmpscale = math.min(math.floor(desktopheight / game_height_pixels), math.floor(desktopwidth / game_mp_width_pixels))
 	
 	if fullscreen == false then
@@ -58,39 +58,39 @@ function love.load()
 	else
 		love.graphics.setMode(0, 0, true, vsync, fsaa)
 		love.mouse.setVisible(false)
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		desktopwidth, desktopheight = love.graphics.getWidth(), love.graphics.getHeight()
 		saveoptions()
 		
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		suggestedscale = math.floor((desktopheight - heightcorrection) / game_height_pixels)
 		if suggestedscale > max_initial_suggestedscale then
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			suggestedscale = max_initial_suggestedscale
 		end
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		maxscale = math.min(math.floor(desktopheight / game_height_pixels), math.floor(desktopwidth / game_sp_width_pixels))
 		
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		scale = maxscale
 		
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		fullscreenoffsetX = (desktopwidth - game_sp_width_pixels * scale) / 2 -- divide these by two to factor in the screen centering
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		fullscreenoffsetY = (desktopheight - game_height_pixels * scale) / 2
 	end
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	physicsscale = scale / physics_scale_factor
 	
 	--pieces--
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	tetriimages = {}
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	tetriimagedata = {}
 	
 	--SOUND--
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	music = {}
 	
 	music[1] = love.audio.newSource("sounds/themeA.ogg", "stream")
@@ -105,73 +105,73 @@ function love.load()
 	music[3]:setVolume(0.6)
 	music[3]:setLooping(true)
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	musictitle = love.audio.newSource("sounds/titlemusic.ogg", "stream")
 	musictitle:setVolume(0.6)
 	musictitle:setLooping(true)
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	musichighscore = love.audio.newSource("sounds/highscoremusic.ogg", "stream")
 	musichighscore:setVolume(0.6)
 	musichighscore:setLooping(true)
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	musicrocket4 = love.audio.newSource("sounds/rocket4.ogg", "stream")
 	musicrocket4:setVolume(0.6)
 	musicrocket4:setLooping(false)
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	musicrocket1to3 = love.audio.newSource("sounds/rocket1to3.ogg", "stream")
 	musicrocket1to3:setVolume(0.6)
 	musicrocket1to3:setLooping(false)
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	musicresults = love.audio.newSource("sounds/resultsmusic.ogg", "stream")
 	musicresults:setVolume(1)
 	musicresults:setLooping(false)
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	highscoreintro = love.audio.newSource("sounds/highscoreintro.ogg", "stream")
 	highscoreintro:setVolume(0.6)
 	highscoreintro:setLooping(false)
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	musicoptions = love.audio.newSource("sounds/musicoptions.ogg", "stream")
 	musicoptions:setVolume(1)
 	musicoptions:setLooping(true)
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	boot = love.audio.newSource("sounds/boot.ogg")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	blockfall = love.audio.newSource("sounds/blockfall.ogg", "stream")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	blockturn = love.audio.newSource("sounds/turn.ogg", "stream")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	blockmove = love.audio.newSource("sounds/move.ogg", "stream")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	lineclear = love.audio.newSource("sounds/lineclear.ogg", "stream")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	fourlineclear = love.audio.newSource("sounds/4lineclear.ogg", "stream")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	gameover1 = love.audio.newSource("sounds/gameover1.ogg", "stream")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	gameover2 = love.audio.newSource("sounds/gameover2.ogg", "stream")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	pausesound = love.audio.newSource("sounds/pause.ogg", "stream")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	highscorebeep = love.audio.newSource("sounds/highscorebeep.ogg", "stream")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	newlevel = love.audio.newSource("sounds/newlevel.ogg", "stream")
 	newlevel:setVolume(0.6)
 	
 	changevolume(volume)
 	
 	--IMAGES THAT WON'T CHANGE HUE:
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	rainbowgradient = love.graphics.newImage("graphics/rainbow.png") rainbowgradient:setFilter("nearest", "nearest")
 	
 	--Whitelist for highscorenames--
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	whitelist = {}
 	for i = 48, 57 do -- 0 - 9
 		whitelist[i] = true
@@ -195,71 +195,71 @@ function love.load()
 	
 	love.graphics.setBackgroundColor(255, 255, 255)
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	p1wins = 0
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	p2wins = 0
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	skipupdate = true
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	soundenabled = true
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	startdelay = 1
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	logoduration = 1.5
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	logodelay = 1
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	creditsdelay = 2
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	selectblinkrate = 0.29
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	cursorblinkrate = 0.14
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	selectblink = true
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	cursorblink = true
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	playerselection = 1
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	musicno = 1 --
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	gameno = 1 --
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	selection = 1 --
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	colorizeduration = 3 --seconds
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	lineclearduration = 1.2 --seconds
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	lineclearblinks = 7 --i
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	lineclearthreshold = 8.1 --in blocks
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	densityupdateinterval = 1 / 30 --in seconds
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	nextpiecerotspeed = 1 --rad per seconnd
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	minfps = 1 / 50 --dt doesn't go higher than this
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	scoreaddtime = 0.5
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	startdelaytime = 0
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	blockstartY = -64 --where new blocks are created
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	losingY = 0 --lose if block 1 collides above this line
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	blockrot = 10
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	minmass = 1
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	optionschoices = { "volume", "color", "scale", "fullscrn" }
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	piececenter = {}
 	piececenter[1] = { 17, 5 }
 	piececenter[2] = { 13, 9 }
@@ -269,7 +269,7 @@ function love.load()
 	piececenter[6] = { 13, 9 }
 	piececenter[7] = { 13, 9 }
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	piececenterpreview = {}
 	piececenterpreview[1] = { 17, 5 }
 	piececenterpreview[2] = { 15, 7 }
@@ -293,115 +293,115 @@ function loadimages()
 	--IMAGES--
 
 	--menu--
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	stabyourselflogo = newPaddedImage("graphics/stabyourselflogo.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	logo = newPaddedImage("graphics/logo.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	title = newPaddedImage("graphics/title.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	gametype = newPaddedImage("graphics/gametype.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	mpmenu = newPaddedImage("graphics/mpmenu.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	optionsmenu = newPaddedImage("graphics/options.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	volumeslider = newPaddedImage("graphics/volumeslider.png")
 
 	--game--
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	gamebackground = newPaddedImage("graphics/gamebackground.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	gamebackgroundcutoff = newPaddedImage("graphics/gamebackgroundgamea.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	gamebackgroundmulti = newPaddedImage("graphics/gamebackgroundmulti.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	multiresults = newPaddedImage("graphics/multiresults.png")
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	number1 = newPaddedImage("graphics/versus/number1.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	number2 = newPaddedImage("graphics/versus/number2.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	number3 = newPaddedImage("graphics/versus/number3.png")
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	gameover = newPaddedImage("graphics/gameover.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	gameovercutoff = newPaddedImage("graphics/gameovercutoff.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	pausegraphic = newPaddedImage("graphics/pause.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	pausegraphiccutoff = newPaddedImage("graphics/pausecutoff.png")
 	
 	--figures--
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	marioidle = newPaddedImage("graphics/versus/marioidle.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	mariojump = newPaddedImage("graphics/versus/mariojump.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	mariocry1 = newPaddedImage("graphics/versus/mariocry1.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	mariocry2 = newPaddedImage("graphics/versus/mariocry2.png")
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	luigiidle = newPaddedImage("graphics/versus/luigiidle.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	luigijump = newPaddedImage("graphics/versus/luigijump.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	luigicry1 = newPaddedImage("graphics/versus/luigicry1.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	luigicry2 = newPaddedImage("graphics/versus/luigicry2.png")
 	
 	--rockets--
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	rocket1 = newPaddedImage("graphics/rocket1.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	rocket2 = newPaddedImage("graphics/rocket2.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	rocket3 = newPaddedImage("graphics/rocket3.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	spaceshuttle = newPaddedImage("graphics/spaceshuttle.png")
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	rocketbackground = newPaddedImage("graphics/rocketbackground.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	bigrocketbackground = newPaddedImage("graphics/bigrocketbackground.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	bigrockettakeoffbackground = newPaddedImage("graphics/bigrockettakeoffbackground.png")
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	smoke1left = newPaddedImage("graphics/smoke1left.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	smoke1right = newPaddedImage("graphics/smoke1right.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	smoke2left = newPaddedImage("graphics/smoke2left.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	smoke2right = newPaddedImage("graphics/smoke2right.png")
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	fire1 = newPaddedImage("graphics/fire1.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	fire2 = newPaddedImage("graphics/fire2.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	firebig1 = newPaddedImage("graphics/firebig1.png")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	firebig2 = newPaddedImage("graphics/firebig2.png")
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	congratsline = newPaddedImage("graphics/congratsline.png")
 	
 	--nextpiece
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	nextpieceimg = {}
 	for i = 1, 7 do
 		nextpieceimg[i] = newPaddedImage("graphics/pieces/" .. i .. ".png", scale)
 	end
 	
 	--font--
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	tetrisfont = newPaddedImageFont("graphics/font.png", "0123456789abcdefghijklmnopqrstTuvwxyz.,'C-#_>:<! ")
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	whitefont = newPaddedImageFont("graphics/fontwhite.png", "0123456789abcdefghijklmnopqrstTuvwxyz.,'C-#_>:<!+ ")
 	love.graphics.setFont(tetrisfont)
 	
@@ -452,7 +452,7 @@ end
 
 function love.update(dt)
 	if gamestate == nil then
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		startdelaytime = startdelaytime + dt
 		if startdelaytime >= startdelay then
 			menu_load()
@@ -460,7 +460,7 @@ function love.update(dt)
 	end
 	
 	if skipupdate then
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		skipupdate = false
 		return
 	end
@@ -650,58 +650,58 @@ function loadoptions()
 				end
 				v = math.floor(v * 10) / 10
 				
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				volume = v
 			
 			elseif split2[1] == "hue" then
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				hue = tonumber(split2[2])
 			
 			elseif split2[1] == "scale" then
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				scale = tonumber(split2[2])
 			
 			elseif split2[1] == "fullscreen" then
 				if split2[2] == "true" then
-					--noinspection GlobalCreationOutsideO
+					-- TODO: Justify global
 					fullscreen = true
 				else
-					--noinspection GlobalCreationOutsideO
+					-- TODO: Justify global
 					fullscreen = false
 				end
 			end
 		end
 		
 		if volume == nil then
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			volume = 1
 		end
 		if hue == nil then
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			hue = 0.08
 		end
 		if fullscreen == nil then
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			fullscreen = false
 		end
 		
 		if scale == nil then
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			scale = suggestedscale
 		end
 	
 	
 	else
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		volume = 1
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		hue = 0.08
 	
 		autosize()
 	
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		scale = suggestedscale
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		fullscreen = false
 	end
 	
@@ -721,73 +721,73 @@ end
 
 function autosize()
 	local modes = love.graphics.getModes()
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	desktopwidth, desktopheight = modes[1]["width"], modes[1]["height"]
 end
 
 function togglefullscreen(fullscr)
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	fullscreen = fullscr
 	love.mouse.setVisible(not fullscreen)
 	if fullscr == false then
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		scale = suggestedscale
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		physicsscale = scale / physics_scale_factor
 		love.graphics.setMode(game_sp_width_pixels * scale, game_height_pixels * scale, false, vsync, fsaa)
 	else
 		love.graphics.setMode(0, 0, true, vsync, fsaa)
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		desktopwidth, desktopheight = love.graphics.getWidth(), love.graphics.getHeight()
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		suggestedscale = math.min(math.floor((desktopheight - heightcorrection) / game_height_pixels), math.floor((desktopwidth - widthcorrection) / game_sp_width_pixels))
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		suggestedscale = math.min(math.floor((desktopheight - heightcorrection) / game_height_pixels), math.floor((desktopwidth - widthcorrection) / game_sp_width_pixels))
 		if suggestedscale > max_initial_suggestedscale then
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			suggestedscale = max_initial_suggestedscale
 		end
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		maxscale = math.min(math.floor(desktopheight / game_height_pixels), math.floor(desktopwidth / game_sp_width_pixels))
 		
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		scale = maxscale
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		physicsscale = scale / physics_scale_factor
 		
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		fullscreenoffsetX = (desktopwidth - game_sp_width_pixels * scale) / 2
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		fullscreenoffsetY = (desktopheight - game_height_pixels * scale) / 2
 	end
 end
 
 function loadhighscores()
 	if gameno == 1 then
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		fileloc = "highscoresA.txt"
 	else
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		fileloc = "highscoresB.txt"
 	end
 	
 	if love.filesystem.exists(fileloc) then
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		highdata = love.filesystem.read(fileloc)
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		highdata = highdata:split(";")
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		highscore = {}
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		highscorename = {}
 		for i = 1, 3 do
 			highscore[i] = tonumber(highdata[i * 2])
 			highscorename[i] = string.lower(highdata[i * 2 - 1])
 		end
 	else
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		highscore = {}
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		highscorename = {}
 		highscore[1] = 0
 		highscorename[1] = ""
@@ -800,9 +800,9 @@ function loadhighscores()
 end
 
 function newhighscores()
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	highscore = {}
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	highscorename = {}
 	highscore[1] = 0
 	highscorename[1] = ""
@@ -815,17 +815,17 @@ end
 
 function savehighscores()
 	if gameno == 1 then
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		fileloc = "highscoresA.txt"
 	else
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		fileloc = "highscoresB.txt"
 	end
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	highdata = ""
 	for i = 1, 3 do
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		highdata = highdata .. highscorename[i] .. ";" .. highscore[i] .. ";"
 	end
 	love.filesystem.write(fileloc, highdata .. "\n")
@@ -833,12 +833,12 @@ end
 
 function changescale(i)
 	love.graphics.setMode(game_sp_width_pixels * i, game_height_pixels * i, false, vsync, fsaa)
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	nextpieceimg = {}
 	for j = 1, 7 do
 		nextpieceimg[j] = newPaddedImage("graphics/pieces/" .. j .. ".png", i)
 	end
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	physicsscale = i / physics_scale_factor
 end
 
@@ -969,21 +969,21 @@ function love.keypressed(key, unicode)
 					love.audio.stop(musictitle)
 					love.audio.play(musicoptions)
 				end
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				optionsselection = 1
 			end
 		elseif key == "escape" then
 			love.event.push("q")
 		elseif key == "left" and playerselection > 1 then
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			playerselection = playerselection - 1
 		elseif key == "right" and playerselection < 3 then
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			playerselection = playerselection + 1
 		end
 	
 	elseif gamestate == "menu" then
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		oldmusicno = musicno
 		if key == "escape" then
 			if musicno < 4 then
@@ -1004,73 +1004,73 @@ function love.keypressed(key, unicode)
 			end
 		elseif key == "left" then
 			if selection == 2 or selection == 4 or selection == 6 then
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				selection = selection - 1
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				selectblink = true
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				oldtime = love.timer.getTime()
 			end
 		elseif key == "right" then
 			if selection == 1 or selection == 3 or selection == 5 then
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				selection = selection + 1
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				selectblink = true
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				oldtime = love.timer.getTime()
 			end
 		elseif key == "up" then
 			if selection == 3 or selection == 4 or selection == 5 or selection == 6 then
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				selection = selection - 2
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				selectblink = true
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				oldtime = love.timer.getTime()
 				if selection < 3 then
-					--noinspection GlobalCreationOutsideO
+					-- TODO: Justify global
 					selection = gameno
-					--noinspection GlobalCreationOutsideO
+					-- TODO: Justify global
 					selectblink = false
-					--noinspection GlobalCreationOutsideO
+					-- TODO: Justify global
 					oldtime = love.timer.getTime()
 				end
 			elseif selection == 1 or selection == 2 then
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				selection = musicno + 2
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				selectblink = false
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				oldtime = love.timer.getTime()
 			end
 		elseif key == "down" then
 			if selection == 1 or selection == 2 or selection == 3 or selection == 4 then
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				selection = selection + 2
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				selectblink = true
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				oldtime = love.timer.getTime()
 				if selection > 2 and selection < 5 then
-					--noinspection GlobalCreationOutsideO
+					-- TODO: Justify global
 					selection = musicno + 2
-					--noinspection GlobalCreationOutsideO
+					-- TODO: Justify global
 					selectblink = false
-					--noinspection GlobalCreationOutsideO
+					-- TODO: Justify global
 					oldtime = love.timer.getTime()
 				end
 			elseif selection == 5 or selection == 6 then
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				selection = gameno
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				selectblink = false
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				oldtime = love.timer.getTime()
 			end
 		end
 		if selection > 2 and key ~= "escape" then
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			musicno = selection - 2
 			if oldmusicno ~= musicno and oldmusicno ~= 4 then
 				love.audio.stop(music[oldmusicno])
@@ -1079,7 +1079,7 @@ function love.keypressed(key, unicode)
 				love.audio.play(music[musicno])
 			end
 		elseif key ~= "escape" then
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			gameno = selection
 			loadhighscores()
 		end
@@ -1095,36 +1095,36 @@ function love.keypressed(key, unicode)
 			loadimages()
 			gamestate = "title"
 		elseif key == "down" then
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			optionsselection = optionsselection + 1
 			if optionsselection > #optionschoices then
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				optionsselection = 1
 			end
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			selectblink = true
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			oldtime = love.timer.getTime()
 		
 		elseif key == "up" then
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			optionsselection = optionsselection - 1
 			if optionsselection == 0 then
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				optionsselection = #optionschoices
 			end
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			selectblink = true
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			oldtime = love.timer.getTime()
 		
 		elseif key == "left" then
 			if optionsselection == 1 then
 				if volume >= 0.1 then
-					--noinspection GlobalCreationOutsideO
+					-- TODO: Justify global
 					volume = volume - 0.1
 					if volume < 0.1 then
-						--noinspection GlobalCreationOutsideO
+						-- TODO: Justify global
 						volume = 0
 					end
 					changevolume(volume)
@@ -1133,7 +1133,7 @@ function love.keypressed(key, unicode)
 			elseif optionsselection == 3 then
 				if fullscreen == false then
 					if scale > 1 then
-						--noinspection GlobalCreationOutsideO
+						-- TODO: Justify global
 						scale = scale - 1
 						changescale(scale)
 					end
@@ -1148,7 +1148,7 @@ function love.keypressed(key, unicode)
 		elseif key == "right" then
 			if optionsselection == 1 then
 				if volume <= 0.9 then
-					--noinspection GlobalCreationOutsideO
+					-- TODO: Justify global
 					volume = volume + 0.1
 					changevolume(volume)
 				end
@@ -1156,7 +1156,7 @@ function love.keypressed(key, unicode)
 			elseif optionsselection == 3 then
 				if fullscreen == false then
 					if scale < maxscale then
-						--noinspection GlobalCreationOutsideO
+						-- TODO: Justify global
 						scale = scale + 1
 						changescale(scale)
 					end
@@ -1170,16 +1170,16 @@ function love.keypressed(key, unicode)
 		
 		elseif key == "return" then
 			if optionsselection == 1 then
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				volume = 1
 				changevolume(volume)
 			elseif optionsselection == 2 then
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				hue = 0.08
 			elseif optionsselection == 3 then
 				if fullscreen == false then
 					if scale ~= suggestedscale then
-						--noinspection GlobalCreationOutsideO
+						-- TODO: Justify global
 						scale = suggestedscale
 						changescale(scale)
 					end
@@ -1192,7 +1192,7 @@ function love.keypressed(key, unicode)
 		end
 	
 	elseif gamestate == "multimenu" then
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		oldmusicno = musicno
 		if key == "escape" then
 			if musicno < 4 then
@@ -1205,73 +1205,73 @@ function love.keypressed(key, unicode)
 			gameBmulti_load()
 		elseif key == "left" or key == "a" then
 			if selection == 2 or selection == 4 or selection == 6 then
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				selection = selection - 1
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				selectblink = true
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				oldtime = love.timer.getTime()
 			end
 		elseif key == "right" or key == "d" then
 			if selection == 1 or selection == 3 or selection == 5 then
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				selection = selection + 1
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				selectblink = true
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				oldtime = love.timer.getTime()
 			end
 		elseif key == "up" or key == "w" then
 			if selection == 3 or selection == 4 or selection == 5 or selection == 6 then
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				selection = selection - 2
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				selectblink = true
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				oldtime = love.timer.getTime()
 				if selection < 3 then
-					--noinspection GlobalCreationOutsideO
+					-- TODO: Justify global
 					selection = gameno
-					--noinspection GlobalCreationOutsideO
+					-- TODO: Justify global
 					selectblink = false
-					--noinspection GlobalCreationOutsideO
+					-- TODO: Justify global
 					oldtime = love.timer.getTime()
 				end
 			elseif selection == 1 or selection == 2 then
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				selection = musicno + 2
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				selectblink = false
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				oldtime = love.timer.getTime()
 			end
 		elseif key == "down" or key == "s" then
 			if selection == 1 or selection == 2 or selection == 3 or selection == 4 then
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				selection = selection + 2
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				selectblink = true
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				oldtime = love.timer.getTime()
 				if selection > 2 and selection < 5 then
-					--noinspection GlobalCreationOutsideO
+					-- TODO: Justify global
 					selection = musicno + 2
-					--noinspection GlobalCreationOutsideO
+					-- TODO: Justify global
 					selectblink = false
-					--noinspection GlobalCreationOutsideO
+					-- TODO: Justify global
 					oldtime = love.timer.getTime()
 				end
 			elseif selection == 5 or selection == 6 then
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				selection = gameno
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				selectblink = false
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				oldtime = love.timer.getTime()
 			end
 		end
 		if selection > 2 and key ~= "return" and key ~= "escape" then
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			musicno = selection - 2
 			if oldmusicno ~= musicno and oldmusicno ~= 4 then
 				love.audio.stop(music[oldmusicno])
@@ -1280,7 +1280,7 @@ function love.keypressed(key, unicode)
 				love.audio.play(music[musicno])
 			end
 		elseif key ~= "return" and key ~= "escape" then
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			gameno = selection
 			loadhighscores()
 		end
@@ -1288,7 +1288,7 @@ function love.keypressed(key, unicode)
 	elseif gamestate == "gameA" or gamestate == "gameB" or gamestate == "failingA" or gamestate == "failingB" then
 		
 		if key == "return" then
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			pause = not pause
 			
 			if pause == true then
@@ -1305,7 +1305,7 @@ function love.keypressed(key, unicode)
 		end
 		if gamestate == "gameA" or gamestate == "gameB" then
 			if key == "escape" then
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				oldtime = love.timer.getTime()
 				gamestate = "menu"
 			end
@@ -1385,14 +1385,14 @@ function love.keypressed(key, unicode)
 			end
 		elseif key == "backspace" then
 			if highscorename[highscoreno]:len() > 0 then
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				cursorblink = true
 				highscorename[highscoreno] = string.sub(highscorename[highscoreno], 1, highscorename[highscoreno]:len() - 1)
 			end
 		
 		elseif whitelist[unicode] == true then
 			if highscorename[highscoreno]:len() < 6 then
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				cursorblink = true
 				highscorename[highscoreno] = highscorename[highscoreno] .. string.char(unicode)
 				love.audio.stop(highscorebeep)

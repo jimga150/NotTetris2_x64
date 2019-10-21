@@ -1,39 +1,39 @@
 function gameB_load()
 	gamestate = "gameB"
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	pause = false
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	difficulty_speed = 100
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	scorescore = 0
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	levelscore = 0
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	linesscore = 0
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	nextpiecerot = 0
 	
 	--PHYSICS--
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	meter = 30
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	world = love.physics.newWorld(0, -720, 960, 1050, 0, 500, true)
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	tetrikind = {}
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	wallshapes = {}
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	tetrishapes = {}
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	tetribodies = {}
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	offsetshapes = {}
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	wallbodies = love.physics.newBody(world, 32, -64, 0, 0) --WALLS
 	wallshapes["left"] = love.physics.newPolygonShape(wallbodies, 0, -64, 0, 672, 32, 672, 32, -64)
 	wallshapes["left"]:setData("left")
@@ -50,7 +50,7 @@ function gameB_load()
 	-----------
 	
 	--FIRST "nextpiece"-
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	nextpiece = math.random(7)
 	
 	game_addTetriB()
@@ -59,13 +59,13 @@ end
 
 function game_addTetriB()
 	--NEW BLOCK--
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	randomblock = nextpiece
 	createtetriB(randomblock, 1, 224, blockstartY)
 	tetribodies[1]:setLinearVelocity(0, difficulty_speed)
 	
 	--RANDOMIZE
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	nextpiece = math.random(7)
 end
 
@@ -166,38 +166,38 @@ function gameB_draw()
 	
 	--SCORES---------------------------------------
 	--"score"--
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	offsetX = 0
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	scorestring = tostring(scorescore)
 	for i = 1, scorestring:len() - 1 do
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		offsetX = offsetX - 8 * scale
 	end
 	love.graphics.print(scorescore, game_height_pixels * scale + offsetX, 24 * scale, 0, scale)
 	
 	
 	--"level"--
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	offsetX = 0
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	scorestring = tostring(levelscore)
 	for i = 1, scorestring:len() - 1 do
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		offsetX = offsetX - 8 * scale
 	end
 	love.graphics.print(levelscore, 136 * scale + offsetX, 56 * scale, 0, scale)
 	
 	--"tiles"--
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	offsetX = 0
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	scorestring = tostring(linesscore)
 	for i = 1, scorestring:len() - 1 do
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		offsetX = offsetX - 8 * scale
 	end
 	love.graphics.print(linesscore, 136 * scale + offsetX, 80 * scale, 0, scale)
@@ -215,10 +215,10 @@ end
 
 function gameB_update(dt)
 	--NEXTPIECE ROTATION (rotating allday erryday)
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	nextpiecerot = nextpiecerot + nextpiecerotspeed * dt
 	while nextpiecerot > math.pi * 2 do
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		nextpiecerot = nextpiecerot - math.pi * 2
 	end
 	
@@ -262,11 +262,11 @@ function gameB_update(dt)
 	world:update(dt)
 	
 	if gamestate == "failingB" then
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		clearcheck = true
 		for _, v in pairs(tetribodies) do
 			if v:getY() < 648 then
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				clearcheck = false
 			end
 		end
@@ -315,9 +315,9 @@ function endblockB()
 		
 		tetribodies[1] = nil
 	
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		linesscore = linesscore + 1
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		scorescore = linesscore * 100
 		
 		love.audio.stop(blockfall)

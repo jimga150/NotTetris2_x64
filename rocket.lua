@@ -1,5 +1,5 @@
 function rocket_load()
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	rocketscores = {}
 	if gameno == 1 then
 		rocketscores[1] = 5000
@@ -22,13 +22,13 @@ function rocket_load()
 				love.audio.stop(musicrocket4)
 				love.audio.play(musicrocket4)
 			end
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			rockettimer = love.timer.getTime()
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			gamestate = "rocket" .. tostring(i)
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			currenttime = love.timer.getTime()
-			--noinspection GlobalCreationOutsideO
+			-- TODO: Justify global
 			timelapsed = currenttime - rockettimer
 			break
 		end
@@ -61,9 +61,9 @@ function rocket_draw()
 		love.graphics.setScissor(fullscreenoffsetX, fullscreenoffsetY, game_sp_width_pixels * scale, game_height_pixels * scale)
 	end
 	
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	currenttime = love.timer.getTime()
-	--noinspection GlobalCreationOutsideO
+	-- TODO: Justify global
 	timelapsed = currenttime - rockettimer
 	
 	--background
@@ -74,10 +74,10 @@ function rocket_draw()
 	
 	--rocket position
 	if gamestate == "rocket4" then
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		rocketpos = 112 - 112 * ((timelapsed - 12) / 18)
 	else
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		rocketpos = 112 - 112 * ((timelapsed - 8) / 18)
 	end
 	
@@ -151,11 +151,11 @@ function rocket_draw()
 	
 	--text
 	if gamestate == "rocket4" then
-		--noinspection GlobalCreationOutsideO
+		-- TODO: Justify global
 		symbolsnumber = 0
 		for i = 16, 1, -1 do
 			if timelapsed > 35.2 + 1.6 * (i / 16) then
-				--noinspection GlobalCreationOutsideO
+				-- TODO: Justify global
 				symbolsnumber = i
 				break
 			end
