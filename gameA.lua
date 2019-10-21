@@ -33,24 +33,24 @@ function gameA_load()
 	data = {}
 	
 	wallbodies = love.physics.newBody(world, 32, -64, "static") --WALLS
-	wallshapes[0] = love.physics.newFixture(wallbodies,
+	wallshapes["left"] = love.physics.newFixture(wallbodies,
 		love.physics.newPolygonShape(-8, -64, -8, 672, 24, 672, 24, -64),
 		1)
-	wallshapes[0]:setUserData({ "left" })
-	wallshapes[0]:setFriction(0.00001)
-	wallshapes[1] = love.physics.newFixture(wallbodies,
+	wallshapes["left"]:setUserData({ "left" })
+	wallshapes["left"]:setFriction(0.00001)
+	wallshapes["right"] = love.physics.newFixture(wallbodies,
 		love.physics.newPolygonShape(352, -64, 352, 672, 384, 672, 384, -64),
 		1)
-	wallshapes[1]:setUserData({ "right" })
-	wallshapes[1]:setFriction(0.00001)
-	wallshapes[2] = love.physics.newFixture(wallbodies,
+	wallshapes["right"]:setUserData({ "right" })
+	wallshapes["right"]:setFriction(0.00001)
+	wallshapes["ground"] = love.physics.newFixture(wallbodies,
 		love.physics.newPolygonShape(24, 640, 24, 672, 352, 672, 352, 640),
 		1)
-	wallshapes[2]:setUserData({ "ground" })
-	wallshapes[3] = love.physics.newFixture(wallbodies,
+	wallshapes["ground"]:setUserData({ "ground" })
+	wallshapes["ceiling"] = love.physics.newFixture(wallbodies,
 		love.physics.newPolygonShape(-8, -96, 384, -96, 384, -64, -8, -64),
 		1)
-	wallshapes[3]:setUserData({ "ceiling" })
+	wallshapes["ceiling"]:setUserData({ "ceiling" })
 	
 	world:setCallbacks(collideA)
 	-----------
@@ -1193,8 +1193,8 @@ function collideA(a, b, coll) --box2d callback. calls endblock.
 					love.audio.stop(gameover1)
 					love.audio.play(gameover1)
 					
-					wallshapes[2]:destroy()
-					wallshapes[2] = nil
+					wallshapes["ground"]:destroy()
+					wallshapes["ground"] = nil
 				else
 					tetrikind[highestbody() + 1] = tetrikind[1]
 					
