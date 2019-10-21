@@ -1,26 +1,42 @@
 function gameB_load()
+	--noinspection GlobalCreationOutsideO
 	gamestate = "gameB"
 	
+	--noinspection GlobalCreationOutsideO
 	pause = false
 	
+	--noinspection GlobalCreationOutsideO
 	difficulty_speed = 100
 	
+	--noinspection GlobalCreationOutsideO
 	scorescore = 0
+	--noinspection GlobalCreationOutsideO
 	levelscore = 0
+	--noinspection GlobalCreationOutsideO
 	linesscore = 0
+	--noinspection GlobalCreationOutsideO
 	nextpiecerot = 0
 	
 	--PHYSICS--
+	--noinspection GlobalCreationOutsideO
 	meter = 30
+	--noinspection GlobalCreationOutsideO
 	world = love.physics.newWorld(0, -720, 960, 1050, 0, 500, true)
 	
+	--noinspection GlobalCreationOutsideO
 	tetrikind = {}
+	--noinspection GlobalCreationOutsideO
 	wallshapes = {}
+	--noinspection GlobalCreationOutsideO
 	tetrishapes = {}
+	--noinspection GlobalCreationOutsideO
 	tetribodies = {}
+	--noinspection GlobalCreationOutsideO
 	offsetshapes = {}
 	
+	--noinspection GlobalCreationOutsideO
 	wallbodies = love.physics.newBody(world, 32, -64, 0, 0) --WALLS
+	-- TODO: use string keys instead of numbers
 	wallshapes[0] = love.physics.newPolygonShape(wallbodies, 0, -64, 0, 672, 32, 672, 32, -64)
 	wallshapes[0]:setData("left")
 	wallshapes[0]:setFriction(0.00001)
@@ -36,6 +52,7 @@ function gameB_load()
 	-----------
 	
 	--FIRST "nextpiece"-
+	--noinspection GlobalCreationOutsideO
 	nextpiece = math.random(7)
 	
 	game_addTetriB()
@@ -44,11 +61,13 @@ end
 
 function game_addTetriB()
 	--NEW BLOCK--
+	--noinspection GlobalCreationOutsideO
 	randomblock = nextpiece
 	createtetriB(randomblock, 1, 224, blockstartY)
 	tetribodies[1]:setLinearVelocity(0, difficulty_speed)
 	
 	--RANDOMIZE
+	--noinspection GlobalCreationOutsideO
 	nextpiece = math.random(7)
 end
 
@@ -112,7 +131,7 @@ function createtetriB(i, uniqueid, x, y)
 	tetribodies[uniqueid]:setMassFromShapes()
 	tetribodies[uniqueid]:setBullet(true)
 	
-	for i, v in pairs(tetrishapes[uniqueid]) do
+	for _, v in pairs(tetrishapes[uniqueid]) do
 		v:setData(uniqueid)
 	end
 end
@@ -149,29 +168,38 @@ function gameB_draw()
 	
 	--SCORES---------------------------------------
 	--"score"--
+	--noinspection GlobalCreationOutsideO
 	offsetX = 0
 	
+	--noinspection GlobalCreationOutsideO
 	scorestring = tostring(scorescore)
 	for i = 1, scorestring:len() - 1 do
+		--noinspection GlobalCreationOutsideO
 		offsetX = offsetX - 8 * scale
 	end
 	love.graphics.print(scorescore, game_height_pixels * scale + offsetX, 24 * scale, 0, scale)
 	
 	
 	--"level"--
+	--noinspection GlobalCreationOutsideO
 	offsetX = 0
 	
+	--noinspection GlobalCreationOutsideO
 	scorestring = tostring(levelscore)
 	for i = 1, scorestring:len() - 1 do
+		--noinspection GlobalCreationOutsideO
 		offsetX = offsetX - 8 * scale
 	end
 	love.graphics.print(levelscore, 136 * scale + offsetX, 56 * scale, 0, scale)
 	
 	--"tiles"--
+	--noinspection GlobalCreationOutsideO
 	offsetX = 0
 	
+	--noinspection GlobalCreationOutsideO
 	scorestring = tostring(linesscore)
 	for i = 1, scorestring:len() - 1 do
+		--noinspection GlobalCreationOutsideO
 		offsetX = offsetX - 8 * scale
 	end
 	love.graphics.print(linesscore, 136 * scale + offsetX, 80 * scale, 0, scale)
@@ -189,8 +217,10 @@ end
 
 function gameB_update(dt)
 	--NEXTPIECE ROTATION (rotating allday erryday)
+	--noinspection GlobalCreationOutsideO
 	nextpiecerot = nextpiecerot + nextpiecerotspeed * dt
 	while nextpiecerot > math.pi * 2 do
+		--noinspection GlobalCreationOutsideO
 		nextpiecerot = nextpiecerot - math.pi * 2
 	end
 	
@@ -234,9 +264,11 @@ function gameB_update(dt)
 	world:update(dt)
 	
 	if gamestate == "failingB" then
+		--noinspection GlobalCreationOutsideO
 		clearcheck = true
-		for i, v in pairs(tetribodies) do
+		for _, v in pairs(tetribodies) do
 			if v:getY() < 648 then
+				--noinspection GlobalCreationOutsideO
 				clearcheck = false
 			end
 		end
@@ -260,6 +292,7 @@ end
 function endblockB()
 	if tetribodies[1]:getY() < losingY then
 		--LOSE--
+		--noinspection GlobalCreationOutsideO
 		gamestate = "failingB"
 		if musicno < 4 then
 			love.audio.stop(music[musicno])
@@ -277,15 +310,17 @@ function endblockB()
 		tetribodies[highestbody() + 1] = tetribodies[1]
 		
 		tetrishapes[highestbody()] = {}
-		for i, v in pairs(tetrishapes[1]) do
+		for i, _ in pairs(tetrishapes[1]) do
 			tetrishapes[highestbody()][i] = tetrishapes[1][i]
 			tetrishapes[highestbody()][i]:setData({ highestbody() })
 			tetrishapes[1][i] = nil
 		end
 		
 		tetribodies[1] = nil
-		---------------------------
+	
+		--noinspection GlobalCreationOutsideO
 		linesscore = linesscore + 1
+		--noinspection GlobalCreationOutsideO
 		scorescore = linesscore * 100
 		
 		love.audio.stop(blockfall)

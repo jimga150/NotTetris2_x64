@@ -1,5 +1,7 @@
 function menu_load()
+	--noinspection GlobalCreationOutsideO
 	gamestate = "logo"
+	--noinspection GlobalCreationOutsideO
 	creditstext = {
 		"'Tm and C2011 sy,not",
 		"tetris 2 licensed to",
@@ -18,8 +20,11 @@ function menu_load()
 		" design and program ",
 		"by alexey pazhitnov#"
 	}
+	--noinspection GlobalCreationOutsideO
 	logotime = 0
+	--noinspection GlobalCreationOutsideO
 	bootsoundplayed = false
+	--noinspection GlobalCreationOutsideO
 	oldtime = love.timer.getTime()
 end
 
@@ -147,8 +152,10 @@ function menu_draw()
 				--name
 				love.graphics.print(string.lower(string.sub(highscorename[i], 1, 6)), 33 * scale, 110 * scale + 8 * scale * (i - 1), 0, scale)
 				--score
+				--noinspection GlobalCreationOutsideO
 				offsetX = 0
 				for i = 1, string.sub(tostring(highscore[i]), 1, 6):len() - 1 do
+					--noinspection GlobalCreationOutsideO
 					offsetX = offsetX - 8 * scale
 				end
 				love.graphics.print(string.sub(tostring(highscore[i]), 1, 6), 137 * scale + offsetX, 110 * scale + 8 * scale * (i - 1), 0, scale)
@@ -158,8 +165,10 @@ function menu_draw()
 	
 	if gamestate == "highscoreentry" then
 		if highscorename[highscoreno]:len() < 6 then
+			--noinspection GlobalCreationOutsideO
 			offsetX = 0
 			for i = 1, highscorename[highscoreno]:len() do
+				--noinspection GlobalCreationOutsideO
 				offsetX = offsetX + 8 * scale
 			end
 			if cursorblink == true then
@@ -213,24 +222,29 @@ end
 
 function menu_update(dt)
 	if gamestate == "logo" then
+		--noinspection GlobalCreationOutsideO
 		logotime = logotime + dt
 		
 		if logotime >= logoduration and bootsoundplayed == false then
 			love.audio.stop(boot)
 			love.audio.play(boot)
-			
+			--noinspection GlobalCreationOutsideO
 			bootsoundplayed = true
 		end
 		
 		if logotime >= logoduration + logodelay then
+			--noinspection GlobalCreationOutsideO
 			oldtime = love.timer.getTime()
+			--noinspection GlobalCreationOutsideO
 			gamestate = "credits"
 		end
 	end
 	
 	if gamestate == "credits" then
+		--noinspection GlobalCreationOutsideO
 		currenttime = love.timer.getTime()
 		if currenttime - oldtime > creditsdelay then
+			--noinspection GlobalCreationOutsideO
 			gamestate = "title"
 			love.graphics.setBackgroundColor(0, 0, 0)
 			love.audio.play(musictitle)
@@ -238,9 +252,12 @@ function menu_update(dt)
 	end
 	
 	if gamestate == "menu" or gamestate == "multimenu" or gamestate == "options" then
+		--noinspection GlobalCreationOutsideO
 		currenttime = love.timer.getTime()
 		if currenttime - oldtime > selectblinkrate then
+			--noinspection GlobalCreationOutsideO
 			selectblink = not selectblink
+			--noinspection GlobalCreationOutsideO
 			oldtime = currenttime
 		end
 	end
@@ -249,20 +266,28 @@ function menu_update(dt)
 		if optionsselection == 2 then
 			if love.keyboard.isDown("left") then
 				if hue > 0 then
+					--noinspection GlobalCreationOutsideO
 					hue = hue - 0.5 * dt
 					if hue < 0 then
+						--noinspection GlobalCreationOutsideO
 						hue = 0
 					end
+					--noinspection GlobalCreationOutsideO
 					optionsmenu = newPaddedImage("graphics/options.png"); optionsmenu:setFilter("nearest", "nearest")
+					--noinspection GlobalCreationOutsideO
 					volumeslider = newPaddedImage("graphics/volumeslider.png"); volumeslider:setFilter("nearest", "nearest")
 				end
 			elseif love.keyboard.isDown("right") then
 				if hue < 1 then
+					--noinspection GlobalCreationOutsideO
 					hue = hue + 0.5 * dt
 					if hue > 1 then
+						--noinspection GlobalCreationOutsideO
 						hue = 1
 					end
+					--noinspection GlobalCreationOutsideO
 					optionsmenu = newPaddedImage("graphics/options.png"); optionsmenu:setFilter("nearest", "nearest")
+					--noinspection GlobalCreationOutsideO
 					volumeslider = newPaddedImage("graphics/volumeslider.png"); volumeslider:setFilter("nearest", "nearest")
 				end
 			end
@@ -270,13 +295,17 @@ function menu_update(dt)
 	end
 	
 	if gamestate == "highscoreentry" then
+		--noinspection GlobalCreationOutsideO
 		currenttime = love.timer.getTime()
 		if currenttime - oldtime > cursorblinkrate then
+			--noinspection GlobalCreationOutsideO
 			cursorblink = not cursorblink
+			--noinspection GlobalCreationOutsideO
 			oldtime = currenttime
 		end
 		if currenttime - highscoremusicstart > 1.2 then
 			if musicchanged == false then
+				--noinspection GlobalCreationOutsideO
 				musicchanged = true
 				love.audio.stop(highscoreintro)
 				love.audio.play(musichighscore)

@@ -1,36 +1,60 @@
 function gameA_load()
+	--noinspection GlobalCreationOutsideO
 	gamestate = "gameA"
 	
+	--noinspection GlobalCreationOutsideO
 	pause = false
+	--noinspection GlobalCreationOutsideO
 	skipupdate = true
 	
+	--noinspection GlobalCreationOutsideO
 	difficulty_speed = 100
 	
+	--noinspection GlobalCreationOutsideO
 	cuttingtimer = lineclearduration
 	
+	--noinspection GlobalCreationOutsideO
 	scorescore = 0
+	--noinspection GlobalCreationOutsideO
 	levelscore = 0
+	--noinspection GlobalCreationOutsideO
 	linesscore = 0
 	
+	--noinspection GlobalCreationOutsideO
 	linescleared = 0
+	--noinspection GlobalCreationOutsideO
 	lastscoreadd = 0
+	--noinspection GlobalCreationOutsideO
 	scoreaddtimer = scoreaddtime
+	--noinspection GlobalCreationOutsideO
 	densityupdatetimer = 0
+	--noinspection GlobalCreationOutsideO
 	nextpiecerot = 0
+	--noinspection GlobalCreationOutsideO
 	newlevelbeep = false
 	
 	--PHYSICS--
+	--noinspection GlobalCreationOutsideO
 	meter = 30
+	--noinspection GlobalCreationOutsideO
 	world = love.physics.newWorld(0, -720, 960, 1050, 0, 500, true)
 	
+	--noinspection GlobalCreationOutsideO
 	tetrikind = {}
+	--noinspection GlobalCreationOutsideO
 	wallshapes = {}
+	--noinspection GlobalCreationOutsideO
 	tetrishapes = {}
+	--noinspection GlobalCreationOutsideO
 	tetribodies = {}
+	--noinspection GlobalCreationOutsideO
 	offsetshapes = {}
+	--noinspection GlobalCreationOutsideO
 	tetrishapescopy = {}
+	--noinspection GlobalCreationOutsideO
 	data = {}
 	
+	--noinspection GlobalCreationOutsideO
 	wallbodies = love.physics.newBody(world, 32, -64, 0, 0) --WALLS
 	wallshapes[0] = love.physics.newPolygonShape(wallbodies, -8, -64, -8, 672, 24, 672, 24, -64)
 	wallshapes[0]:setData({ "left" })
@@ -47,16 +71,19 @@ function gameA_load()
 	-----------
 	
 	--FIRST "nextpiece"-
+	--noinspection GlobalCreationOutsideO
 	nextpiece = math.random(7)
 	
 	checklinedensity(false)
 	game_addTetriA()
+	--noinspection GlobalCreationOutsideO
 	nextpiece = math.random(7)
 	----------------
 end
 
 function game_addTetriA() --creates new block (using createtetriA) at 1 and sets its velocity
 	--NEW BLOCK--
+	--noinspection GlobalCreationOutsideO
 	randomblock = nextpiece
 	createtetriA(randomblock, 1, 224, blockstartY)
 	tetribodies[1]:setLinearVelocity(0, difficulty_speed)
@@ -237,29 +264,38 @@ function gameA_draw()
 	
 	--SCORES---------------------------------------
 	--"score"--
+	--noinspection GlobalCreationOutsideO
 	offsetX = 0
 	
+	--noinspection GlobalCreationOutsideO
 	scorestring = tostring(scorescore)
 	for i = 1, scorestring:len() - 1 do
+		--noinspection GlobalCreationOutsideO
 		offsetX = offsetX - 8 * scale
 	end
 	love.graphics.print(scorescore, game_height_pixels * scale + offsetX, 24 * scale, 0, scale, scale)
 	
 	
 	--"level"--
+	--noinspection GlobalCreationOutsideO
 	offsetX = 0
 	
+	--noinspection GlobalCreationOutsideO
 	scorestring = tostring(levelscore)
 	for i = 1, scorestring:len() - 1 do
+		--noinspection GlobalCreationOutsideO
 		offsetX = offsetX - 8 * scale
 	end
 	love.graphics.print(levelscore, 136 * scale + offsetX, 56 * scale, 0, scale, scale)
 	
 	--"tiles"--
+	--noinspection GlobalCreationOutsideO
 	offsetX = 0
 	
+	--noinspection GlobalCreationOutsideO
 	scorestring = tostring(linesscore)
 	for i = 1, scorestring:len() - 1 do
+		--noinspection GlobalCreationOutsideO
 		offsetX = offsetX - 8 * scale
 	end
 	love.graphics.print(linesscore, 136 * scale + offsetX, 80 * scale, 0, scale, scale)
@@ -278,26 +314,34 @@ end
 function gameA_update(dt)
 	--NEXTPIECE ROTATION (rotating allday erryday)
 	if cuttingtimer == lineclearduration then
+		--noinspection GlobalCreationOutsideO
 		nextpiecerot = nextpiecerot + nextpiecerotspeed * dt
 		while nextpiecerot > math.pi * 2 do
+			--noinspection GlobalCreationOutsideO
 			nextpiecerot = nextpiecerot - math.pi * 2
 		end
 	end
 	
 	--CUTTING TIMER
 	if cuttingtimer < lineclearduration then
+		--noinspection GlobalCreationOutsideO
 		cuttingtimer = cuttingtimer + dt
 		if cuttingtimer >= lineclearduration then
 			--RANDOMIZE NEXT PIECE
+			--noinspection GlobalCreationOutsideO
 			nextpiece = math.random(7)
 			
+			--noinspection GlobalCreationOutsideO
 			cuttingtimer = lineclearduration
+			--noinspection GlobalCreationOutsideO
 			skipupdate = true
+			--noinspection GlobalCreationOutsideO
 			scoreaddtimer = 0
 			
 			if newlevelbeep then
 				love.audio.stop(newlevel)
 				love.audio.play(newlevel)
+				--noinspection GlobalCreationOutsideO
 				newlevelbeep = false
 			end
 		end
@@ -307,8 +351,10 @@ function gameA_update(dt)
 	--SCOREADD TIMER
 	if cuttingtimer == lineclearduration then
 		if scoreaddtimer < scoreaddtime then
+			--noinspection GlobalCreationOutsideO
 			scoreaddtimer = scoreaddtimer + dt
 			if scoreaddtimer > scoreaddtime then
+				--noinspection GlobalCreationOutsideO
 				scoreaddtimer = scoreaddtime
 			end
 		end
@@ -351,6 +397,7 @@ function gameA_update(dt)
 		end
 	end
 	
+	--noinspection GlobalCreationOutsideO
 	endblock = false
 	
 	world:update(dt)
@@ -364,15 +411,19 @@ function gameA_update(dt)
 	if densityupdatetimer >= densityupdateinterval then
 		while densityupdatetimer >= densityupdateinterval and cuttingtimer == lineclearduration do
 			checklinedensity(false)
+			--noinspection GlobalCreationOutsideO
 			densityupdatetimer = densityupdatetimer - densityupdateinterval
 		end
 	end
+	--noinspection GlobalCreationOutsideO
 	densityupdatetimer = densityupdatetimer + dt
 	
 	if gamestate == "failingA" then
+		--noinspection GlobalCreationOutsideO
 		clearcheck = true
 		for i, v in pairs(tetribodies) do
 			if v:getY() < 648 then
+				--noinspection GlobalCreationOutsideO
 				clearcheck = false
 			end
 		end
@@ -396,31 +447,40 @@ function getintersectX(shape, y) --returns left and right collision points to a 
 end
 
 function removeline(lineno) --Does all necessary things to clear a line. Refineshape and cutimage included.
+	--noinspection GlobalCreationOutsideO
 	upperline = (lineno - 1) * 32
+	--noinspection GlobalCreationOutsideO
 	lowerline = lineno * 32
+	--noinspection GlobalCreationOutsideO
 	globaline = lineno
+	--noinspection GlobalCreationOutsideO
 	coordinateproperties = {}
-	numberofbodies = highestbody()
+	local numberofbodies = highestbody()
 	local ioffset = 0
 	tetribodies[1] = "dummy :D"
 	for i = 2, numberofbodies do --every body
-		v = tetribodies[i - ioffset]
+		local v = tetribodies[i - ioffset] -- TODO: rename this
 		if i - ioffset > numberofbodies then
 			print("oh yeah")
 			break
 		end
 		if i - ioffset > 1 then
-			refined = false
+			local refined = false
 			coordinateproperties[i - ioffset] = {}
+			--noinspection GlobalCreationOutsideO
 			tetrishapescopy = {}
 			
+			--noinspection GlobalCreationOutsideO
 			upperleftx = 640
+			--noinspection GlobalCreationOutsideO
 			lowerleftx = 640
 			
+			--[[--noinspection GlobalCreationOutsideO
 			upperrightx = 0
+			--noinspection GlobalCreationOutsideO
 			lowerrightx = 0
 			for j, w in pairs(tetrishapes[i - ioffset]) do
-				x1, x2 = getintersectX(tetrishapes[i - ioffset][j], upperline)
+				local x1, x2 = getintersectX(tetrishapes[i - ioffset][j], upperline)
 				
 				if x1 < upperleftx and x1 ~= -1 then
 					upperleftx = x1
@@ -437,14 +497,14 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 				if x2 > lowerrightx then
 					lowerrightx = x2
 				end
-			end
+			end]]
 			
 			for j, w in pairs(tetrishapes[i - ioffset]) do --Every shape
-				above = false
-				inside = false
-				below = false
+				local above = false
+				local inside = false
+				local below = false
 				coordinateproperties[i - ioffset][j] = {}
-				coordinates = getPoints2table(w)
+				local coordinates = getPoints2table(w)
 				
 				for y = 1, #coordinates, 2 do --Every Point
 					if coordinates[y + 1] < upperline then --POINT ABOVE CUTRECT
@@ -476,7 +536,7 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 					tetrishapescopy[#tetrishapescopy + 1] = refineshape(lowerline, -1, i - ioffset, v, j, w)
 					refined = true
 				else
-					cotable = getPoints2table(tetrishapes[i - ioffset][j])
+					local cotable = getPoints2table(tetrishapes[i - ioffset][j])
 					for var = 1, #cotable, 2 do
 						cotable[var], cotable[var + 1] = tetribodies[i - ioffset]:getLocalPoint(cotable[var], cotable[var + 1])
 					end
@@ -506,14 +566,17 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 				else
 					
 					--- -check for disconnected shapes
-					-- apply group numbers to shapes then loop through each existing value, creating a new body for everything > 1 (max should be 3 I think).
-					shapegroups = {}
-					numberofgroups = 0
+					-- apply group numbers to shapes then loop through each existing value,
+					-- creating a new body for everything > 1 (max should be 3 I think).
+					
+					local shapegroups = {}
+					local numberofgroups = 0
 					for a, b in pairs(tetrishapescopy) do --through all shapes
 						shapegroups[a] = 0
+						--noinspection GlobalCreationOutsideO
 						currentcoords = getPoints2table(b)
 						for shapecounter = 1, a - 1 do --Through all previously set groups
-							coords = getPoints2table(tetrishapescopy[shapecounter])
+							local coords = getPoints2table(tetrishapescopy[shapecounter])
 							for currentcoordsvar = 1, #currentcoords / 2 do --through all coords in the current shape
 								for coordsvar = 1, #coords / 2 do --through all coords in all previously set groups (Holy shit 6 stacked "for" loops; I code like an asshole!)
 									if math.abs(currentcoords[currentcoordsvar * 2 - 1] - coords[coordsvar * 2 - 1]) < 2 and math.abs(currentcoords[currentcoordsvar * 2] - coords[coordsvar * 2]) < 2 then
@@ -533,14 +596,14 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 					
 					for a = 1, numberofgroups do
 						if a == 1 then --reassign the old bodyid
-							rotation = tetribodies[i - ioffset]:getAngle()
+							local rotation = tetribodies[i - ioffset]:getAngle()
 							tetribodies[i - ioffset]:destroy()
 							tetribodies[i - ioffset] = love.physics.newBody(world, tetribodies[i - ioffset]:getX(), tetribodies[i - ioffset]:getY(), tetribodies[i - ioffset]:getMass(), blockrot)
 							tetribodies[i - ioffset]:setAngle(rotation)
 							tetrishapes[i - ioffset] = {}
 							for b, c in pairs(tetrishapescopy) do
 								if shapegroups[b] == a then
-									cotable = getPoints2table(tetrishapescopy[b])
+									local cotable = getPoints2table(tetrishapescopy[b])
 									for var = 1, #cotable, 2 do
 										cotable[var], cotable[var + 1] = tetribodies[i - ioffset]:getLocalPoint(cotable[var], cotable[var + 1])
 									end
@@ -550,9 +613,10 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 							end
 							
 							--save old imagedata to local var first in case we create a new bodyid..
+							--noinspection GlobalCreationOutsideO
 							backupimagedata = love.image.newImageData(tetriimagedata[i - ioffset]:getWidth(), tetriimagedata[i - ioffset]:getHeight())
 							backupimagedata:paste(tetriimagedata[i - ioffset], 0, 0, 0, 0, tetriimagedata[i - ioffset]:getWidth(), tetriimagedata[i - ioffset]:getHeight())
-							
+							-- TODO: do we need this^?
 							--cut the image.
 							cutimage(i - ioffset, numberofgroups)
 							
@@ -579,7 +643,7 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 							
 							for b, c in pairs(tetrishapescopy) do
 								if shapegroups[b] == a then
-									cotable = getPoints2table(tetrishapescopy[b])
+									local cotable = getPoints2table(tetrishapescopy[b])
 									for var = 1, #cotable, 2 do
 										cotable[var], cotable[var + 1] = tetribodies[i - ioffset]:getLocalPoint(cotable[var], cotable[var + 1])
 									end
@@ -588,7 +652,7 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 								end
 							end
 							
-							linearspeedX, linearspeedY = tetribodies[i - ioffset]:getLinearVelocity()
+							local linearspeedX, linearspeedY = tetribodies[i - ioffset]:getLinearVelocity()
 							tetribodies[highestbody()]:setLinearVelocity(linearspeedX, linearspeedY)
 							tetribodies[highestbody()]:setLinearDamping(0.5)
 							tetribodies[highestbody()]:setBullet(true)
@@ -599,10 +663,11 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 							tetriimages[highestbody()] = padImagedata(tetriimagedata[highestbody()])
 							tetrikind[highestbody()] = tetrikind[i - ioffset]
 							
-							debugimagedata = love.image.newImageData(backupimagedata:getWidth(), backupimagedata:getHeight())
+							local debugimagedata = love.image.newImageData(backupimagedata:getWidth(), backupimagedata:getHeight())
 							debugimagedata:paste(backupimagedata, 0, 0, 0, 0, backupimagedata:getWidth(), backupimagedata:getHeight())
-							debugimage = padImagedata(debugimagedata)
-							
+							local debugimage = padImagedata(debugimagedata)
+							-- TODO: do we need this?^
+						
 							--cut the image
 							cutimage(highestbody(), numberofgroups)
 							
@@ -631,7 +696,7 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 				tetrishapescopy[a]:destroy()
 				tetrishapescopy[a] = nil
 			end
-			
+			--noinspection GlobalCreationOutsideO
 			tetrishapescopy = {}
 		end --if i-ioffset > 1
 	end
@@ -799,7 +864,7 @@ end
 
 function checklinedensity(active) --checks all 18 lines and, if active == true, calls removeline. Also does scoring, sounds and stuff.
 	--loop through every shape and add each area to a nax
-	
+	--noinspection GlobalCreationOutsideO
 	linearea = {}
 	
 	for i = 1, 18 do
@@ -827,7 +892,8 @@ function checklinedensity(active) --checks all 18 lines and, if active == true, 
 					
 					if line > firstline then
 						local offset = 0
-						
+						local leftx, rightx = 0, 0
+					
 						repeat
 							leftx, rightx = getintersectX(tetrishapes[i][j], (line - 1) * 32 + offset)
 							offset = offset + 1
@@ -835,7 +901,7 @@ function checklinedensity(active) --checks all 18 lines and, if active == true, 
 						
 						--remove all points above the line
 						local coi = 2
-						local lastcutoff = nil
+						local lastcutoff
 						while coi <= #coords do
 							if coords[coi] <= (line - 1) * 32 then
 								table.remove(coords, coi)
@@ -858,6 +924,7 @@ function checklinedensity(active) --checks all 18 lines and, if active == true, 
 					
 					if line < lastline then
 						local offset = 0
+						local leftx, rightx = 0, 0
 						repeat
 							leftx, rightx = getintersectX(tetrishapes[i][j], (line) * 32 - offset)
 							offset = offset + 1
@@ -865,7 +932,7 @@ function checklinedensity(active) --checks all 18 lines and, if active == true, 
 						
 						--remove all points below the line
 						local coi = 2
-						local lastcutoff = nil
+						local lastcutoff
 						while coi <= #coords do
 							if coords[coi] >= (line) * 32 then
 								table.remove(coords, coi)
@@ -895,19 +962,25 @@ function checklinedensity(active) --checks all 18 lines and, if active == true, 
 	if active then
 		local removedlines = false
 		local numberoflines = 0
+		--noinspection GlobalCreationOutsideO
 		linesremoved = {}
 		
 		for i = 1, 18 do
 			if linearea[i] > 1024 * lineclearthreshold then
 				if removedlines == false then
+					--noinspection GlobalCreationOutsideO
 					cuttingtimer = 0
 					removedlines = true
 					
 					--Save position, image, kind and image of each kind so I can draw them even after changing the actual parts.
 					
+					--noinspection GlobalCreationOutsideO
 					tetricutpos = {}
+					--noinspection GlobalCreationOutsideO
 					tetricutang = {}
+					--noinspection GlobalCreationOutsideO
 					tetricutkind = {}
+					--noinspection GlobalCreationOutsideO
 					tetricutimg = {}
 					
 					for i, v in pairs(tetribodies) do -- = 2, #tetribodies do
@@ -930,6 +1003,7 @@ function checklinedensity(active) --checks all 18 lines and, if active == true, 
 				
 				linesremoved[i] = true
 				numberoflines = numberoflines + 1
+				--noinspection GlobalCreationOutsideO
 				linesscore = linesscore + 1
 			end
 		end
@@ -971,17 +1045,24 @@ function checklinedensity(active) --checks all 18 lines and, if active == true, 
 			averagearea = averagearea / numberoflines / 10240
 			
 			local scoreadd = math.ceil((numberoflines * 3) ^ (averagearea ^ 10) * 20 + numberoflines ^ 2 * 40)
+			--noinspection GlobalCreationOutsideO
 			scorescore = scorescore + scoreadd
 			
+			--noinspection GlobalCreationOutsideO
 			lastscoreadd = scoreadd
+			--noinspection GlobalCreationOutsideO
 			scoreaddtimer = 0
 			
 			--Level
+			--noinspection GlobalCreationOutsideO
 			linescleared = linescleared + numberoflines
 			
 			if math.floor(linescleared / 10) > levelscore then
+				--noinspection GlobalCreationOutsideO
 				levelscore = levelscore + 1
+				--noinspection GlobalCreationOutsideO
 				difficulty_speed = 100 + levelscore * 7
+				--noinspection GlobalCreationOutsideO
 				newlevelbeep = true
 			end
 			
@@ -1122,7 +1203,7 @@ function largeenough(coords) --checks if a polygon is good enough for box2d's sn
 end
 
 function highestbody() --returns the highest body in tetribodies. Because without the 1 body, #tetribodies sometimes fails or something
-	i = 2
+	local i = 2
 	while tetribodies[i] ~= nil do
 		i = i + 1
 	end
@@ -1148,6 +1229,7 @@ function collideA(a, b, coll) --box2d callback. calls endblock.
 		if a[1] ~= "left" and a[1] ~= "right" and b[1] ~= "left" and b[1] ~= "right" then
 			if gamestate == "gameA" then
 				if tetribodies[1]:getY() < losingY then
+					--noinspection GlobalCreationOutsideO
 					gamestate = "failingA"
 					if musicno < 4 then
 						love.audio.stop(music[musicno])
@@ -1175,6 +1257,7 @@ function collideA(a, b, coll) --box2d callback. calls endblock.
 					
 					tetribodies[1] = nil
 					
+					--noinspection GlobalCreationOutsideO
 					endblock = true
 				end
 			end
@@ -1188,6 +1271,7 @@ function endblockA() --handles failing, moving the current block to the end of t
 	else
 		game_addTetriA()
 		--RANDOMIZE NEXT PIECE
+		--noinspection GlobalCreationOutsideO
 		nextpiece = math.random(7)
 	end
 end

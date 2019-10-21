@@ -291,71 +291,117 @@ end
 
 function loadimages()
 	--IMAGES--
+
 	--menu--
+	--noinspection GlobalCreationOutsideO
 	stabyourselflogo = newPaddedImage("graphics/stabyourselflogo.png")
+	--noinspection GlobalCreationOutsideO
 	logo = newPaddedImage("graphics/logo.png")
+	--noinspection GlobalCreationOutsideO
 	title = newPaddedImage("graphics/title.png")
+	--noinspection GlobalCreationOutsideO
 	gametype = newPaddedImage("graphics/gametype.png")
+	--noinspection GlobalCreationOutsideO
 	mpmenu = newPaddedImage("graphics/mpmenu.png")
+	--noinspection GlobalCreationOutsideO
 	optionsmenu = newPaddedImage("graphics/options.png")
+	--noinspection GlobalCreationOutsideO
 	volumeslider = newPaddedImage("graphics/volumeslider.png")
+
 	--game--
+	--noinspection GlobalCreationOutsideO
 	gamebackground = newPaddedImage("graphics/gamebackground.png")
+	--noinspection GlobalCreationOutsideO
 	gamebackgroundcutoff = newPaddedImage("graphics/gamebackgroundgamea.png")
+	--noinspection GlobalCreationOutsideO
 	gamebackgroundmulti = newPaddedImage("graphics/gamebackgroundmulti.png")
+	--noinspection GlobalCreationOutsideO
 	multiresults = newPaddedImage("graphics/multiresults.png")
 	
+	--noinspection GlobalCreationOutsideO
 	number1 = newPaddedImage("graphics/versus/number1.png")
+	--noinspection GlobalCreationOutsideO
 	number2 = newPaddedImage("graphics/versus/number2.png")
+	--noinspection GlobalCreationOutsideO
 	number3 = newPaddedImage("graphics/versus/number3.png")
 	
+	--noinspection GlobalCreationOutsideO
 	gameover = newPaddedImage("graphics/gameover.png")
+	--noinspection GlobalCreationOutsideO
 	gameovercutoff = newPaddedImage("graphics/gameovercutoff.png")
+	--noinspection GlobalCreationOutsideO
 	pausegraphic = newPaddedImage("graphics/pause.png")
+	--noinspection GlobalCreationOutsideO
 	pausegraphiccutoff = newPaddedImage("graphics/pausecutoff.png")
 	
 	--figures--
+	--noinspection GlobalCreationOutsideO
 	marioidle = newPaddedImage("graphics/versus/marioidle.png")
+	--noinspection GlobalCreationOutsideO
 	mariojump = newPaddedImage("graphics/versus/mariojump.png")
+	--noinspection GlobalCreationOutsideO
 	mariocry1 = newPaddedImage("graphics/versus/mariocry1.png")
+	--noinspection GlobalCreationOutsideO
 	mariocry2 = newPaddedImage("graphics/versus/mariocry2.png")
 	
+	--noinspection GlobalCreationOutsideO
 	luigiidle = newPaddedImage("graphics/versus/luigiidle.png")
+	--noinspection GlobalCreationOutsideO
 	luigijump = newPaddedImage("graphics/versus/luigijump.png")
+	--noinspection GlobalCreationOutsideO
 	luigicry1 = newPaddedImage("graphics/versus/luigicry1.png")
+	--noinspection GlobalCreationOutsideO
 	luigicry2 = newPaddedImage("graphics/versus/luigicry2.png")
 	
 	--rockets--
+	--noinspection GlobalCreationOutsideO
 	rocket1 = newPaddedImage("graphics/rocket1.png"); rocket1:setFilter("nearest", "nearest")
+	--noinspection GlobalCreationOutsideO
 	rocket2 = newPaddedImage("graphics/rocket2.png")
+	--noinspection GlobalCreationOutsideO
 	rocket3 = newPaddedImage("graphics/rocket3.png")
+	--noinspection GlobalCreationOutsideO
 	spaceshuttle = newPaddedImage("graphics/spaceshuttle.png")
 	
+	--noinspection GlobalCreationOutsideO
 	rocketbackground = newPaddedImage("graphics/rocketbackground.png")
+	--noinspection GlobalCreationOutsideO
 	bigrocketbackground = newPaddedImage("graphics/bigrocketbackground.png")
+	--noinspection GlobalCreationOutsideO
 	bigrockettakeoffbackground = newPaddedImage("graphics/bigrockettakeoffbackground.png")
 	
-	
+	--noinspection GlobalCreationOutsideO
 	smoke1left = newPaddedImage("graphics/smoke1left.png")
+	--noinspection GlobalCreationOutsideO
 	smoke1right = newPaddedImage("graphics/smoke1right.png")
+	--noinspection GlobalCreationOutsideO
 	smoke2left = newPaddedImage("graphics/smoke2left.png")
+	--noinspection GlobalCreationOutsideO
 	smoke2right = newPaddedImage("graphics/smoke2right.png")
 	
+	--noinspection GlobalCreationOutsideO
 	fire1 = newPaddedImage("graphics/fire1.png")
+	--noinspection GlobalCreationOutsideO
 	fire2 = newPaddedImage("graphics/fire2.png")
+	--noinspection GlobalCreationOutsideO
 	firebig1 = newPaddedImage("graphics/firebig1.png")
+	--noinspection GlobalCreationOutsideO
 	firebig2 = newPaddedImage("graphics/firebig2.png")
 	
+	--noinspection GlobalCreationOutsideO
 	congratsline = newPaddedImage("graphics/congratsline.png")
 	
 	--nextpiece
+	--noinspection GlobalCreationOutsideO
 	nextpieceimg = {}
 	for i = 1, 7 do
 		nextpieceimg[i] = newPaddedImage("graphics/pieces/" .. i .. ".png", scale)
 	end
 	
 	--font--
+	--noinspection GlobalCreationOutsideO
 	tetrisfont = newPaddedImageFont("graphics/font.png", "0123456789abcdefghijklmnopqrstTuvwxyz.,'C-#_>:<! ")
+	--noinspection GlobalCreationOutsideO
 	whitefont = newPaddedImageFont("graphics/fontwhite.png", "0123456789abcdefghijklmnopqrstTuvwxyz.,'C-#_>:<!+ ")
 	love.graphics.setFont(tetrisfont)
 	
@@ -405,6 +451,7 @@ end
 
 function love.update(dt)
 	if gamestate == nil then
+		--noinspection GlobalCreationOutsideO
 		startdelaytime = startdelaytime + dt
 		if startdelaytime >= startdelay then
 			menu_load()
@@ -412,6 +459,7 @@ function love.update(dt)
 	end
 	
 	if skipupdate then
+		--noinspection GlobalCreationOutsideO
 		skipupdate = false
 		return
 	end
@@ -601,43 +649,58 @@ function loadoptions()
 				end
 				v = math.floor(v * 10) / 10
 				
+				--noinspection GlobalCreationOutsideO
 				volume = v
 			
 			elseif split2[1] == "hue" then
+				--noinspection GlobalCreationOutsideO
 				hue = tonumber(split2[2])
 			
 			elseif split2[1] == "scale" then
+				--noinspection GlobalCreationOutsideO
 				scale = tonumber(split2[2])
 			
 			elseif split2[1] == "fullscreen" then
 				if split2[2] == "true" then
+					--noinspection GlobalCreationOutsideO
 					fullscreen = true
 				else
+					--noinspection GlobalCreationOutsideO
 					fullscreen = false
 				end
 			end
 		end
 		
 		if volume == nil then
+			--noinspection GlobalCreationOutsideO
 			volume = 1
 		end
 		if hue == nil then
+			--noinspection GlobalCreationOutsideO
 			hue = 0.08
 		end
 		if fullscreen == nil then
+			--noinspection GlobalCreationOutsideO
 			fullscreen = false
 		end
 		
 		if scale == nil then
+			--noinspection GlobalCreationOutsideO
 			scale = suggestedscale
 		end
 	
 	
 	else
+		--noinspection GlobalCreationOutsideO
 		volume = 1
+		--noinspection GlobalCreationOutsideO
 		hue = 0.08
+	
 		autosize()
+	
+		--noinspection GlobalCreationOutsideO
 		scale = suggestedscale
+		--noinspection GlobalCreationOutsideO
 		fullscreen = false
 	end
 	
@@ -657,53 +720,73 @@ end
 
 function autosize()
 	local modes = love.graphics.getModes()
+	--noinspection GlobalCreationOutsideO
 	desktopwidth, desktopheight = modes[1]["width"], modes[1]["height"]
 end
 
 function togglefullscreen(fullscr)
+	--noinspection GlobalCreationOutsideO
 	fullscreen = fullscr
 	love.mouse.setVisible(not fullscreen)
 	if fullscr == false then
+		--noinspection GlobalCreationOutsideO
 		scale = suggestedscale
+		--noinspection GlobalCreationOutsideO
 		physicsscale = scale / physics_scale_factor
 		love.graphics.setMode(game_sp_width_pixels * scale, game_height_pixels * scale, false, vsync, fsaa)
 	else
 		love.graphics.setMode(0, 0, true, vsync, fsaa)
+		--noinspection GlobalCreationOutsideO
 		desktopwidth, desktopheight = love.graphics.getWidth(), love.graphics.getHeight()
+		--noinspection GlobalCreationOutsideO
 		suggestedscale = math.min(math.floor((desktopheight - heightcorrection) / game_height_pixels), math.floor((desktopwidth - widthcorrection) / game_sp_width_pixels))
+		--noinspection GlobalCreationOutsideO
 		suggestedscale = math.min(math.floor((desktopheight - heightcorrection) / game_height_pixels), math.floor((desktopwidth - widthcorrection) / game_sp_width_pixels))
 		if suggestedscale > max_initial_suggestedscale then
+			--noinspection GlobalCreationOutsideO
 			suggestedscale = max_initial_suggestedscale
 		end
+		--noinspection GlobalCreationOutsideO
 		maxscale = math.min(math.floor(desktopheight / game_height_pixels), math.floor(desktopwidth / game_sp_width_pixels))
 		
+		--noinspection GlobalCreationOutsideO
 		scale = maxscale
+		--noinspection GlobalCreationOutsideO
 		physicsscale = scale / physics_scale_factor
 		
+		--noinspection GlobalCreationOutsideO
 		fullscreenoffsetX = (desktopwidth - game_sp_width_pixels * scale) / 2
+		--noinspection GlobalCreationOutsideO
 		fullscreenoffsetY = (desktopheight - game_height_pixels * scale) / 2
 	end
 end
 
 function loadhighscores()
 	if gameno == 1 then
+		--noinspection GlobalCreationOutsideO
 		fileloc = "highscoresA.txt"
 	else
+		--noinspection GlobalCreationOutsideO
 		fileloc = "highscoresB.txt"
 	end
 	
 	if love.filesystem.exists(fileloc) then
-		
+		--noinspection GlobalCreationOutsideO
 		highdata = love.filesystem.read(fileloc)
+		--noinspection GlobalCreationOutsideO
 		highdata = highdata:split(";")
+		--noinspection GlobalCreationOutsideO
 		highscore = {}
+		--noinspection GlobalCreationOutsideO
 		highscorename = {}
 		for i = 1, 3 do
 			highscore[i] = tonumber(highdata[i * 2])
 			highscorename[i] = string.lower(highdata[i * 2 - 1])
 		end
 	else
+		--noinspection GlobalCreationOutsideO
 		highscore = {}
+		--noinspection GlobalCreationOutsideO
 		highscorename = {}
 		highscore[1] = 0
 		highscorename[1] = ""
@@ -716,7 +799,9 @@ function loadhighscores()
 end
 
 function newhighscores()
+	--noinspection GlobalCreationOutsideO
 	highscore = {}
+	--noinspection GlobalCreationOutsideO
 	highscorename = {}
 	highscore[1] = 0
 	highscorename[1] = ""
@@ -729,13 +814,17 @@ end
 
 function savehighscores()
 	if gameno == 1 then
+		--noinspection GlobalCreationOutsideO
 		fileloc = "highscoresA.txt"
 	else
+		--noinspection GlobalCreationOutsideO
 		fileloc = "highscoresB.txt"
 	end
 	
+	--noinspection GlobalCreationOutsideO
 	highdata = ""
 	for i = 1, 3 do
+		--noinspection GlobalCreationOutsideO
 		highdata = highdata .. highscorename[i] .. ";" .. highscore[i] .. ";"
 	end
 	love.filesystem.write(fileloc, highdata .. "\n")
@@ -743,10 +832,12 @@ end
 
 function changescale(i)
 	love.graphics.setMode(game_sp_width_pixels * i, game_height_pixels * i, false, vsync, fsaa)
+	--noinspection GlobalCreationOutsideO
 	nextpieceimg = {}
 	for j = 1, 7 do
 		nextpieceimg[j] = newPaddedImage("graphics/pieces/" .. j .. ".png", i)
 	end
+	--noinspection GlobalCreationOutsideO
 	physicsscale = i / physics_scale_factor
 end
 
@@ -764,7 +855,7 @@ function string:split(delimiter)
 end
 
 function pythagoras(a, b)
-	c = math.sqrt(a ^ 2 + b ^ 2)
+	local c = math.sqrt(a ^ 2 + b ^ 2)
 	if a < 0 or b < 0 then
 		c = -c
 	end
@@ -777,7 +868,7 @@ function round(num, idp)
 end
 
 function table2string(mytable)
-	output = {}
+	local output = {}
 	for i, v in pairs(mytable) do
 		output[i] = mytable[i]
 	end
@@ -785,7 +876,7 @@ function table2string(mytable)
 end
 
 function getPoints2table(shape)
-	x1, y1, x2, y2, x3, y3, x4, y4, x5, y5, x6, y6, x7, y7, x8, y8 = shape:getPoints()
+	local x1, y1, x2, y2, x3, y3, x4, y4, x5, y5, x6, y6, x7, y7, x8, y8 = shape:getPoints()
 	if x4 == nil then
 		return { x1, y1, x2, y2, x3, y3 }
 	end
@@ -838,6 +929,7 @@ end
 function love.keypressed(key, unicode)
 	if gamestate == nil then
 		if key == "return" then
+			--noinspection GlobalCreationOutsideO
 			gamestate = "title"
 			love.graphics.setBackgroundColor(0, 0, 0)
 			love.audio.play(musictitle)
@@ -845,6 +937,7 @@ function love.keypressed(key, unicode)
 	
 	elseif gamestate == "logo" then
 		if key == "return" then
+			--noinspection GlobalCreationOutsideO
 			gamestate = "title"
 			love.graphics.setBackgroundColor(0, 0, 0)
 			love.audio.play(musictitle)
@@ -852,6 +945,7 @@ function love.keypressed(key, unicode)
 	
 	elseif gamestate == "credits" then
 		if key == "return" then
+			--noinspection GlobalCreationOutsideO
 			gamestate = "title"
 			love.graphics.setBackgroundColor(0, 0, 0)
 			love.audio.play(musictitle)
@@ -868,31 +962,39 @@ function love.keypressed(key, unicode)
 				end
 			end
 			if playerselection == 1 then
+				--noinspection GlobalCreationOutsideO
 				gamestate = "menu"
 			elseif playerselection == 2 then
+				--noinspection GlobalCreationOutsideO
 				gamestate = "multimenu"
 			else
+				--noinspection GlobalCreationOutsideO
 				gamestate = "options"
 				if soundenabled then
 					love.audio.stop(musictitle)
 					love.audio.play(musicoptions)
 				end
+				--noinspection GlobalCreationOutsideO
 				optionsselection = 1
 			end
 		elseif key == "escape" then
 			love.event.push("q")
 		elseif key == "left" and playerselection > 1 then
+			--noinspection GlobalCreationOutsideO
 			playerselection = playerselection - 1
 		elseif key == "right" and playerselection < 3 then
+			--noinspection GlobalCreationOutsideO
 			playerselection = playerselection + 1
 		end
 	
 	elseif gamestate == "menu" then
+		--noinspection GlobalCreationOutsideO
 		oldmusicno = musicno
 		if key == "escape" then
 			if musicno < 4 then
 				love.audio.stop(music[musicno])
 			end
+			--noinspection GlobalCreationOutsideO
 			gamestate = "title"
 			if soundenabled then
 				love.audio.stop(musictitle)
@@ -908,48 +1010,73 @@ function love.keypressed(key, unicode)
 			end
 		elseif key == "left" then
 			if selection == 2 or selection == 4 or selection == 6 then
+				--noinspection GlobalCreationOutsideO
 				selection = selection - 1
+				--noinspection GlobalCreationOutsideO
 				selectblink = true
+				--noinspection GlobalCreationOutsideO
 				oldtime = love.timer.getTime()
 			end
 		elseif key == "right" then
 			if selection == 1 or selection == 3 or selection == 5 then
+				--noinspection GlobalCreationOutsideO
 				selection = selection + 1
+				--noinspection GlobalCreationOutsideO
 				selectblink = true
+				--noinspection GlobalCreationOutsideO
 				oldtime = love.timer.getTime()
 			end
 		elseif key == "up" then
 			if selection == 3 or selection == 4 or selection == 5 or selection == 6 then
+				--noinspection GlobalCreationOutsideO
 				selection = selection - 2
+				--noinspection GlobalCreationOutsideO
 				selectblink = true
+				--noinspection GlobalCreationOutsideO
 				oldtime = love.timer.getTime()
 				if selection < 3 then
+					--noinspection GlobalCreationOutsideO
 					selection = gameno
+					--noinspection GlobalCreationOutsideO
 					selectblink = false
+					--noinspection GlobalCreationOutsideO
 					oldtime = love.timer.getTime()
 				end
 			elseif selection == 1 or selection == 2 then
+				--noinspection GlobalCreationOutsideO
 				selection = musicno + 2
+				--noinspection GlobalCreationOutsideO
 				selectblink = false
+				--noinspection GlobalCreationOutsideO
 				oldtime = love.timer.getTime()
 			end
 		elseif key == "down" then
 			if selection == 1 or selection == 2 or selection == 3 or selection == 4 then
+				--noinspection GlobalCreationOutsideO
 				selection = selection + 2
+				--noinspection GlobalCreationOutsideO
 				selectblink = true
+				--noinspection GlobalCreationOutsideO
 				oldtime = love.timer.getTime()
 				if selection > 2 and selection < 5 then
+					--noinspection GlobalCreationOutsideO
 					selection = musicno + 2
+					--noinspection GlobalCreationOutsideO
 					selectblink = false
+					--noinspection GlobalCreationOutsideO
 					oldtime = love.timer.getTime()
 				end
 			elseif selection == 5 or selection == 6 then
+				--noinspection GlobalCreationOutsideO
 				selection = gameno
+				--noinspection GlobalCreationOutsideO
 				selectblink = false
+				--noinspection GlobalCreationOutsideO
 				oldtime = love.timer.getTime()
 			end
 		end
 		if selection > 2 and key ~= "escape" then
+			--noinspection GlobalCreationOutsideO
 			musicno = selection - 2
 			if oldmusicno ~= musicno and oldmusicno ~= 4 then
 				love.audio.stop(music[oldmusicno])
@@ -958,6 +1085,7 @@ function love.keypressed(key, unicode)
 				love.audio.play(music[musicno])
 			end
 		elseif key ~= "escape" then
+			--noinspection GlobalCreationOutsideO
 			gameno = selection
 			loadhighscores()
 		end
@@ -971,28 +1099,39 @@ function love.keypressed(key, unicode)
 			end
 			saveoptions()
 			loadimages()
+			--noinspection GlobalCreationOutsideO
 			gamestate = "title"
 		elseif key == "down" then
+			--noinspection GlobalCreationOutsideO
 			optionsselection = optionsselection + 1
 			if optionsselection > #optionschoices then
+				--noinspection GlobalCreationOutsideO
 				optionsselection = 1
 			end
+			--noinspection GlobalCreationOutsideO
 			selectblink = true
+			--noinspection GlobalCreationOutsideO
 			oldtime = love.timer.getTime()
 		
 		elseif key == "up" then
+			--noinspection GlobalCreationOutsideO
 			optionsselection = optionsselection - 1
 			if optionsselection == 0 then
+				--noinspection GlobalCreationOutsideO
 				optionsselection = #optionschoices
 			end
+			--noinspection GlobalCreationOutsideO
 			selectblink = true
+			--noinspection GlobalCreationOutsideO
 			oldtime = love.timer.getTime()
 		
 		elseif key == "left" then
 			if optionsselection == 1 then
 				if volume >= 0.1 then
+					--noinspection GlobalCreationOutsideO
 					volume = volume - 0.1
 					if volume < 0.1 then
+						--noinspection GlobalCreationOutsideO
 						volume = 0
 					end
 					changevolume(volume)
@@ -1001,6 +1140,7 @@ function love.keypressed(key, unicode)
 			elseif optionsselection == 3 then
 				if fullscreen == false then
 					if scale > 1 then
+						--noinspection GlobalCreationOutsideO
 						scale = scale - 1
 						changescale(scale)
 					end
@@ -1015,6 +1155,7 @@ function love.keypressed(key, unicode)
 		elseif key == "right" then
 			if optionsselection == 1 then
 				if volume <= 0.9 then
+					--noinspection GlobalCreationOutsideO
 					volume = volume + 0.1
 					changevolume(volume)
 				end
@@ -1022,6 +1163,7 @@ function love.keypressed(key, unicode)
 			elseif optionsselection == 3 then
 				if fullscreen == false then
 					if scale < maxscale then
+						--noinspection GlobalCreationOutsideO
 						scale = scale + 1
 						changescale(scale)
 					end
@@ -1035,15 +1177,20 @@ function love.keypressed(key, unicode)
 		
 		elseif key == "return" then
 			if optionsselection == 1 then
+				--noinspection GlobalCreationOutsideO
 				volume = 1
 				changevolume(volume)
-			elseif optionsselection == 2 then
+			elseif optionsselection == 2 then -- TODO: load these images beforehand?
+				--noinspection GlobalCreationOutsideO
 				hue = 0.08
+				--noinspection GlobalCreationOutsideO
 				optionsmenu = newPaddedImage("graphics/options.png"); optionsmenu:setFilter("nearest", "nearest")
+				--noinspection GlobalCreationOutsideO
 				volumeslider = newPaddedImage("graphics/volumeslider.png"); volumeslider:setFilter("nearest", "nearest")
 			elseif optionsselection == 3 then
 				if fullscreen == false then
 					if scale ~= suggestedscale then
+						--noinspection GlobalCreationOutsideO
 						scale = suggestedscale
 						changescale(scale)
 					end
@@ -1056,11 +1203,13 @@ function love.keypressed(key, unicode)
 		end
 	
 	elseif gamestate == "multimenu" then
+		--noinspection GlobalCreationOutsideO
 		oldmusicno = musicno
 		if key == "escape" then
 			if musicno < 4 then
 				love.audio.stop(music[musicno])
 			end
+			--noinspection GlobalCreationOutsideO
 			gamestate = "title"
 			love.audio.stop(musictitle)
 			love.audio.play(musictitle)
@@ -1068,48 +1217,73 @@ function love.keypressed(key, unicode)
 			gameBmulti_load()
 		elseif key == "left" or key == "a" then
 			if selection == 2 or selection == 4 or selection == 6 then
+				--noinspection GlobalCreationOutsideO
 				selection = selection - 1
+				--noinspection GlobalCreationOutsideO
 				selectblink = true
+				--noinspection GlobalCreationOutsideO
 				oldtime = love.timer.getTime()
 			end
 		elseif key == "right" or key == "d" then
 			if selection == 1 or selection == 3 or selection == 5 then
+				--noinspection GlobalCreationOutsideO
 				selection = selection + 1
+				--noinspection GlobalCreationOutsideO
 				selectblink = true
+				--noinspection GlobalCreationOutsideO
 				oldtime = love.timer.getTime()
 			end
 		elseif key == "up" or key == "w" then
 			if selection == 3 or selection == 4 or selection == 5 or selection == 6 then
+				--noinspection GlobalCreationOutsideO
 				selection = selection - 2
+				--noinspection GlobalCreationOutsideO
 				selectblink = true
+				--noinspection GlobalCreationOutsideO
 				oldtime = love.timer.getTime()
 				if selection < 3 then
+					--noinspection GlobalCreationOutsideO
 					selection = gameno
+					--noinspection GlobalCreationOutsideO
 					selectblink = false
+					--noinspection GlobalCreationOutsideO
 					oldtime = love.timer.getTime()
 				end
 			elseif selection == 1 or selection == 2 then
+				--noinspection GlobalCreationOutsideO
 				selection = musicno + 2
+				--noinspection GlobalCreationOutsideO
 				selectblink = false
+				--noinspection GlobalCreationOutsideO
 				oldtime = love.timer.getTime()
 			end
 		elseif key == "down" or key == "s" then
 			if selection == 1 or selection == 2 or selection == 3 or selection == 4 then
+				--noinspection GlobalCreationOutsideO
 				selection = selection + 2
+				--noinspection GlobalCreationOutsideO
 				selectblink = true
+				--noinspection GlobalCreationOutsideO
 				oldtime = love.timer.getTime()
 				if selection > 2 and selection < 5 then
+					--noinspection GlobalCreationOutsideO
 					selection = musicno + 2
+					--noinspection GlobalCreationOutsideO
 					selectblink = false
+					--noinspection GlobalCreationOutsideO
 					oldtime = love.timer.getTime()
 				end
 			elseif selection == 5 or selection == 6 then
+				--noinspection GlobalCreationOutsideO
 				selection = gameno
+				--noinspection GlobalCreationOutsideO
 				selectblink = false
+				--noinspection GlobalCreationOutsideO
 				oldtime = love.timer.getTime()
 			end
 		end
 		if selection > 2 and key ~= "return" and key ~= "escape" then
+			--noinspection GlobalCreationOutsideO
 			musicno = selection - 2
 			if oldmusicno ~= musicno and oldmusicno ~= 4 then
 				love.audio.stop(music[oldmusicno])
@@ -1118,6 +1292,7 @@ function love.keypressed(key, unicode)
 				love.audio.play(music[musicno])
 			end
 		elseif key ~= "return" and key ~= "escape" then
+			--noinspection GlobalCreationOutsideO
 			gameno = selection
 			loadhighscores()
 		end
@@ -1125,6 +1300,7 @@ function love.keypressed(key, unicode)
 	elseif gamestate == "gameA" or gamestate == "gameB" or gamestate == "failingA" or gamestate == "failingB" then
 		
 		if key == "return" then
+			--noinspection GlobalCreationOutsideO
 			pause = not pause
 			
 			if pause == true then
@@ -1141,7 +1317,9 @@ function love.keypressed(key, unicode)
 		end
 		if gamestate == "gameA" or gamestate == "gameB" then
 			if key == "escape" then
+				--noinspection GlobalCreationOutsideO
 				oldtime = love.timer.getTime()
+				--noinspection GlobalCreationOutsideO
 				gamestate = "menu"
 			end
 			
@@ -1163,6 +1341,7 @@ function love.keypressed(key, unicode)
 			if not fullscreen then
 				love.graphics.setMode(game_sp_width_pixels * scale, game_height_pixels * scale, false, vsync, 0)
 			end
+			--noinspection GlobalCreationOutsideO
 			gamestate = "multimenu"
 			if musicno < 4 then
 				love.audio.play(music[musicno])
@@ -1173,6 +1352,7 @@ function love.keypressed(key, unicode)
 			if not fullscreen then
 				love.graphics.setMode(game_sp_width_pixels * scale, game_height_pixels * scale, false, vsync, 0)
 			end
+			--noinspection GlobalCreationOutsideO
 			gamestate = "multimenu"
 		end
 		if key == "a" or key == "d" then
@@ -1198,6 +1378,7 @@ function love.keypressed(key, unicode)
 			if not fullscreen then
 				love.graphics.setMode(game_sp_width_pixels * scale, game_height_pixels * scale, false, vsync, 0)
 			end
+			--noinspection GlobalCreationOutsideO
 			gamestate = "multimenu"
 		end
 	
@@ -1208,6 +1389,7 @@ function love.keypressed(key, unicode)
 		end
 	elseif gamestate == "highscoreentry" then
 		if key == "return" then
+			--noinspection GlobalCreationOutsideO
 			gamestate = "menu"
 			savehighscores()
 			if musicchanged == true then
@@ -1220,12 +1402,14 @@ function love.keypressed(key, unicode)
 			end
 		elseif key == "backspace" then
 			if highscorename[highscoreno]:len() > 0 then
+				--noinspection GlobalCreationOutsideO
 				cursorblink = true
 				highscorename[highscoreno] = string.sub(highscorename[highscoreno], 1, highscorename[highscoreno]:len() - 1)
 			end
 		
 		elseif whitelist[unicode] == true then
 			if highscorename[highscoreno]:len() < 6 then
+				--noinspection GlobalCreationOutsideO
 				cursorblink = true
 				highscorename[highscoreno] = highscorename[highscoreno] .. string.char(unicode)
 				love.audio.stop(highscorebeep)
