@@ -35,7 +35,7 @@ function gameA_load()
 	
 	--PHYSICS--
 	--noinspection GlobalCreationOutsideO
-	meter = 30 --TODO: set this in main.lua and rename to pixelspermeter
+	pixelspermeter = 30
 	--noinspection GlobalCreationOutsideO
 	world = love.physics.newWorld(0, 500, true)
 	-- world = love.physics.newWorld(0, -720, 960, 1050, 0, 500, true )
@@ -1143,7 +1143,7 @@ function largeenough(coords) --checks if a polygon is good enough for box2d's sn
 		local projection = (coords[i] - centroidX) * normals[i]
 				+ (coords[i + 1] - centroidY) * normals[i + 1]
 		
-		if (projection < 0.04 * meter) then
+		if (projection < 0.04 * pixelspermeter) then
 			
 			return false
 		end
