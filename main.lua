@@ -198,10 +198,6 @@ function love.load()
 	end
 end
 
-function start()
-	menu_load()
-end
-
 function loadimages()
 	--IMAGES--
 	--menu--
@@ -320,7 +316,7 @@ function love.update(dt)
 	if gamestate == nil then
 		startdelaytime = startdelaytime + dt
 		if startdelaytime >= startdelay then
-			start()
+			menu_load()
 		end
 	end
 	
