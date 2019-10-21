@@ -841,7 +841,7 @@ function refineshape(line, mult, bodyid, body, shapeid, shape) --refines a shape
 		for i=1,#coords,2 do
 			newcoords[i],newcoords[i+1] = body:getLocalPoint(coords[i], coords[i+1])
 		end
-		return love.physics.newPolygonShape(body, unpack(newcoords))
+		return love.physics.newFixture(body, love.physics.newPolygonShape(unpack(newcoords)), 1)
 	end
 end
 
