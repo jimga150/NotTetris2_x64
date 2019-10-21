@@ -116,34 +116,34 @@ function gameBmulti_load()
 	--WALLS P1--
 	--noinspection GlobalCreationOutsideO
 	wallbodiesp1 = love.physics.newBody(world, 32, -64, 0, 0)
-	-- TODO: use string keys instead of numbers
-	wallshapesp1[0] = love.physics.newPolygonShape(wallbodiesp1, 164, 0, 164, 672, 196, 672, 196, 0)
-	wallshapesp1[0]:setData("leftp1")
-	wallshapesp1[0]:setFriction(0.0001)
+
+	wallshapesp1["leftp1"] = love.physics.newPolygonShape(wallbodiesp1, 164, 0, 164, 672, 196, 672, 196, 0)
+	wallshapesp1["leftp1"]:setData("leftp1")
+	wallshapesp1["leftp1"]:setFriction(0.0001)
 	
-	wallshapesp1[1] = love.physics.newPolygonShape(wallbodiesp1, 516, 0, 516, 672, 548, 672, 548, 0)
-	wallshapesp1[1]:setData("rightp1")
-	wallshapesp1[1]:setCategory(2)
-	wallshapesp1[1]:setFriction(0.0001)
+	wallshapesp1["rightp1"] = love.physics.newPolygonShape(wallbodiesp1, 516, 0, 516, 672, 548, 672, 548, 0)
+	wallshapesp1["rightp1"]:setData("rightp1")
+	wallshapesp1["rightp1"]:setCategory(2)
+	wallshapesp1["rightp1"]:setFriction(0.0001)
 	
-	wallshapesp1[2] = love.physics.newPolygonShape(wallbodiesp1, 196, 640, 196, 672, 516, 672, 516, 640)
-	wallshapesp1[2]:setData("groundp1")
+	wallshapesp1["groundp1"] = love.physics.newPolygonShape(wallbodiesp1, 196, 640, 196, 672, 516, 672, 516, 640)
+	wallshapesp1["groundp1"]:setData("groundp1")
 	
 	--WALLS P2--
 	--noinspection GlobalCreationOutsideO
 	wallbodiesp2 = love.physics.newBody(world, 32, -64, 0, 0)
-	-- TODO: use string keys instead of numbers
-	wallshapesp2[0] = love.physics.newPolygonShape(wallbodiesp2, 484, 0, 484, 672, 516, 672, 516, 0)
-	wallshapesp2[0]:setData("leftp2")
-	wallshapesp2[0]:setCategory(3)
-	wallshapesp2[0]:setFriction(0.0001)
+
+	wallshapesp2["leftp2"] = love.physics.newPolygonShape(wallbodiesp2, 484, 0, 484, 672, 516, 672, 516, 0)
+	wallshapesp2["leftp2"]:setData("leftp2")
+	wallshapesp2["leftp2"]:setCategory(3)
+	wallshapesp2["leftp2"]:setFriction(0.0001)
 	
-	wallshapesp2[1] = love.physics.newPolygonShape(wallbodiesp2, 836, 0, 836, 672, 868, 672, 868, 0)
-	wallshapesp2[1]:setData("rightp2")
-	wallshapesp2[1]:setFriction(0.0001)
+	wallshapesp2["rightp2"] = love.physics.newPolygonShape(wallbodiesp2, 836, 0, 836, 672, 868, 672, 868, 0)
+	wallshapesp2["rightp2"]:setData("rightp2")
+	wallshapesp2["rightp2"]:setFriction(0.0001)
 	
-	wallshapesp2[2] = love.physics.newPolygonShape(wallbodiesp2, 516, 640, 516, 672, 836, 672, 836, 640)
-	wallshapesp2[2]:setData("groundp2")
+	wallshapesp2["groundp2"] = love.physics.newPolygonShape(wallbodiesp2, 516, 640, 516, 672, 836, 672, 836, 640)
+	wallshapesp2["groundp2"]:setData("groundp2")
 	-----------
 	world:setCallbacks(collideBmulti)
 	-----------
@@ -466,8 +466,8 @@ function gameBmulti_update(dt)
 			--noinspection GlobalCreationOutsideO
 			gamestate = "failedBmulti"
 			
-			wallshapesp1[2]:destroy()
-			wallshapesp2[2]:destroy()
+			wallshapesp1["groundp1"]:destroy()
+			wallshapesp2["groundp1"]:destroy()
 			
 			love.audio.stop(gameover2)
 			love.audio.play(gameover2)
