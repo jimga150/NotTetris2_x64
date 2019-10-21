@@ -644,7 +644,7 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 							cutimage(i - ioffset, numberofgroups)
 							
 							--mass confusion
-							tetribodies[i - ioffset]:setMassFromShapes()
+							calcMassInertia(tetribodies[i - ioffset])
 							
 							local mass = tetribodies[i - ioffset]:getMass()
 							if mass < minmass then
