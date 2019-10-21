@@ -12,6 +12,7 @@ function love.load()
 	vsync = true
 	
 	autosize()
+	fsaa = 16
 	
 	suggestedscale = math.min(math.floor((desktopheight - 50) / 144), math.floor((desktopwidth - 10) / 160))
 	if suggestedscale > 5 then
@@ -25,10 +26,10 @@ function love.load()
 	
 	if fullscreen == false then
 		if scale ~= 5 then
-			love.graphics.setMode(160 * scale, 144 * scale, false, vsync, 16)
+			love.graphics.setMode(160 * scale, 144 * scale, false, vsync, fsaa)
 		end
 	else
-		love.graphics.setMode(0, 0, true, vsync, 16)
+		love.graphics.setMode(0, 0, true, vsync, fsaa)
 		love.mouse.setVisible(false)
 		desktopwidth, desktopheight = love.graphics.getWidth(), love.graphics.getHeight()
 		saveoptions()
@@ -577,9 +578,9 @@ function togglefullscreen(fullscr)
 	if fullscr == false then
 		scale = suggestedscale
 		physicsscale = scale / 4
-		love.graphics.setMode(160 * scale, 144 * scale, false, vsync, 16)
+		love.graphics.setMode(160 * scale, 144 * scale, false, vsync, fsaa)
 	else
-		love.graphics.setMode(0, 0, true, vsync, 16)
+		love.graphics.setMode(0, 0, true, vsync, fsaa)
 		desktopwidth, desktopheight = love.graphics.getWidth(), love.graphics.getHeight()
 		suggestedscale = math.min(math.floor((desktopheight - 50) / 144), math.floor((desktopwidth - 10) / 160))
 		suggestedscale = math.min(math.floor((desktopheight - 50) / 144), math.floor((desktopwidth - 10) / 160))
@@ -653,7 +654,7 @@ function savehighscores()
 end
 
 function changescale(i)
-	love.graphics.setMode(160 * i, 144 * i, false, vsync, 16)
+	love.graphics.setMode(160 * i, 144 * i, false, vsync, fsaa)
 	nextpieceimg = {}
 	for j = 1, 7 do
 		nextpieceimg[j] = newPaddedImage("graphics/pieces/" .. j .. ".png", i)

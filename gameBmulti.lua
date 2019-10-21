@@ -19,7 +19,7 @@ function gameBmulti_load()
 	mpfullscreenoffsetY = (desktopheight - 144 * mpscale) / 2
 	
 	if not fullscreen then
-		love.graphics.setMode(274 * mpscale, 144 * mpscale, fullscreen, vsync, 16)
+		love.graphics.setMode(274 * mpscale, 144 * mpscale, fullscreen, vsync, fsaa)
 	end
 	
 	--nextpieces
