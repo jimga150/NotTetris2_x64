@@ -572,9 +572,11 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 				for a = 1, numberofgroups do
 					if a == 1 then --reassign the old bodyid
 						rotation = tetribodies[i-ioffset]:getAngle()
+						local bodyx, bodyy, bodymass = tetribodies[i-ioffset]:getX(), tetribodies[i-ioffset]:getY(), tetribodies[i-ioffset]:getMass()
 						tetribodies[i-ioffset]:destroy()
-						tetribodies[i-ioffset] = love.physics.newBody(world, tetribodies[i-ioffset]:getX(), tetribodies[i-ioffset]:getY(), tetribodies[i-ioffset]:getMass(), blockrot)
+						tetribodies[i-ioffset] = love.physics.newBody(world, bodyx, bodyy, "dynamic")
 						tetribodies[i-ioffset]:setAngle(rotation)
+						tetribodies[i-ioffset]:setMass(bodymass)
 						tetrifixtures[i-ioffset] = {}
 						for b, c in pairs(tetrifixturescopy) do
 							if shapegroups[b] == a then
