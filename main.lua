@@ -36,14 +36,19 @@ function love.load()
 	
 	autosize() -- sets desktopheight and desktopwidth to the first possible mode that appears
 
+	-- scale to default to, based on the desktop width and height
+	--noinspection GlobalCreationOutsideO
 	suggestedscale = math.min(math.floor((desktopheight - heightcorrection) / game_height_pixels), math.floor((desktopwidth - widthcorrection) / game_sp_width_pixels))
 	if suggestedscale > max_initial_suggestedscale then
+		--noinspection GlobalCreationOutsideO
 		suggestedscale = max_initial_suggestedscale
 	end
 	
 	loadoptions()
 	
+	--noinspection GlobalCreationOutsideO
 	maxscale = math.min(math.floor(desktopheight / game_height_pixels), math.floor(desktopwidth / game_sp_width_pixels))
+	--noinspection GlobalCreationOutsideO
 	maxmpscale = math.min(math.floor(desktopheight / game_height_pixels), math.floor(desktopwidth / game_mp_width_pixels))
 	
 	if fullscreen == false then
@@ -53,18 +58,25 @@ function love.load()
 	else
 		love.graphics.setMode(0, 0, true, vsync, fsaa)
 		love.mouse.setVisible(false)
+		--noinspection GlobalCreationOutsideO
 		desktopwidth, desktopheight = love.graphics.getWidth(), love.graphics.getHeight()
 		saveoptions()
 		
+		--noinspection GlobalCreationOutsideO
 		suggestedscale = math.floor((desktopheight - heightcorrection) / game_height_pixels)
 		if suggestedscale > max_initial_suggestedscale then
+			--noinspection GlobalCreationOutsideO
 			suggestedscale = max_initial_suggestedscale
 		end
+		--noinspection GlobalCreationOutsideO
 		maxscale = math.min(math.floor(desktopheight / game_height_pixels), math.floor(desktopwidth / game_sp_width_pixels))
 		
+		--noinspection GlobalCreationOutsideO
 		scale = maxscale
 		
-		fullscreenoffsetX = (desktopwidth - game_sp_width_pixels * scale) / 2
+		--noinspection GlobalCreationOutsideO
+		fullscreenoffsetX = (desktopwidth - game_sp_width_pixels * scale) / 2 -- divide these by two to factor in the screen centering
+		--noinspection GlobalCreationOutsideO
 		fullscreenoffsetY = (desktopheight - game_height_pixels * scale) / 2
 	end
 	
@@ -72,10 +84,13 @@ function love.load()
 	physicsscale = scale / physics_scale_factor
 	
 	--pieces--
+	--noinspection GlobalCreationOutsideO
 	tetriimages = {}
+	--noinspection GlobalCreationOutsideO
 	tetriimagedata = {}
 	
 	--SOUND--
+	--noinspection GlobalCreationOutsideO
 	music = {}
 	
 	music[1] = love.audio.newSource("sounds/themeA.ogg", "stream")
@@ -90,53 +105,73 @@ function love.load()
 	music[3]:setVolume(0.6)
 	music[3]:setLooping(true)
 	
+	--noinspection GlobalCreationOutsideO
 	musictitle = love.audio.newSource("sounds/titlemusic.ogg", "stream")
 	musictitle:setVolume(0.6)
 	musictitle:setLooping(true)
 	
+	--noinspection GlobalCreationOutsideO
 	musichighscore = love.audio.newSource("sounds/highscoremusic.ogg", "stream")
 	musichighscore:setVolume(0.6)
 	musichighscore:setLooping(true)
 	
+	--noinspection GlobalCreationOutsideO
 	musicrocket4 = love.audio.newSource("sounds/rocket4.ogg", "stream")
 	musicrocket4:setVolume(0.6)
 	musicrocket4:setLooping(false)
 	
+	--noinspection GlobalCreationOutsideO
 	musicrocket1to3 = love.audio.newSource("sounds/rocket1to3.ogg", "stream")
 	musicrocket1to3:setVolume(0.6)
 	musicrocket1to3:setLooping(false)
 	
+	--noinspection GlobalCreationOutsideO
 	musicresults = love.audio.newSource("sounds/resultsmusic.ogg", "stream")
 	musicresults:setVolume(1)
 	musicresults:setLooping(false)
 	
+	--noinspection GlobalCreationOutsideO
 	highscoreintro = love.audio.newSource("sounds/highscoreintro.ogg", "stream")
 	highscoreintro:setVolume(0.6)
 	highscoreintro:setLooping(false)
 	
+	--noinspection GlobalCreationOutsideO
 	musicoptions = love.audio.newSource("sounds/musicoptions.ogg", "stream")
 	musicoptions:setVolume(1)
 	musicoptions:setLooping(true)
 	
+	--noinspection GlobalCreationOutsideO
 	boot = love.audio.newSource("sounds/boot.ogg")
+	--noinspection GlobalCreationOutsideO
 	blockfall = love.audio.newSource("sounds/blockfall.ogg", "stream")
+	--noinspection GlobalCreationOutsideO
 	blockturn = love.audio.newSource("sounds/turn.ogg", "stream")
+	--noinspection GlobalCreationOutsideO
 	blockmove = love.audio.newSource("sounds/move.ogg", "stream")
+	--noinspection GlobalCreationOutsideO
 	lineclear = love.audio.newSource("sounds/lineclear.ogg", "stream")
+	--noinspection GlobalCreationOutsideO
 	fourlineclear = love.audio.newSource("sounds/4lineclear.ogg", "stream")
+	--noinspection GlobalCreationOutsideO
 	gameover1 = love.audio.newSource("sounds/gameover1.ogg", "stream")
+	--noinspection GlobalCreationOutsideO
 	gameover2 = love.audio.newSource("sounds/gameover2.ogg", "stream")
+	--noinspection GlobalCreationOutsideO
 	pausesound = love.audio.newSource("sounds/pause.ogg", "stream")
+	--noinspection GlobalCreationOutsideO
 	highscorebeep = love.audio.newSource("sounds/highscorebeep.ogg", "stream")
+	--noinspection GlobalCreationOutsideO
 	newlevel = love.audio.newSource("sounds/newlevel.ogg", "stream")
 	newlevel:setVolume(0.6)
 	
 	changevolume(volume)
 	
 	--IMAGES THAT WON'T CHANGE HUE:
+	--noinspection GlobalCreationOutsideO
 	rainbowgradient = love.graphics.newImage("graphics/rainbow.png") rainbowgradient:setFilter("nearest", "nearest")
 	
 	--Whitelist for highscorenames--
+	--noinspection GlobalCreationOutsideO
 	whitelist = {}
 	for i = 48, 57 do -- 0 - 9
 		whitelist[i] = true
@@ -160,43 +195,71 @@ function love.load()
 	
 	love.graphics.setBackgroundColor(255, 255, 255)
 	
+	--noinspection GlobalCreationOutsideO
 	p1wins = 0
+	--noinspection GlobalCreationOutsideO
 	p2wins = 0
 	
+	--noinspection GlobalCreationOutsideO
 	skipupdate = true
+	--noinspection GlobalCreationOutsideO
 	soundenabled = true
+	--noinspection GlobalCreationOutsideO
 	startdelay = 1
+	--noinspection GlobalCreationOutsideO
 	logoduration = 1.5
+	--noinspection GlobalCreationOutsideO
 	logodelay = 1
+	--noinspection GlobalCreationOutsideO
 	creditsdelay = 2
+	--noinspection GlobalCreationOutsideO
 	selectblinkrate = 0.29
+	--noinspection GlobalCreationOutsideO
 	cursorblinkrate = 0.14
+	--noinspection GlobalCreationOutsideO
 	selectblink = true
+	--noinspection GlobalCreationOutsideO
 	cursorblink = true
+	--noinspection GlobalCreationOutsideO
 	playerselection = 1
+	--noinspection GlobalCreationOutsideO
 	musicno = 1 --
+	--noinspection GlobalCreationOutsideO
 	gameno = 1 --
+	--noinspection GlobalCreationOutsideO
 	selection = 1 --
+	--noinspection GlobalCreationOutsideO
 	colorizeduration = 3 --seconds
+	--noinspection GlobalCreationOutsideO
 	lineclearduration = 1.2 --seconds
+	--noinspection GlobalCreationOutsideO
 	lineclearblinks = 7 --i
 	--noinspection GlobalCreationOutsideO
 	lineclearthreshold = 8.1 --in blocks
+	--noinspection GlobalCreationOutsideO
 	densityupdateinterval = 1 / 30 --in seconds
+	--noinspection GlobalCreationOutsideO
 	nextpiecerotspeed = 1 --rad per seconnd
+	--noinspection GlobalCreationOutsideO
 	minfps = 1 / 50 --dt doesn't go higher than this
+	--noinspection GlobalCreationOutsideO
 	scoreaddtime = 0.5
+	--noinspection GlobalCreationOutsideO
 	startdelaytime = 0
 	
+	--noinspection GlobalCreationOutsideO
 	blockstartY = -64 --where new blocks are created
+	--noinspection GlobalCreationOutsideO
 	losingY = 0 --lose if block 1 collides above this line
-	blockmass = 5 --probably obsolete because body:setMassFromShapes()
+	--noinspection GlobalCreationOutsideO
 	blockrot = 10
-	blockrestitution = 0.1
+	--noinspection GlobalCreationOutsideO
 	minmass = 1
 	
+	--noinspection GlobalCreationOutsideO
 	optionschoices = { "volume", "color", "scale", "fullscrn" }
 	
+	--noinspection GlobalCreationOutsideO
 	piececenter = {}
 	piececenter[1] = { 17, 5 }
 	piececenter[2] = { 13, 9 }
@@ -206,6 +269,7 @@ function love.load()
 	piececenter[6] = { 13, 9 }
 	piececenter[7] = { 13, 9 }
 	
+	--noinspection GlobalCreationOutsideO
 	piececenterpreview = {}
 	piececenterpreview[1] = { 17, 5 }
 	piececenterpreview[2] = { 15, 7 }
