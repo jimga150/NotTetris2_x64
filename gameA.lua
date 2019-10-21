@@ -1178,9 +1178,6 @@ function collideA(a, b, coll) --box2d callback. calls endblock.
 		return
 	end
 	
-	print(a:getUserData(), b:getUserData())
-	print(a:getUserData()[1], b:getUserData()[1])
-	
 	if a:getUserData()[1] == 1 or b:getUserData()[1] == 1 then
 		if a:getUserData()[1] ~= "left" and a:getUserData()[1] ~= "right" and b:getUserData()[1] ~= "left" and b:getUserData()[1] ~= "right" then
 			if gamestate == "gameA" then
