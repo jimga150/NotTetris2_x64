@@ -16,10 +16,10 @@ function gameBmulti_load()
 	physicsmpscale = mpscale / 4
 	
 	mpfullscreenoffsetX = (desktopwidth - 274 * mpscale) / 2
-	mpfullscreenoffsetY = (desktopheight - 144 * mpscale) / 2
+	mpfullscreenoffsetY = (desktopheight - game_height_pixels * mpscale) / 2
 	
 	if not fullscreen then
-		love.graphics.setMode(274 * mpscale, 144 * mpscale, fullscreen, vsync, fsaa)
+		love.graphics.setMode(274 * mpscale, game_height_pixels * mpscale, fullscreen, vsync, fsaa)
 	end
 	
 	--nextpieces
@@ -116,7 +116,7 @@ function gameBmulti_draw()
 	if fullscreen then
 		love.graphics.translate(mpfullscreenoffsetX, mpfullscreenoffsetY)
 		
-		love.graphics.setScissor(mpfullscreenoffsetX, mpfullscreenoffsetY, 274 * mpscale, 144 * mpscale)
+		love.graphics.setScissor(mpfullscreenoffsetX, mpfullscreenoffsetY, 274 * mpscale, game_height_pixels * mpscale)
 	end
 	
 	--background--
@@ -277,7 +277,7 @@ function gameBmulti_draw()
 			--mario
 			love.graphics.draw(marioidle, 84 * mpscale, 69 * mpscale, 0, mpscale, mpscale)
 			if cryframe == false then
-				love.graphics.print("draw", 160 * mpscale, 40 * mpscale, 0, mpscale)
+				love.graphics.print("draw", game_width_pixels * mpscale, 40 * mpscale, 0, mpscale)
 			end
 			
 			--luigi

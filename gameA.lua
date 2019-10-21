@@ -134,7 +134,7 @@ function gameA_draw()
 		love.graphics.translate(fullscreenoffsetX, fullscreenoffsetY)
 		
 		--scissor
-		love.graphics.setScissor(fullscreenoffsetX, fullscreenoffsetY, 160 * scale, 144 * scale)
+		love.graphics.setScissor(fullscreenoffsetX, fullscreenoffsetY, game_width_pixels * scale, game_height_pixels * scale)
 	end
 	
 	--background--
@@ -201,7 +201,7 @@ function gameA_draw()
 		love.graphics.setFont(tetrisfont)
 		
 		if fullscreen then
-			love.graphics.setScissor(fullscreenoffsetX, fullscreenoffsetY, 160 * scale, 144 * scale)
+			love.graphics.setScissor(fullscreenoffsetX, fullscreenoffsetY, game_width_pixels * scale, game_height_pixels * scale)
 		else
 			love.graphics.setScissor()
 		end
@@ -243,7 +243,7 @@ function gameA_draw()
 	for i = 1, scorestring:len() - 1 do
 		offsetX = offsetX - 8 * scale
 	end
-	love.graphics.print(scorescore, 144 * scale + offsetX, 24 * scale, 0, scale, scale)
+	love.graphics.print(scorescore, game_height_pixels * scale + offsetX, 24 * scale, 0, scale, scale)
 	
 	
 	--"level"--
@@ -649,7 +649,7 @@ function cutimage(bodyid, numberofgroups) --cuts the image of a body based on it
 	bodyang = math.mod(bodyang, math.pi)
 	
 	local highestx = -1
-	local lowestx = 160*scale
+	local lowestx = game_width_pixels*scale
 	for i, v in pairs(tetrishapes[bodyid]) do
 		x1, x2 = getintersectX(v, upperline-0.01)
 		if x1 < lowestx and x1 ~= -1 then
@@ -679,7 +679,7 @@ function cutimage(bodyid, numberofgroups) --cuts the image of a body based on it
 	dummy1, dummy2 = dummy1 + width/2, dummy2 + height/2
 	local point2 = {dummy1, dummy2}	
 	
-	local leftlimit = 160*scale
+	local leftlimit = game_width_pixels*scale
 	local rightlimit = -1
 	
 	--find out the limits of there's more than 1 body being created
@@ -698,7 +698,7 @@ function cutimage(bodyid, numberofgroups) --cuts the image of a body based on it
 		end
 	else 
 		leftlimit = -1
-		rightlimit = 160*scale
+		rightlimit = game_width_pixels*scale
 	end
 	
 	local ang = math.atan2(point2[1] - point1[1], point2[2] - point1[2])

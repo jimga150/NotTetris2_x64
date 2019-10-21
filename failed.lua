@@ -11,7 +11,7 @@ function failed_draw()
 		love.graphics.translate(fullscreenoffsetX, fullscreenoffsetY)
 		
 		--scissor
-		love.graphics.setScissor(fullscreenoffsetX, fullscreenoffsetY, 160 * scale, 144 * scale)
+		love.graphics.setScissor(fullscreenoffsetX, fullscreenoffsetY, game_width_pixels * scale, game_height_pixels * scale)
 	end
 	
 	if gameno == 1 then
@@ -30,7 +30,7 @@ function failed_draw()
 	for i = 1, scorestring:len() - 1 do
 		offsetX = offsetX - 8 * scale
 	end
-	love.graphics.print(scorescore, 144 * scale + offsetX, 24 * scale, 0, scale)
+	love.graphics.print(scorescore, game_height_pixels * scale + offsetX, 24 * scale, 0, scale)
 	
 	
 	--"level"--
