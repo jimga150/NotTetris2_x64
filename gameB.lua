@@ -11,7 +11,6 @@ function gameB_load()
 	nextpiecerot = 0
 	
 	--PHYSICS--
-	meter = 30
 	world = love.physics.newWorld(0, -720, 960, 1050, 0, 500, true)
 	
 	tetrikind = {}
