@@ -663,10 +663,9 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 							tetriimages[highestbody()] = padImagedata(tetriimagedata[highestbody()])
 							tetrikind[highestbody()] = tetrikind[i - ioffset]
 							
-							local debugimagedata = love.image.newImageData(backupimagedata:getWidth(), backupimagedata:getHeight())
+							--[[local debugimagedata = love.image.newImageData(backupimagedata:getWidth(), backupimagedata:getHeight())
 							debugimagedata:paste(backupimagedata, 0, 0, 0, 0, backupimagedata:getWidth(), backupimagedata:getHeight())
-							local debugimage = padImagedata(debugimagedata)
-							-- TODO: do we need this?^
+							local debugimage = padImagedata(debugimagedata)]]
 						
 							--cut the image
 							cutimage(highestbody(), numberofgroups)
