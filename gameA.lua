@@ -550,8 +550,12 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 					for var = 1, #cotable, 2 do
 						cotable[var], cotable[var + 1] = tetribodies[i - ioffset]:getLocalPoint(cotable[var], cotable[var + 1])
 					end
-					tetrifixturescopy[#tetrifixturescopy + 1] = love.physics.newFixture(tetribodies[i - ioffset], love.physics.newPolygonShape(unpack(cotable)), 1)
-				end
+					tetrifixturescopy[#tetrifixturescopy + 1] = love.physics.newFixture(
+						tetribodies[i - ioffset],
+						love.physics.newPolygonShape(unpack(cotable)),
+						1
+					)
+                end
 			end
 			if refined == true then
 				
@@ -620,7 +624,8 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 									for var = 1, #cotable, 2 do
 										cotable[var], cotable[var + 1] = tetribodies[i - ioffset]:getLocalPoint(cotable[var], cotable[var + 1])
 									end
-									tetrifixtures[i - ioffset][#tetrifixtures[i - ioffset] + 1] = love.physics.newFixture(tetribodies[i - ioffset],
+									tetrifixtures[i - ioffset][#tetrifixtures[i - ioffset] + 1] = love.physics.newFixture(
+                                        tetribodies[i - ioffset],
 										love.physics.newPolygonShape(unpack(cotable)),
 										1)
 									tetrifixtures[i - ioffset][#tetrifixtures[i - ioffset]]:setUserData({ i - ioffset }) --set the shape name for collision
