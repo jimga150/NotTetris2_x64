@@ -677,76 +677,8 @@ function cutimage(bodyid, numberofgroups) --cuts the image of a body based on it
 	local width = tetriimagedata[bodyid]:getWidth()
 	local height = tetriimagedata[bodyid]:getHeight()
 	
-	--[[ This old method used the angle between the two cutting points and all the other points to determine if the point should be removed.
-		 But it sometimes bugged out for reasons I couldn't figure out so I'm going for the less good looking easy approach. Boo :(
-
-	local bodyang = tetribodies[bodyid]:getAngle()
-	bodyang = math.mod(bodyang, math.pi)
-
-	local highestx = -1
-	local lowestx = 160*scale
-	for i, v in pairs(tetrifixtures[bodyid]) do
-		x1, x2 = getintersectX(v, upperline-0.01)
-		if x1 < lowestx and x1 ~= -1 then
-			lowestx = x1
-		end
-		if x2 > highestx thena
-			highestx = x2
-		end
-	end
-
-	--get if to chose lower or upper line
-	local posy = getPoints2table(tetrifixtures[bodyid][1])
-	posy = posy[2]
-
-	if posy > (upperline + lowerline) / 2 then
-		line = lowerline
-	else
-		line = upperline
-	end
-
-	--convert points to local coordinates
-	local dummy1, dummy2 = tetribodies[bodyid]:getLocalPoint( lowestx, line )
-	dummy1, dummy2 = dummy1 + width/2, dummy2 + height/2
-	local point1 = {dummy1, dummy2}
-
-	local dummy1, dummy2 = tetribodies[bodyid]:getLocalPoint( highestx, line )
-	dummy1, dummy2 = dummy1 + width/2, dummy2 + height/2
-	local point2 = {dummy1, dummy2}
-
-	local leftlimit = 160*scale
-	local rightlimit = -1
-
-	--find out the limits of there's more than 1 body being created
-	if numberofgroups > 1 then
-		for s = 1, #tetrifixtures[bodyid] do
-			local cotable = getPoints2table(tetrifixtures[bodyid][s])
-			for i = 1, #cotable, 2 do
-				local x, y = tetribodies[bodyid]:getLocalPoint(cotable[i], cotable[i+1])
-				x = x+width/2
-				if x < leftlimit then
-					leftlimit = x
-				elseif x > rightlimit then
-					rightlimit = x
-				end
-			end
-		end
-	else
-		leftlimit = -1
-		rightlimit = 160*scale
-	end
-
-	local ang = math.atan2(point2[1] - point1[1], point2[2] - point1[2])
-	ang = -ang + math.pi]] --
-	
 	for y = 0, height - 1 do
 		for x = 0, width - 1 do
-			--[[local ang2 = math.atan2(x - point1[1], y - point1[2]) --PART OF OLD METHOD
-				ang2 = -ang2 + math.pi
-
-				if (ang2 > ang and ang2 < ang + math.pi) or ang2 < ang - math.pi or (x < leftlimit or x > rightlimit) then
-					tetriimagedata[bodyid]:setPixel(x, y, 255, 255, 255, 0)
-				end]]
 			
 			local dummy1, dummy2 = tetribodies[bodyid]:getWorldPoint((x - width / 2 + .5) * (4 / scale), (y - height / 2 + .5) * (4 / scale))
 			local deletepixel = true
