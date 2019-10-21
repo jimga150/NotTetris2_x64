@@ -8,44 +8,44 @@ function love.load()
 	require "rocket"
 	
 	vsync = true
-
-	love.graphics.setDefaultFilter("nearest", "nearest", 1 )
+	
+	love.graphics.setDefaultFilter("nearest", "nearest", 1)
 	
 	autosize()
 	
-	suggestedscale = math.min(math.floor((desktopheight-50)/144), math.floor((desktopwidth-10)/160))
+	suggestedscale = math.min(math.floor((desktopheight - 50) / 144), math.floor((desktopwidth - 10) / 160))
 	if suggestedscale > 5 then
 		suggestedscale = 5
 	end
 	
 	loadoptions()
 	
-	maxscale = math.min(math.floor(desktopheight/144), math.floor(desktopwidth/160)) 
-	maxmpscale = math.min(math.floor(desktopheight/144), math.floor(desktopwidth/274)) 
+	maxscale = math.min(math.floor(desktopheight / 144), math.floor(desktopwidth / 160))
+	maxmpscale = math.min(math.floor(desktopheight / 144), math.floor(desktopwidth / 274))
 	
 	if fullscreen == false then
 		if scale ~= 5 then
-			love.graphics.setMode( 160*scale, 144*scale, false, vsync, 16 )
+			love.graphics.setMode(160 * scale, 144 * scale, false, vsync, 16)
 		end
 	else
-		love.graphics.setMode( 0, 0, true, vsync, 16 )
-		love.mouse.setVisible( false )
+		love.graphics.setMode(0, 0, true, vsync, 16)
+		love.mouse.setVisible(false)
 		desktopwidth, desktopheight = love.graphics.getWidth(), love.graphics.getHeight()
 		saveoptions()
 		
-		suggestedscale = math.floor((desktopheight-50)/144)
+		suggestedscale = math.floor((desktopheight - 50) / 144)
 		if suggestedscale > 5 then
 			suggestedscale = 5
 		end
-		maxscale = math.min(math.floor(desktopheight/144), math.floor(desktopwidth/160))
+		maxscale = math.min(math.floor(desktopheight / 144), math.floor(desktopwidth / 160))
 		
 		scale = maxscale
 		
-		fullscreenoffsetX = (desktopwidth-160*scale)/2
-		fullscreenoffsetY = (desktopheight-144*scale)/2
+		fullscreenoffsetX = (desktopwidth - 160 * scale) / 2
+		fullscreenoffsetY = (desktopheight - 144 * scale) / 2
 	end
 	
-	physicsscale = scale/4
+	physicsscale = scale / 4
 	
 	--pieces--
 	tetriimages = {}
@@ -54,64 +54,64 @@ function love.load()
 	--SOUND--
 	music = {}
 	
-	music[1] = love.audio.newSource( "sounds/themeA.ogg", "stream")
-	music[1]:setVolume( 0.6 )
-	music[1]:setLooping( true )
+	music[1] = love.audio.newSource("sounds/themeA.ogg", "stream")
+	music[1]:setVolume(0.6)
+	music[1]:setLooping(true)
 	
-	music[2] = love.audio.newSource( "sounds/themeB.ogg", "stream")
-	music[2]:setVolume( 0.6 )
-	music[2]:setLooping( true )
+	music[2] = love.audio.newSource("sounds/themeB.ogg", "stream")
+	music[2]:setVolume(0.6)
+	music[2]:setLooping(true)
 	
-	music[3] = love.audio.newSource( "sounds/themeC.ogg", "stream")
-	music[3]:setVolume( 0.6 )
-	music[3]:setLooping( true )
+	music[3] = love.audio.newSource("sounds/themeC.ogg", "stream")
+	music[3]:setVolume(0.6)
+	music[3]:setLooping(true)
 	
-	musictitle = love.audio.newSource( "sounds/titlemusic.ogg", "stream")
-	musictitle:setVolume( 0.6 )
-	musictitle:setLooping( true )
+	musictitle = love.audio.newSource("sounds/titlemusic.ogg", "stream")
+	musictitle:setVolume(0.6)
+	musictitle:setLooping(true)
 	
-	musichighscore = love.audio.newSource( "sounds/highscoremusic.ogg", "stream")
-	musichighscore:setVolume( 0.6 )
-	musichighscore:setLooping( true )
+	musichighscore = love.audio.newSource("sounds/highscoremusic.ogg", "stream")
+	musichighscore:setVolume(0.6)
+	musichighscore:setLooping(true)
 	
-	musicrocket4 = love.audio.newSource( "sounds/rocket4.ogg", "stream")
-	musicrocket4:setVolume( 0.6 )
-	musicrocket4:setLooping( false )
+	musicrocket4 = love.audio.newSource("sounds/rocket4.ogg", "stream")
+	musicrocket4:setVolume(0.6)
+	musicrocket4:setLooping(false)
 	
-	musicrocket1to3 = love.audio.newSource( "sounds/rocket1to3.ogg", "stream")
-	musicrocket1to3:setVolume( 0.6 )
-	musicrocket1to3:setLooping( false )
+	musicrocket1to3 = love.audio.newSource("sounds/rocket1to3.ogg", "stream")
+	musicrocket1to3:setVolume(0.6)
+	musicrocket1to3:setLooping(false)
 	
-	musicresults = love.audio.newSource( "sounds/resultsmusic.ogg", "stream")
-	musicresults:setVolume( 1 )
-	musicresults:setLooping( false )
+	musicresults = love.audio.newSource("sounds/resultsmusic.ogg", "stream")
+	musicresults:setVolume(1)
+	musicresults:setLooping(false)
 	
-	highscoreintro = love.audio.newSource( "sounds/highscoreintro.ogg", "stream")
-	highscoreintro:setVolume( 0.6 )
-	highscoreintro:setLooping( false )
+	highscoreintro = love.audio.newSource("sounds/highscoreintro.ogg", "stream")
+	highscoreintro:setVolume(0.6)
+	highscoreintro:setLooping(false)
 	
-	musicoptions = love.audio.newSource( "sounds/musicoptions.ogg", "stream")
-	musicoptions:setVolume( 1 )
-	musicoptions:setLooping( true )
+	musicoptions = love.audio.newSource("sounds/musicoptions.ogg", "stream")
+	musicoptions:setVolume(1)
+	musicoptions:setLooping(true)
 	
 	boot = love.audio.newSource("sounds/boot.ogg", "static")
-	blockfall = love.audio.newSource( "sounds/blockfall.ogg", "stream")
-	blockturn = love.audio.newSource( "sounds/turn.ogg", "stream")
-	blockmove = love.audio.newSource( "sounds/move.ogg", "stream")
-	lineclear = love.audio.newSource( "sounds/lineclear.ogg", "stream")
-	fourlineclear = love.audio.newSource( "sounds/4lineclear.ogg", "stream")
-	gameover1 = love.audio.newSource( "sounds/gameover1.ogg", "stream")
-	gameover2 = love.audio.newSource( "sounds/gameover2.ogg", "stream")
-	pausesound = love.audio.newSource( "sounds/pause.ogg", "stream")
-	highscorebeep = love.audio.newSource( "sounds/highscorebeep.ogg", "stream")
-	newlevel = love.audio.newSource( "sounds/newlevel.ogg", "stream")
-	newlevel:setVolume( 0.6 )
+	blockfall = love.audio.newSource("sounds/blockfall.ogg", "stream")
+	blockturn = love.audio.newSource("sounds/turn.ogg", "stream")
+	blockmove = love.audio.newSource("sounds/move.ogg", "stream")
+	lineclear = love.audio.newSource("sounds/lineclear.ogg", "stream")
+	fourlineclear = love.audio.newSource("sounds/4lineclear.ogg", "stream")
+	gameover1 = love.audio.newSource("sounds/gameover1.ogg", "stream")
+	gameover2 = love.audio.newSource("sounds/gameover2.ogg", "stream")
+	pausesound = love.audio.newSource("sounds/pause.ogg", "stream")
+	highscorebeep = love.audio.newSource("sounds/highscorebeep.ogg", "stream")
+	newlevel = love.audio.newSource("sounds/newlevel.ogg", "stream")
+	newlevel:setVolume(0.6)
 	
 	changevolume(volume)
 	
 	--IMAGES THAT WON'T CHANGE HUE:
 	rainbowgradient = love.graphics.newImage("graphics/rainbow.png")
-
+	
 	--Whitelist for highscorenames--
 	whitelist = {}
 	for i = 48, 57 do -- 0 - 9
@@ -131,14 +131,14 @@ function love.load()
 	
 	-----------------------------
 	
-	math.randomseed( os.time() )
-	math.random();math.random();math.random() --discarding some as they seem to tend to unrandomness.
+	math.randomseed(os.time())
+	math.random(); math.random(); math.random() --discarding some as they seem to tend to unrandomness.
 	
-	love.graphics.setBackgroundColor( 255, 255, 255 )
-
+	love.graphics.setBackgroundColor(255, 255, 255)
+	
 	p1wins = 0
 	p2wins = 0
-
+	
 	skipupdate = true
 	soundenabled = true
 	startdelay = 0 -- changed from 1, fixes oldtime = nil error
@@ -157,9 +157,9 @@ function love.load()
 	lineclearduration = 1.2 --seconds
 	lineclearblinks = 7 --i
 	linecleartreshold = 8.1 --in blocks
-	densityupdateinterval = 1/30 --in seconds
+	densityupdateinterval = 1 / 30 --in seconds
 	nextpiecerotspeed = 1 --rad per seconnd
-	minfps = 1/50 --dt doesn't go higher than this
+	minfps = 1 / 50 --dt doesn't go higher than this
 	scoreaddtime = 0.5
 	startdelaytime = 0
 	
@@ -172,28 +172,28 @@ function love.load()
 	blocktorque = 70000
 	blocklatforce = 2000
 	
-	optionschoices = {"volume", "color", "scale", "fullscrn"}
+	optionschoices = { "volume", "color", "scale", "fullscrn" }
 	
 	piececenter = {}
-	piececenter[1] = {17, 5}
-	piececenter[2] = {13, 9}
-	piececenter[3] = {13, 9}
-	piececenter[4] = { 9, 9}
-	piececenter[5] = {13, 9}
-	piececenter[6] = {13, 9}
-	piececenter[7] = {13, 9}
+	piececenter[1] = { 17, 5 }
+	piececenter[2] = { 13, 9 }
+	piececenter[3] = { 13, 9 }
+	piececenter[4] = { 9, 9 }
+	piececenter[5] = { 13, 9 }
+	piececenter[6] = { 13, 9 }
+	piececenter[7] = { 13, 9 }
 	
 	piececenterpreview = {}
-	piececenterpreview[1] = {17, 5}
-	piececenterpreview[2] = {15, 7}
-	piececenterpreview[3] = {11, 7}
-	piececenterpreview[4] = { 9, 9}
-	piececenterpreview[5] = {13, 9}
-	piececenterpreview[6] = {13, 7}
-	piececenterpreview[7] = {13, 9}
+	piececenterpreview[1] = { 17, 5 }
+	piececenterpreview[2] = { 15, 7 }
+	piececenterpreview[3] = { 11, 7 }
+	piececenterpreview[4] = { 9, 9 }
+	piececenterpreview[5] = { 13, 9 }
+	piececenterpreview[6] = { 13, 7 }
+	piececenterpreview[7] = { 13, 9 }
 	
 	loadhighscores()
-
+	
 	loadimages()
 	
 	--all done!
@@ -268,14 +268,13 @@ function loadimages()
 	--nextpiece
 	nextpieceimg = {}
 	for i = 1, 7 do
-		nextpieceimg[i] = newPaddedImage( "graphics/pieces/"..i..".png", scale )
+		nextpieceimg[i] = newPaddedImage("graphics/pieces/" .. i .. ".png", scale)
 	end
 	
 	--font--
 	tetrisfont = newPaddedImageFont("graphics/font.png", "0123456789abcdefghijklmnopqrstTuvwxyz.,'C-#_>:<! ")
 	whitefont = newPaddedImageFont("graphics/fontwhite.png", "0123456789abcdefghijklmnopqrstTuvwxyz.,'C-#_>:<!+ ")
 	love.graphics.setFont(tetrisfont)
-
 end
 
 function love.update(dt)
@@ -285,7 +284,7 @@ function love.update(dt)
 			start()
 		end
 	end
-
+	
 	if skipupdate then
 		skipupdate = false
 		return
@@ -305,7 +304,7 @@ function love.update(dt)
 		if pause == false then
 			gameB_update(dt)
 		end
-		elseif gamestate == "gameBmulti" or gamestate == "failingBmulti" or gamestate == "failedBmulti" or gamestate == "gameBmulti_results" then
+	elseif gamestate == "gameBmulti" or gamestate == "failingBmulti" or gamestate == "failedBmulti" or gamestate == "gameBmulti_results" then
 		gameBmulti_update(dt)
 	elseif gamestate == "rocket1" or gamestate == "rocket2" or gamestate == "rocket3" or gamestate == "rocket4" then
 		rocket_update()
@@ -329,7 +328,7 @@ function love.draw()
 end
 
 function newImageData(path, s)
-	local imagedata = love.image.newImageData( path )
+	local imagedata = love.image.newImageData(path)
 	
 	if s then
 		imagedata = scaleImagedata(imagedata, s)
@@ -339,20 +338,20 @@ function newImageData(path, s)
 	
 	local rr, rg, rb = unpack(getrainbowcolor(hue))
 	
-	for y = 0, height-1 do
-		for x = 0, width-1 do
+	for y = 0, height - 1 do
+		for x = 0, width - 1 do
 			local oldr, oldg, oldb, olda = imagedata:getPixel(x, y)
 			
 			if olda ~= 0 then
 				if oldr > 203 and oldr < 213 then --lightgrey
-					local r = 145 + rr*64
-					local g = 145 + rg*64
-					local b = 145 + rb*64
+					local r = 145 + rr * 64
+					local g = 145 + rg * 64
+					local b = 145 + rb * 64
 					imagedata:setPixel(x, y, r, g, b, olda)
 				elseif oldr > 107 and oldr < 117 then --darkgrey
-					local r = 73 + rr*43
-					local g = 73 + rg*43
-					local b = 73 + rb*43
+					local r = 73 + rr * 43
+					local g = 73 + rg * 43
+					local b = 73 + rb * 43
 					imagedata:setPixel(x, y, r, g, b, olda)
 				end
 			end
@@ -363,102 +362,102 @@ function newImageData(path, s)
 end
 
 function newPaddedImage(filename, s)
-    local source = newImageData(filename)
+	local source = newImageData(filename)
 	
 	if s then
 		source = scaleImagedata(source, s)
 	end
 	
-    local w, h = source:getWidth(), source:getHeight()
-   
-    -- Find closest power-of-two.
-    local wp = math.pow(2, math.ceil(math.log(w)/math.log(2)))
-    local hp = math.pow(2, math.ceil(math.log(h)/math.log(2)))
-   
-    -- Only pad if needed:
-    if wp ~= w or hp ~= h then
-        local padded = love.image.newImageData(wp, hp)
-        padded:paste(source, 0, 0)
-        return love.graphics.newImage(padded)
-    end
-   
-    return love.graphics.newImage(source)
+	local w, h = source:getWidth(), source:getHeight()
+	
+	-- Find closest power-of-two.
+	local wp = math.pow(2, math.ceil(math.log(w) / math.log(2)))
+	local hp = math.pow(2, math.ceil(math.log(h) / math.log(2)))
+	
+	-- Only pad if needed:
+	if wp ~= w or hp ~= h then
+		local padded = love.image.newImageData(wp, hp)
+		padded:paste(source, 0, 0)
+		return love.graphics.newImage(padded)
+	end
+	
+	return love.graphics.newImage(source)
 end
 
 function padImagedata(source) --returns image, not imagedata!
-    local w, h = source:getWidth(), source:getHeight()
-   
-    -- Find closest power-of-two.
-    local wp = math.pow(2, math.ceil(math.log(w)/math.log(2)))
-    local hp = math.pow(2, math.ceil(math.log(h)/math.log(2)))
-   
-    -- Only pad if needed:
-    if wp ~= w or hp ~= h then
-        local padded = love.image.newImageData(wp, hp)
-        padded:paste(source, 0, 0)
-        return love.graphics.newImage(padded)
-    end
-   
-    return love.graphics.newImage(source)
+	local w, h = source:getWidth(), source:getHeight()
+	
+	-- Find closest power-of-two.
+	local wp = math.pow(2, math.ceil(math.log(w) / math.log(2)))
+	local hp = math.pow(2, math.ceil(math.log(h) / math.log(2)))
+	
+	-- Only pad if needed:
+	if wp ~= w or hp ~= h then
+		local padded = love.image.newImageData(wp, hp)
+		padded:paste(source, 0, 0)
+		return love.graphics.newImage(padded)
+	end
+	
+	return love.graphics.newImage(source)
 end
 
 function newPaddedImageFont(filename, glyphs)
-    local source = newImageData(filename)
-    local w, h = source:getWidth(), source:getHeight()
-
-    -- Find closest power-of-two.
-    local wp = math.pow(2, math.ceil(math.log(w)/math.log(2)))
-    local hp = math.pow(2, math.ceil(math.log(h)/math.log(2)))
-
-    -- Only pad if needed:
-    if wp ~= w or hp ~= h then
-        local padded = love.image.newImageData(wp, hp)
-        padded:paste(source, 0, 0)
+	local source = newImageData(filename)
+	local w, h = source:getWidth(), source:getHeight()
+	
+	-- Find closest power-of-two.
+	local wp = math.pow(2, math.ceil(math.log(w) / math.log(2)))
+	local hp = math.pow(2, math.ceil(math.log(h) / math.log(2)))
+	
+	-- Only pad if needed:
+	if wp ~= w or hp ~= h then
+		local padded = love.image.newImageData(wp, hp)
+		padded:paste(source, 0, 0)
 		-- local image = love.graphics.newImage(padded)
 		-- image:setFilter("nearest", "nearest")
 		-- replaced by setting default image padding in inittioalization
-        return love.graphics.newImageFont(padded, glyphs)
+		return love.graphics.newImageFont(padded, glyphs)
 	end
-
-    return love.graphics.newImageFont(source, glyphs)
+	
+	return love.graphics.newImageFont(source, glyphs)
 end
 
 function scaleImagedata(imagedata, i)
 	local width, height = imagedata:getWidth(), imagedata:getHeight()
-	local scaled = love.image.newImageData(width*i, height*i)
+	local scaled = love.image.newImageData(width * i, height * i)
 	
-	for y = 0, height*i-1 do
-		for x = 0, width*i-1 do
-			local r, g, b, a = imagedata:getPixel(math.floor(x/i), math.floor(y/i))
+	for y = 0, height * i - 1 do
+		for x = 0, width * i - 1 do
+			local r, g, b, a = imagedata:getPixel(math.floor(x / i), math.floor(y / i))
 			scaled:setPixel(x, y, r, g, b, a)
 		end
-	end	
+	end
 	
 	return scaled
 end
 
 function changevolume(i)
-	music[1]:setVolume( 0.6*i )
-	music[2]:setVolume( 0.6*i )
-	music[3]:setVolume( 0.6*i )
-	musictitle:setVolume( 0.6*i )
-	musichighscore:setVolume( 0.6*i )
-	musicrocket4:setVolume( 0.6*i )
-	musicrocket1to3:setVolume( 0.6*i )
-	musicresults:setVolume( i )
-	highscoreintro:setVolume( 0.6*i )
-	musicoptions:setVolume( i )
-	boot:setVolume( i )
-	blockfall:setVolume( i )
-	blockturn:setVolume( i )
-	blockmove:setVolume( i )
-	lineclear:setVolume( i )
-	fourlineclear:setVolume( i )
-	gameover1:setVolume( i )
-	gameover2:setVolume( i )
-	pausesound:setVolume( i )
-	highscorebeep:setVolume( i )
-	newlevel:setVolume( 0.6*i )
+	music[1]:setVolume(0.6 * i)
+	music[2]:setVolume(0.6 * i)
+	music[3]:setVolume(0.6 * i)
+	musictitle:setVolume(0.6 * i)
+	musichighscore:setVolume(0.6 * i)
+	musicrocket4:setVolume(0.6 * i)
+	musicrocket1to3:setVolume(0.6 * i)
+	musicresults:setVolume(i)
+	highscoreintro:setVolume(0.6 * i)
+	musicoptions:setVolume(i)
+	boot:setVolume(i)
+	blockfall:setVolume(i)
+	blockturn:setVolume(i)
+	blockmove:setVolume(i)
+	lineclear:setVolume(i)
+	fourlineclear:setVolume(i)
+	gameover1:setVolume(i)
+	gameover2:setVolume(i)
+	pausesound:setVolume(i)
+	highscorebeep:setVolume(i)
+	newlevel:setVolume(0.6 * i)
 end
 
 function loadoptions()
@@ -475,10 +474,10 @@ function loadoptions()
 				elseif v > 1 then
 					v = 1
 				end
-				v = math.floor(v*10)/10
+				v = math.floor(v * 10) / 10
 				
 				volume = v
-				
+			
 			elseif split2[1] == "hue" then
 				hue = tonumber(split2[2])
 			
@@ -490,7 +489,7 @@ function loadoptions()
 					fullscreen = true
 				else
 					fullscreen = false
-				end	
+				end
 			end
 		end
 		
@@ -507,8 +506,8 @@ function loadoptions()
 		if scale == nil then
 			scale = suggestedscale
 		end
-		
-		
+	
+	
 	else
 		volume = 1
 		hue = 0.08
@@ -538,26 +537,26 @@ end
 
 function togglefullscreen(fullscr)
 	fullscreen = fullscr
-	love.mouse.setVisible( not fullscreen )
+	love.mouse.setVisible(not fullscreen)
 	if fullscr == false then
 		scale = suggestedscale
-		physicsscale = scale/4
-		love.graphics.setMode( 160*scale, 144*scale, false, vsync, 16 )
+		physicsscale = scale / 4
+		love.graphics.setMode(160 * scale, 144 * scale, false, vsync, 16)
 	else
-		love.graphics.setMode( 0, 0, true, vsync, 16 )
+		love.graphics.setMode(0, 0, true, vsync, 16)
 		desktopwidth, desktopheight = love.graphics.getWidth(), love.graphics.getHeight()
-		suggestedscale = math.min(math.floor((desktopheight-50)/144), math.floor((desktopwidth-10)/160))
-		suggestedscale = math.min(math.floor((desktopheight-50)/144), math.floor((desktopwidth-10)/160))
+		suggestedscale = math.min(math.floor((desktopheight - 50) / 144), math.floor((desktopwidth - 10) / 160))
+		suggestedscale = math.min(math.floor((desktopheight - 50) / 144), math.floor((desktopwidth - 10) / 160))
 		if suggestedscale > 5 then
 			suggestedscale = 5
 		end
-		maxscale = math.min(math.floor(desktopheight/144), math.floor(desktopwidth/160))
+		maxscale = math.min(math.floor(desktopheight / 144), math.floor(desktopwidth / 160))
 		
 		scale = maxscale
-		physicsscale = scale/4
+		physicsscale = scale / 4
 		
-		fullscreenoffsetX = (desktopwidth-160*scale)/2
-		fullscreenoffsetY = (desktopheight-144*scale)/2
+		fullscreenoffsetX = (desktopwidth - 160 * scale) / 2
+		fullscreenoffsetY = (desktopheight - 144 * scale) / 2
 	end
 end
 
@@ -570,13 +569,13 @@ function loadhighscores()
 	
 	if not love.filesystem.getInfo(fileloc, "file") == nil then
 		
-		highdata = love.filesystem.read( fileloc )
+		highdata = love.filesystem.read(fileloc)
 		highdata = highdata:split(";")
 		highscore = {}
 		highscorename = {}
 		for i = 1, 3 do
-			highscore[i] = tonumber(highdata[i*2])
-			highscorename[i] = string.lower(highdata[i*2-1])
+			highscore[i] = tonumber(highdata[i * 2])
+			highscorename[i] = string.lower(highdata[i * 2 - 1])
 		end
 	else
 		highscore = {}
@@ -612,35 +611,35 @@ function savehighscores()
 	
 	highdata = ""
 	for i = 1, 3 do
-		highdata = highdata..highscorename[i]..";"..highscore[i]..";"
+		highdata = highdata .. highscorename[i] .. ";" .. highscore[i] .. ";"
 	end
-	love.filesystem.write( fileloc, highdata.."\n" )
+	love.filesystem.write(fileloc, highdata .. "\n")
 end
 
 function changescale(i)
-	love.graphics.setMode( 160*i, 144*i, false, vsync, 16 )
+	love.graphics.setMode(160 * i, 144 * i, false, vsync, 16)
 	nextpieceimg = {}
 	for j = 1, 7 do
-		nextpieceimg[j] = newPaddedImage( "graphics/pieces/"..j..".png", i )
+		nextpieceimg[j] = newPaddedImage("graphics/pieces/" .. j .. ".png", i)
 	end
-	physicsscale = i/4
+	physicsscale = i / 4
 end
 
 function string:split(delimiter)
 	local result = {}
-	local from  = 1
-	local delim_from, delim_to = string.find( self, delimiter, from  )
+	local from = 1
+	local delim_from, delim_to = string.find(self, delimiter, from)
 	while delim_from do
-		table.insert( result, string.sub( self, from , delim_from-1 ) )
-		from  = delim_to + 1
-		delim_from, delim_to = string.find( self, delimiter, from  )
+		table.insert(result, string.sub(self, from, delim_from - 1))
+		from = delim_to + 1
+		delim_from, delim_to = string.find(self, delimiter, from)
 	end
-	table.insert( result, string.sub( self, from  ) )
+	table.insert(result, string.sub(self, from))
 	return result
 end
 
 function pythagoras(a, b)
-	c = math.sqrt(a^2 + b^2)
+	c = math.sqrt(a ^ 2 + b ^ 2)
 	if a < 0 or b < 0 then
 		c = -c
 	end
@@ -648,91 +647,91 @@ function pythagoras(a, b)
 end
 
 function round(num, idp)
-  local mult = 10^(idp or 0)
-  return math.floor(num * mult + 0.5) / mult
+	local mult = 10 ^ (idp or 0)
+	return math.floor(num * mult + 0.5) / mult
 end
 
 function table2string(mytable)
 	output = {}
-	for i, v in pairs (mytable) do
+	for i, v in pairs(mytable) do
 		output[i] = mytable[i]
 	end
 	return output
 end
 
 function getPoints2table(shape)
-	x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x6,y6,x7,y7,x8,y8 = shape:getPoints()
+	x1, y1, x2, y2, x3, y3, x4, y4, x5, y5, x6, y6, x7, y7, x8, y8 = shape:getPoints()
 	if x4 == nil then
-		return {x1,y1,x2,y2,x3,y3}
+		return { x1, y1, x2, y2, x3, y3 }
 	end
 	if x5 == nil then
-		return {x1,y1,x2,y2,x3,y3,x4,y4}
+		return { x1, y1, x2, y2, x3, y3, x4, y4 }
 	end
 	if x6 == nil then
-		return {x1,y1,x2,y2,x3,y3,x4,y4,x5,y5}
+		return { x1, y1, x2, y2, x3, y3, x4, y4, x5, y5 }
 	end
 	if x7 == nil then
-		return {x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x6,y6}
+		return { x1, y1, x2, y2, x3, y3, x4, y4, x5, y5, x6, y6 }
 	end
 	if x8 == nil then
-		return {x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x6,y6,x7,y7}
+		return { x1, y1, x2, y2, x3, y3, x4, y4, x5, y5, x6, y6, x7, y7 }
 	end
-	return     {x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x6,y6,x7,y7,x8,y8}
+	return { x1, y1, x2, y2, x3, y3, x4, y4, x5, y5, x6, y6, x7, y7, x8, y8 }
 end
 
 function getrainbowcolor(i)
 	local r, g, b
-	if i < 1/6 then
+	if i < 1 / 6 then
 		r = 1
-		g = i*6
+		g = i * 6
 		b = 0
-	elseif i >= 1/6 and i < 2/6 then
-		r = (1/6-(i-1/6))*6
+	elseif i >= 1 / 6 and i < 2 / 6 then
+		r = (1 / 6 - (i - 1 / 6)) * 6
 		g = 1
 		b = 0
-	elseif i >= 2/6 and i < 3/6 then
+	elseif i >= 2 / 6 and i < 3 / 6 then
 		r = 0
 		g = 1
-		b = (i-2/6)*6
-	elseif i >= 3/6 and i < 4/6 then
+		b = (i - 2 / 6) * 6
+	elseif i >= 3 / 6 and i < 4 / 6 then
 		r = 0
-		g = (1/6-(i-3/6))*6
+		g = (1 / 6 - (i - 3 / 6)) * 6
 		b = 1
-	elseif i >= 4/6 and i < 5/6 then
-		r = (i-4/6)*6
+	elseif i >= 4 / 6 and i < 5 / 6 then
+		r = (i - 4 / 6) * 6
 		g = 0
 		b = 1
 	else
 		r = 1
 		g = 0
-		b = (1/6-(i-5/6))*6
+		b = (1 / 6 - (i - 5 / 6)) * 6
 	end
 	
-	return {r, g, b}
+	return { r, g, b }
 end
 
-function love.keypressed( key, unicode )
+function love.keypressed(key, unicode)
 	if gamestate == nil then
 		if key == "return" then
 			gamestate = "title"
-			love.graphics.setBackgroundColor( 0, 0, 0)
+			love.graphics.setBackgroundColor(0, 0, 0)
 			love.audio.play(musictitle)
 		end
-		
+	
 	elseif gamestate == "logo" then
 		if key == "return" then
 			gamestate = "title"
-			love.graphics.setBackgroundColor( 0, 0, 0)
+			love.graphics.setBackgroundColor(0, 0, 0)
 			love.audio.play(musictitle)
 		end
-		
+	
 	elseif gamestate == "credits" then
 		if key == "return" then
 			gamestate = "title"
-			love.graphics.setBackgroundColor( 0, 0, 0)
+			love.graphics.setBackgroundColor(0, 0, 0)
 			love.audio.play(musictitle)
 		end
-		
+	
 	elseif gamestate == "title" then
 		if key == "return" then
 			if playerselection ~= 3 then
@@ -750,8 +749,8 @@ function love.keypressed( key, unicode )
 			else
 				gamestate = "options"
 				if soundenabled then
-				love.audio.stop(musictitle)
-				love.audio.play(musicoptions)
+					love.audio.stop(musictitle)
+					love.audio.play(musicoptions)
 				end
 				optionsselection = 1
 			end
@@ -762,8 +761,8 @@ function love.keypressed( key, unicode )
 		elseif key == "right" and playerselection < 3 then
 			playerselection = playerselection + 1
 		end
-		
-	elseif gamestate == "menu" then	
+	
+	elseif gamestate == "menu" then
 		oldmusicno = musicno
 		if key == "escape" then
 			if musicno < 4 then
@@ -771,8 +770,8 @@ function love.keypressed( key, unicode )
 			end
 			gamestate = "title"
 			if soundenabled then
-			love.audio.stop(musictitle)
-			love.audio.play(musictitle)
+				love.audio.stop(musictitle)
+				love.audio.play(musictitle)
 			end
 		elseif key == "backspace" then
 			newhighscores()
@@ -855,7 +854,7 @@ function love.keypressed( key, unicode )
 			end
 			selectblink = true
 			oldtime = love.timer.getTime()
-			
+		
 		elseif key == "up" then
 			optionsselection = optionsselection - 1
 			if optionsselection == 0 then
@@ -863,7 +862,7 @@ function love.keypressed( key, unicode )
 			end
 			selectblink = true
 			oldtime = love.timer.getTime()
-			
+		
 		elseif key == "left" then
 			if optionsselection == 1 then
 				if volume >= 0.1 then
@@ -873,7 +872,7 @@ function love.keypressed( key, unicode )
 					end
 					changevolume(volume)
 				end
-				
+			
 			elseif optionsselection == 3 then
 				if fullscreen == false then
 					if scale > 1 then
@@ -881,21 +880,20 @@ function love.keypressed( key, unicode )
 						changescale(scale)
 					end
 				end
-				
+			
 			elseif optionsselection == 4 then
 				if fullscreen == false then
 					togglefullscreen(true)
 				end
-			
 			end
-			
+		
 		elseif key == "right" then
 			if optionsselection == 1 then
 				if volume <= 0.9 then
 					volume = volume + 0.1
 					changevolume(volume)
 				end
-				
+			
 			elseif optionsselection == 3 then
 				if fullscreen == false then
 					if scale < maxscale then
@@ -903,14 +901,13 @@ function love.keypressed( key, unicode )
 						changescale(scale)
 					end
 				end
-				
+			
 			elseif optionsselection == 4 then
 				if fullscreen == true then
 					togglefullscreen(false)
 				end
-				
 			end
-			
+		
 		elseif key == "return" then
 			if optionsselection == 1 then
 				volume = 1
@@ -931,10 +928,9 @@ function love.keypressed( key, unicode )
 					togglefullscreen(false)
 				end
 			end
-			
 		end
 	
-	elseif gamestate == "multimenu" then	
+	elseif gamestate == "multimenu" then
 		oldmusicno = musicno
 		if key == "escape" then
 			if musicno < 4 then
@@ -1000,12 +996,12 @@ function love.keypressed( key, unicode )
 			gameno = selection
 			loadhighscores()
 		end
-			
+	
 	elseif gamestate == "gameA" or gamestate == "gameB" or gamestate == "failingA" or gamestate == "failingB" then
-
+		
 		if key == "return" then
 			pause = not pause
-
+			
 			if pause == true then
 				if musicno < 4 then
 					love.audio.pause(music[musicno])
@@ -1040,7 +1036,7 @@ function love.keypressed( key, unicode )
 	elseif gamestate == "gameBmulti" and gamestarted == false then
 		if key == "escape" then
 			if not fullscreen then
-				love.graphics.setMode( 160*scale, 144*scale, false, vsync, 0 )
+				love.graphics.setMode(160 * scale, 144 * scale, false, vsync, 0)
 			end
 			gamestate = "multimenu"
 			if musicno < 4 then
@@ -1050,7 +1046,7 @@ function love.keypressed( key, unicode )
 	elseif gamestate == "gameBmulti" and gamestarted == true then
 		if key == "escape" then
 			if not fullscreen then
-				love.graphics.setMode( 160*scale, 144*scale, false, vsync, 0 )
+				love.graphics.setMode(160 * scale, 144 * scale, false, vsync, 0)
 			end
 			gamestate = "multimenu"
 		end
@@ -1067,7 +1063,7 @@ function love.keypressed( key, unicode )
 			love.audio.stop(blockturn)
 			love.audio.play(blockturn)
 		end
-		
+	
 	elseif gamestate == "gameBmulti_results" then
 		if key == "return" or key == "escape" then
 			if musicno < 4 then
@@ -1075,13 +1071,13 @@ function love.keypressed( key, unicode )
 				love.audio.play(music[musicno])
 			end
 			if not fullscreen then
-				love.graphics.setMode( 160*scale, 144*scale, false, vsync, 0 )
+				love.graphics.setMode(160 * scale, 144 * scale, false, vsync, 0)
 			end
 			gamestate = "multimenu"
 		end
-		
+	
 	elseif gamestate == "failed" then
-		if key == "return" or key == "y" or key == "z" or key == "x" or key == "w" or key == "left" or key == "down" or key == "up" or key == "right" then 
+		if key == "return" or key == "y" or key == "z" or key == "x" or key == "w" or key == "left" or key == "down" or key == "up" or key == "right" then
 			love.audio.stop(gameover2)
 			rocket_load()
 		end
@@ -1100,9 +1096,9 @@ function love.keypressed( key, unicode )
 		elseif key == "backspace" then
 			if highscorename[highscoreno]:len() > 0 then
 				cursorblink = true
-				highscorename[highscoreno] = string.sub(highscorename[highscoreno], 1, highscorename[highscoreno]:len()-1)
+				highscorename[highscoreno] = string.sub(highscorename[highscoreno], 1, highscorename[highscoreno]:len() - 1)
 			end
-			
+		
 		elseif whitelist[unicode] == true then
 			if highscorename[highscoreno]:len() < 6 then
 				cursorblink = true

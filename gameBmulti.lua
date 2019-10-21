@@ -6,35 +6,35 @@ function gameBmulti_load()
 	gamestate = "gameBmulti"
 	gamestarted = false
 	
-	beeped = {false, false, false}
+	beeped = { false, false, false }
 	
 	--figure out the multiplayer scale
 	mpscale = scale
-	while 274*mpscale > desktopwidth do
+	while 274 * mpscale > desktopwidth do
 		mpscale = mpscale - 1
 	end
-	physicsmpscale = mpscale/4
+	physicsmpscale = mpscale / 4
 	
-	mpfullscreenoffsetX = (desktopwidth-274*mpscale)/2
-	mpfullscreenoffsetY = (desktopheight-144*mpscale)/2
+	mpfullscreenoffsetX = (desktopwidth - 274 * mpscale) / 2
+	mpfullscreenoffsetY = (desktopheight - 144 * mpscale) / 2
 	
 	if not fullscreen then
-		love.graphics.setMode( 274*mpscale, 144*mpscale, fullscreen, vsync, 16 )
+		love.graphics.setMode(274 * mpscale, 144 * mpscale, fullscreen, vsync, 16)
 	end
 	
 	--nextpieces
 	nextpieceimgmp = {}
 	for i = 1, 7 do
-		nextpieceimgmp[i] = newPaddedImage( "graphics/pieces/"..i..".png", mpscale )
+		nextpieceimgmp[i] = newPaddedImage("graphics/pieces/" .. i .. ".png", mpscale)
 	end
 	
 	difficulty_speed = 100
-
+	
 	p1fail = false
 	p2fail = false
 	
-	p1color = {255, 50, 50}
-	p2color = {50, 255, 50}
+	p1color = { 255, 50, 50 }
+	p2color = { 50, 255, 50 }
 	
 	--p1color = {116, 92, 73}
 	--p2color = {209, 174, 145}
@@ -64,7 +64,7 @@ function gameBmulti_load()
 	
 	--PHYSICS--
 	meter = 30
-	world = love.physics.newWorld(0, -720, 960, 1050, 0, 500, true )
+	world = love.physics.newWorld(0, -720, 960, 1050, 0, 500, true)
 	
 	
 	wallshapesp1 = {}
@@ -77,33 +77,33 @@ function gameBmulti_load()
 	--WALLS P1--
 	wallbodiesp1 = love.physics.newBody(world, 32, -64, 0, 0)
 	
-	wallshapesp1[0] = love.physics.newPolygonShape( wallbodiesp1,164, 0, 164,672, 196,672, 196, 0)
+	wallshapesp1[0] = love.physics.newPolygonShape(wallbodiesp1, 164, 0, 164, 672, 196, 672, 196, 0)
 	wallshapesp1[0]:setData("leftp1")
 	wallshapesp1[0]:setFriction(0.0001)
 	
-	wallshapesp1[1] = love.physics.newPolygonShape( wallbodiesp1,516,0, 516,672, 548,672, 548,0)
+	wallshapesp1[1] = love.physics.newPolygonShape(wallbodiesp1, 516, 0, 516, 672, 548, 672, 548, 0)
 	wallshapesp1[1]:setData("rightp1")
-	wallshapesp1[1]:setCategory( 2 )
+	wallshapesp1[1]:setCategory(2)
 	wallshapesp1[1]:setFriction(0.0001)
 	
-	wallshapesp1[2] = love.physics.newPolygonShape( wallbodiesp1,196,640, 196,672, 516,672, 516,640)
+	wallshapesp1[2] = love.physics.newPolygonShape(wallbodiesp1, 196, 640, 196, 672, 516, 672, 516, 640)
 	wallshapesp1[2]:setData("groundp1")
 	
 	--WALLS P2--
 	wallbodiesp2 = love.physics.newBody(world, 32, -64, 0, 0)
 	
-	wallshapesp2[0] = love.physics.newPolygonShape( wallbodiesp2,484, 0, 484,672, 516,672, 516, 0)
+	wallshapesp2[0] = love.physics.newPolygonShape(wallbodiesp2, 484, 0, 484, 672, 516, 672, 516, 0)
 	wallshapesp2[0]:setData("leftp2")
-	wallshapesp2[0]:setCategory( 3 )
+	wallshapesp2[0]:setCategory(3)
 	wallshapesp2[0]:setFriction(0.0001)
 	
-	wallshapesp2[1] = love.physics.newPolygonShape( wallbodiesp2,836,0, 836,672, 868,672, 868,0)
+	wallshapesp2[1] = love.physics.newPolygonShape(wallbodiesp2, 836, 0, 836, 672, 868, 672, 868, 0)
 	wallshapesp2[1]:setData("rightp2")
 	wallshapesp2[1]:setFriction(0.0001)
 	
-	wallshapesp2[2] = love.physics.newPolygonShape( wallbodiesp2,516,640, 516,672, 836,672, 836,640)
+	wallshapesp2[2] = love.physics.newPolygonShape(wallbodiesp2, 516, 640, 516, 672, 836, 672, 836, 640)
 	wallshapesp2[2]:setData("groundp2")
-	-----------	
+	-----------
 	world:setCallbacks(collideBmulti)
 	-----------
 	
@@ -116,9 +116,9 @@ function gameBmulti_draw()
 	if fullscreen then
 		love.graphics.translate(mpfullscreenoffsetX, mpfullscreenoffsetY)
 		
-		love.graphics.setScissor(mpfullscreenoffsetX, mpfullscreenoffsetY, 274*mpscale, 144*mpscale)
+		love.graphics.setScissor(mpfullscreenoffsetX, mpfullscreenoffsetY, 274 * mpscale, 144 * mpscale)
 	end
-
+	
 	--background--
 	if gamestate ~= "gameBmulti_results" then
 		love.graphics.draw(gamebackgroundmulti, 0, 0, 0, mpscale)
@@ -128,55 +128,55 @@ function gameBmulti_draw()
 	---------------
 	if gamestarted == false then
 		if newtime - starttimer > 2 then
-			love.graphics.draw( number1, 73*mpscale, 48*mpscale, 0, mpscale)
-			love.graphics.draw( number1, 153*mpscale, 48*mpscale, 0, mpscale)
+			love.graphics.draw(number1, 73 * mpscale, 48 * mpscale, 0, mpscale)
+			love.graphics.draw(number1, 153 * mpscale, 48 * mpscale, 0, mpscale)
 		elseif newtime - starttimer > 1 then
-			love.graphics.draw( number2, 73*mpscale, 48*mpscale, 0, mpscale)
-			love.graphics.draw( number2, 153*mpscale, 48*mpscale, 0, mpscale)
+			love.graphics.draw(number2, 73 * mpscale, 48 * mpscale, 0, mpscale)
+			love.graphics.draw(number2, 153 * mpscale, 48 * mpscale, 0, mpscale)
 		elseif newtime - starttimer > 0 then
-			love.graphics.draw( number3, 73*mpscale, 48*mpscale, 0, mpscale)
-			love.graphics.draw( number3, 153*mpscale, 48*mpscale, 0, mpscale)
+			love.graphics.draw(number3, 73 * mpscale, 48 * mpscale, 0, mpscale)
+			love.graphics.draw(number3, 153 * mpscale, 48 * mpscale, 0, mpscale)
 		end
 	end
 	--tetrishapes P1--
 	
-	for i,v in pairs(tetribodiesp1) do
+	for i, v in pairs(tetribodiesp1) do
 		love.graphics.setColor(255, 255, 255)
 		--set color:
 		if gamestate == "failingBmulti" or gamestate == "failedBmulti" then
 			timepassed = love.timer.getTime() - colorizetimer
-			if v:getY() > 576 - (576*(timepassed/colorizeduration)) then
+			if v:getY() > 576 - (576 * (timepassed / colorizeduration)) then
 				love.graphics.setColor(unpack(p1color))
 			end
 		end
 		
-		love.graphics.draw( tetriimagesp1[i], v:getX()*physicsmpscale, v:getY()*physicsmpscale, v:getAngle(), 1, 1, piececenter[tetrikindp1[i]][1]*mpscale, piececenter[tetrikindp1[i]][2]*mpscale)
+		love.graphics.draw(tetriimagesp1[i], v:getX() * physicsmpscale, v:getY() * physicsmpscale, v:getAngle(), 1, 1, piececenter[tetrikindp1[i]][1] * mpscale, piececenter[tetrikindp1[i]][2] * mpscale)
 	end
 	
 	if p1fail == false and nextpiecep1 then
 		--Next piece
-		love.graphics.draw(nextpieceimgmp[nextpiecep1], 24*mpscale, 120*mpscale, -nextpiecerot, 1, 1, piececenterpreview[nextpiecep1][1]*mpscale, piececenterpreview[nextpiecep1][2]*mpscale)
+		love.graphics.draw(nextpieceimgmp[nextpiecep1], 24 * mpscale, 120 * mpscale, -nextpiecerot, 1, 1, piececenterpreview[nextpiecep1][1] * mpscale, piececenterpreview[nextpiecep1][2] * mpscale)
 	end
 	
 	----------------
-	--tetrishapes P2--	
-	for i,v in pairs(tetribodiesp2) do
+	-- tetrishapes P2--
+	for i, v in pairs(tetribodiesp2) do
 		love.graphics.setColor(255, 255, 255)
 		--set color:
 		if gamestate == "failingBmulti" or gamestate == "failedBmulti" then
 			timepassed = love.timer.getTime() - colorizetimer
-			if v:getY() > 576 - (576*(timepassed/colorizeduration)) then
+			if v:getY() > 576 - (576 * (timepassed / colorizeduration)) then
 				love.graphics.setColor(unpack(p2color))
 			end
 		end
-		love.graphics.draw( tetriimagesp2[i], v:getX()*physicsmpscale, v:getY()*physicsmpscale, v:getAngle(), 1, 1, piececenter[tetrikindp2[i]][1]*mpscale, piececenter[tetrikindp2[i]][2]*mpscale)
+		love.graphics.draw(tetriimagesp2[i], v:getX() * physicsmpscale, v:getY() * physicsmpscale, v:getAngle(), 1, 1, piececenter[tetrikindp2[i]][1] * mpscale, piececenter[tetrikindp2[i]][2] * mpscale)
 	end
-	----------------	
+	----------------
 	love.graphics.setColor(255, 255, 255)
 	
 	if p2fail == false and nextpiecep2 then
 		--Next piece
-		love.graphics.draw(nextpieceimgmp[nextpiecep2], 250*mpscale, 120*mpscale, nextpiecerot, 1, 1, piececenterpreview[nextpiecep2][1]*mpscale, piececenterpreview[nextpiecep2][2]*mpscale)
+		love.graphics.draw(nextpieceimgmp[nextpiecep2], 250 * mpscale, 120 * mpscale, nextpiecerot, 1, 1, piececenterpreview[nextpiecep2][1] * mpscale, piececenterpreview[nextpiecep2][2] * mpscale)
 	end
 	--SCORES P1---------------------------------------
 	
@@ -185,18 +185,18 @@ function gameBmulti_draw()
 	
 	scorestring = tostring(scorescorep1)
 	for i = 1, scorestring:len() - 1 do
-		offsetX = offsetX - 8*mpscale
+		offsetX = offsetX - 8 * mpscale
 	end
-	love.graphics.print( scorescorep1, 36*mpscale + offsetX, 24*mpscale, 0, mpscale)
+	love.graphics.print(scorescorep1, 36 * mpscale + offsetX, 24 * mpscale, 0, mpscale)
 	
 	--"tiles"--
 	offsetX = 0
 	
 	scorestring = tostring(linesscorep1)
 	for i = 1, scorestring:len() - 1 do
-		offsetX = offsetX - 8*mpscale
+		offsetX = offsetX - 8 * mpscale
 	end
-	love.graphics.print( linesscorep1, 28*mpscale + offsetX, 80*mpscale, 0, mpscale)
+	love.graphics.print(linesscorep1, 28 * mpscale + offsetX, 80 * mpscale, 0, mpscale)
 	-----------------------------------------------
 	
 	--SCORES P2---------------------------------------
@@ -205,87 +205,86 @@ function gameBmulti_draw()
 	
 	scorestring = tostring(scorescorep2)
 	for i = 1, scorestring:len() - 1 do
-		offsetX = offsetX - 8*mpscale
+		offsetX = offsetX - 8 * mpscale
 	end
-	love.graphics.print( scorescorep2, 262*mpscale + offsetX, 24*mpscale, 0, mpscale)
+	love.graphics.print(scorescorep2, 262 * mpscale + offsetX, 24 * mpscale, 0, mpscale)
 	
 	--"tiles"--
 	offsetX = 0
 	
 	scorestring = tostring(linesscorep2)
 	for i = 1, scorestring:len() - 1 do
-		offsetX = offsetX - 8*mpscale
+		offsetX = offsetX - 8 * mpscale
 	end
-	love.graphics.print( linesscorep2, 254*mpscale + offsetX, 80*mpscale, 0, mpscale)
+	love.graphics.print(linesscorep2, 254 * mpscale + offsetX, 80 * mpscale, 0, mpscale)
 	-----------------------------------------------
 	
 	if gamestate == "gameBmulti_results" then
 		--win counter
 		if p1wins < 10 then
-			love.graphics.print( "0"..p1wins, 111*mpscale, 128*mpscale, 0, mpscale)
+			love.graphics.print("0" .. p1wins, 111 * mpscale, 128 * mpscale, 0, mpscale)
 		else
-			love.graphics.print( p1wins, 111*mpscale, 128*mpscale, 0, mpscale)
+			love.graphics.print(p1wins, 111 * mpscale, 128 * mpscale, 0, mpscale)
 		end
 		
 		if p2wins < 10 then
-			love.graphics.print( "0"..p2wins, 193*mpscale, 128*mpscale, 0, mpscale)
+			love.graphics.print("0" .. p2wins, 193 * mpscale, 128 * mpscale, 0, mpscale)
 		else
-			love.graphics.print( p2wins, 193*mpscale, 128*mpscale, 0, mpscale)
+			love.graphics.print(p2wins, 193 * mpscale, 128 * mpscale, 0, mpscale)
 		end
 		
 		if winner == 1 then
 			--mario
 			if jumpframe == false then
-				love.graphics.draw( marioidle, mariobody:getX()*physicsmpscale, mariobody:getY()*physicsmpscale, mariobody:getAngle(), mpscale, mpscale, 12, 13.5)
+				love.graphics.draw(marioidle, mariobody:getX() * physicsmpscale, mariobody:getY() * physicsmpscale, mariobody:getAngle(), mpscale, mpscale, 12, 13.5)
 			else
-				love.graphics.draw( mariojump, mariobody:getX()*physicsmpscale, mariobody:getY()*physicsmpscale, mariobody:getAngle(), mpscale, mpscale, 12, 13.5)
+				love.graphics.draw(mariojump, mariobody:getX() * physicsmpscale, mariobody:getY() * physicsmpscale, mariobody:getAngle(), mpscale, mpscale, 12, 13.5)
 			end
 			
 			--luigi
 			if cryframe == false then
-				love.graphics.draw( luigicry1, 162*mpscale, 66*mpscale,  0, mpscale, mpscale)
+				love.graphics.draw(luigicry1, 162 * mpscale, 66 * mpscale, 0, mpscale, mpscale)
 			else
-				love.graphics.draw( luigicry2, 162*mpscale, 66*mpscale,  0, mpscale, mpscale)
-				love.graphics.print( "mario", 93*mpscale, 20*mpscale, 0, mpscale)
-				love.graphics.print( "wins!", 141*mpscale, 20*mpscale, 0, mpscale)
+				love.graphics.draw(luigicry2, 162 * mpscale, 66 * mpscale, 0, mpscale, mpscale)
+				love.graphics.print("mario", 93 * mpscale, 20 * mpscale, 0, mpscale)
+				love.graphics.print("wins!", 141 * mpscale, 20 * mpscale, 0, mpscale)
 				for i = 1, 5 do
-					love.graphics.draw( congratsline, (86+(8*i-1))*mpscale, 28*mpscale, 0, mpscale, mpscale)
-					love.graphics.draw( congratsline, (134+(8*i-1))*mpscale, 28*mpscale, 0, mpscale, mpscale)
+					love.graphics.draw(congratsline, (86 + (8 * i - 1)) * mpscale, 28 * mpscale, 0, mpscale, mpscale)
+					love.graphics.draw(congratsline, (134 + (8 * i - 1)) * mpscale, 28 * mpscale, 0, mpscale, mpscale)
 				end
 			end
 		elseif winner == 2 then
 			--luigi
 			if jumpframe == false then
-				love.graphics.draw( luigiidle, luigibody:getX()*physicsmpscale, luigibody:getY()*physicsmpscale, luigibody:getAngle(), mpscale, mpscale, 14, 15.5)
+				love.graphics.draw(luigiidle, luigibody:getX() * physicsmpscale, luigibody:getY() * physicsmpscale, luigibody:getAngle(), mpscale, mpscale, 14, 15.5)
 			else
-				love.graphics.draw( luigijump, luigibody:getX()*physicsmpscale, luigibody:getY()*physicsmpscale, luigibody:getAngle(), mpscale, mpscale, 14, 15.5)
+				love.graphics.draw(luigijump, luigibody:getX() * physicsmpscale, luigibody:getY() * physicsmpscale, luigibody:getAngle(), mpscale, mpscale, 14, 15.5)
 			end
 			
 			--mario
 			if cryframe == false then
-				love.graphics.draw( mariocry1, 83*mpscale, 66*mpscale, 0, mpscale, mpscale)
+				love.graphics.draw(mariocry1, 83 * mpscale, 66 * mpscale, 0, mpscale, mpscale)
 			else
-				love.graphics.draw( mariocry2, 83*mpscale, 66*mpscale, 0, mpscale, mpscale)
-				love.graphics.print( "luigi", 93*mpscale, 20*mpscale, 0, mpscale)
-				love.graphics.print( "wins!", 141*mpscale, 20*mpscale, 0, mpscale)
+				love.graphics.draw(mariocry2, 83 * mpscale, 66 * mpscale, 0, mpscale, mpscale)
+				love.graphics.print("luigi", 93 * mpscale, 20 * mpscale, 0, mpscale)
+				love.graphics.print("wins!", 141 * mpscale, 20 * mpscale, 0, mpscale)
 				for i = 1, 5 do
-					love.graphics.draw( congratsline, (86+(8*i-1))*mpscale, 28*mpscale, 0, mpscale, mpscale)
-					love.graphics.draw( congratsline, (134+(8*i-1))*mpscale, 28*mpscale, 0, mpscale, mpscale)
+					love.graphics.draw(congratsline, (86 + (8 * i - 1)) * mpscale, 28 * mpscale, 0, mpscale, mpscale)
+					love.graphics.draw(congratsline, (134 + (8 * i - 1)) * mpscale, 28 * mpscale, 0, mpscale, mpscale)
 				end
 			end
 		else --draw
 			--mario
-			love.graphics.draw( marioidle, 84*mpscale, 69*mpscale, 0, mpscale, mpscale)
+			love.graphics.draw(marioidle, 84 * mpscale, 69 * mpscale, 0, mpscale, mpscale)
 			if cryframe == false then
-				love.graphics.print( "draw", 160*mpscale, 40*mpscale, 0, mpscale)
+				love.graphics.print("draw", 160 * mpscale, 40 * mpscale, 0, mpscale)
 			end
 			
 			--luigi
-			love.graphics.draw( luigiidle, 162*mpscale, 65*mpscale,  0, mpscale, mpscale)
+			love.graphics.draw(luigiidle, 162 * mpscale, 65 * mpscale, 0, mpscale, mpscale)
 			if cryframe == false then
-				love.graphics.print( "draw", 80*mpscale, 40*mpscale, 0, mpscale)
+				love.graphics.print("draw", 80 * mpscale, 40 * mpscale, 0, mpscale)
 			end
-			
 		end
 	end
 	
@@ -295,15 +294,15 @@ function gameBmulti_draw()
 		love.graphics.setScissor()
 	end
 end
-	
+
 function gameBmulti_update(dt)
-
+	
 	--NEXTPIECE ROTATION (rotating allday erryday)
-	nextpiecerot = nextpiecerot + nextpiecerotspeed*dt
-	while nextpiecerot > math.pi*2 do
-		nextpiecerot = nextpiecerot - math.pi*2
+	nextpiecerot = nextpiecerot + nextpiecerotspeed * dt
+	while nextpiecerot > math.pi * 2 do
+		nextpiecerot = nextpiecerot - math.pi * 2
 	end
-
+	
 	world:update(dt)
 	newtime = love.timer.getTime()
 	if gamestarted == false then
@@ -326,77 +325,77 @@ function gameBmulti_update(dt)
 			love.audio.stop(highscorebeep)
 			love.audio.play(highscorebeep)
 		end
-		
+	
 	elseif gamestate == "gameBmulti" then
 		--PLAYER 1--
 		if p1fail == false then
-			if love.keyboard.isDown( "h" ) then --clockwise
+			if love.keyboard.isDown("h") then --clockwise
 				if tetribodiesp1[counterp1]:getAngularVelocity() < 3 then
-					tetribodiesp1[counterp1]:applyTorque( 70 )
+					tetribodiesp1[counterp1]:applyTorque(70)
 				end
 			end
-			if love.keyboard.isDown( "g" ) then --counterclockwise
+			if love.keyboard.isDown("g") then --counterclockwise
 				if tetribodiesp1[counterp1]:getAngularVelocity() > -3 then
-					tetribodiesp1[counterp1]:applyTorque( -70 )
+					tetribodiesp1[counterp1]:applyTorque(-70)
 				end
 			end
-		   
-			if love.keyboard.isDown( "a" ) then --left
+			
+			if love.keyboard.isDown("a") then --left
 				x, y = tetribodiesp1[counterp1]:getWorldCenter()
-				tetribodiesp1[counterp1]:applyForce( -70, 0, x, y )
+				tetribodiesp1[counterp1]:applyForce(-70, 0, x, y)
 			end
-			if love.keyboard.isDown( "d" ) then --right
+			if love.keyboard.isDown("d") then --right
 				x, y = tetribodiesp1[counterp1]:getWorldCenter()
-				tetribodiesp1[counterp1]:applyForce( 70, 0, x, y )
+				tetribodiesp1[counterp1]:applyForce(70, 0, x, y)
 			end
 			
 			local x, y = tetribodiesp1[counterp1]:getLinearVelocity()
-			if love.keyboard.isDown( "s" ) then --down
-				if y > difficulty_speed*5 then
-					tetribodiesp1[counterp1]:setLinearVelocity(x, difficulty_speed*5)
+			if love.keyboard.isDown("s") then --down
+				if y > difficulty_speed * 5 then
+					tetribodiesp1[counterp1]:setLinearVelocity(x, difficulty_speed * 5)
 				else
 					local cx, cy = tetribodiesp1[counterp1]:getWorldCenter()
-					tetribodiesp1[counterp1]:applyForce( 0, 20, cx, cy )
+					tetribodiesp1[counterp1]:applyForce(0, 20, cx, cy)
 				end
 			else
 				if y > difficulty_speed then
-					tetribodiesp1[counterp1]:setLinearVelocity(x, y-2000*dt)
+					tetribodiesp1[counterp1]:setLinearVelocity(x, y - 2000 * dt)
 				end
 			end
 		end
 		--PLAYER 2--
 		if p2fail == false then
-			if love.keyboard.isDown( "kp2" ) then --clockwise
+			if love.keyboard.isDown("kp2") then --clockwise
 				if tetribodiesp2[counterp2]:getAngularVelocity() < 3 then
-					tetribodiesp2[counterp2]:applyTorque( 70 )
+					tetribodiesp2[counterp2]:applyTorque(70)
 				end
 			end
-			if love.keyboard.isDown( "kp1" ) then --counterclockwise
+			if love.keyboard.isDown("kp1") then --counterclockwise
 				if tetribodiesp2[counterp2]:getAngularVelocity() > -3 then
-					tetribodiesp2[counterp2]:applyTorque( -70 )
+					tetribodiesp2[counterp2]:applyTorque(-70)
 				end
 			end
-		   
-			if love.keyboard.isDown( "left" ) then --left
+			
+			if love.keyboard.isDown("left") then --left
 				x, y = tetribodiesp2[counterp2]:getWorldCenter()
-				tetribodiesp2[counterp2]:applyForce( -70, 0, x, y )
+				tetribodiesp2[counterp2]:applyForce(-70, 0, x, y)
 			end
-			if love.keyboard.isDown( "right" ) then --right
+			if love.keyboard.isDown("right") then --right
 				x, y = tetribodiesp2[counterp2]:getWorldCenter()
-				tetribodiesp2[counterp2]:applyForce( 70, 0, x, y )
+				tetribodiesp2[counterp2]:applyForce(70, 0, x, y)
 			end
 			
 			local x, y = tetribodiesp2[counterp2]:getLinearVelocity()
-			if love.keyboard.isDown( "down" ) then --down
-				if y > difficulty_speed*5 then
-					tetribodiesp2[counterp2]:setLinearVelocity(x, difficulty_speed*5)
+			if love.keyboard.isDown("down") then --down
+				if y > difficulty_speed * 5 then
+					tetribodiesp2[counterp2]:setLinearVelocity(x, difficulty_speed * 5)
 				else
 					local cx, cy = tetribodiesp2[counterp2]:getWorldCenter()
-					tetribodiesp2[counterp2]:applyForce( 0, 20, cx, cy )
+					tetribodiesp2[counterp2]:applyForce(0, 20, cx, cy)
 				end
 			else
 				if y > difficulty_speed then
-					tetribodiesp2[counterp2]:setLinearVelocity(x, y-2000*dt)
+					tetribodiesp2[counterp2]:setLinearVelocity(x, y - 2000 * dt)
 				end
 			end
 		end
@@ -413,14 +412,14 @@ function gameBmulti_update(dt)
 		end
 	elseif gamestate == "failedBmulti" then
 		clearcheck = true
-		for i,v in pairs(tetribodiesp1) do
-			if v:getY() < 162*mpscale then
+		for i, v in pairs(tetribodiesp1) do
+			if v:getY() < 162 * mpscale then
 				clearcheck = false
 			end
 		end
 		
-		for i,v in pairs(tetribodiesp2) do
-			if v:getY() < 162*mpscale then
+		for i, v in pairs(tetribodiesp2) do
+			if v:getY() < 162 * mpscale then
 				clearcheck = false
 			end
 		end
@@ -433,19 +432,19 @@ function gameBmulti_update(dt)
 			love.audio.play(musicresults)
 			
 			resultsfloorbody = love.physics.newBody(world, 32, -64, 0, 0)
-			resultsfloorshape = love.physics.newPolygonShape( resultsfloorbody,196,448, 196,480, 836,480, 836,448)
+			resultsfloorshape = love.physics.newPolygonShape(resultsfloorbody, 196, 448, 196, 480, 836, 480, 836, 448)
 			resultsfloorshape:setData("resultsfloor")
 			
 			if winner == 1 then
 				mariobody = love.physics.newBody(world, 388, 320, 0, 0)
-				marioshape = love.physics.newRectangleShape( mariobody, 0, 0, 64, 108)
+				marioshape = love.physics.newRectangleShape(mariobody, 0, 0, 64, 108)
 				marioshape:setMask(3)
 				marioshape:setData("mario")
 				mariobody:setLinearDamping(0.5)
 				mariobody:setMassFromShapes()
 			elseif winner == 2 then
 				luigibody = love.physics.newBody(world, 704, 320, 0, 0)
-				luigishape = love.physics.newRectangleShape( luigibody, 0, 0, 64, 124)
+				luigishape = love.physics.newRectangleShape(luigibody, 0, 0, 64, 124)
 				luigishape:setMask(2)
 				luigishape:setData("luigi")
 				luigibody:setLinearDamping(0.5)
@@ -453,12 +452,12 @@ function gameBmulti_update(dt)
 			end
 			
 			if winner == 1 then
-				mariobody:setY(mariobody:getY()-1)
-				x, y = mariobody:getLinearVelocity( )
+				mariobody:setY(mariobody:getY() - 1)
+				x, y = mariobody:getLinearVelocity()
 				mariobody:setLinearVelocity(x, -300)
 			elseif winner == 2 then
-				luigibody:setY(luigibody:getY()-1)
-				x, y = luigibody:getLinearVelocity( )
+				luigibody:setY(luigibody:getY() - 1)
+				x, y = luigibody:getLinearVelocity()
 				luigibody:setLinearVelocity(x, -300)
 			end
 			jumpframe = true
@@ -469,12 +468,12 @@ function gameBmulti_update(dt)
 			jumptimer = love.timer.getTime()
 			jumpframe = true
 			if winner == 1 then
-				mariobody:setY(mariobody:getY()-1)
-				x, y = mariobody:getLinearVelocity( )
+				mariobody:setY(mariobody:getY() - 1)
+				x, y = mariobody:getLinearVelocity()
 				mariobody:setLinearVelocity(x, -300)
 			elseif winner == 2 then
-				luigibody:setY(luigibody:getY()-1)
-				x, y = luigibody:getLinearVelocity( )
+				luigibody:setY(luigibody:getY() - 1)
+				x, y = luigibody:getLinearVelocity()
 				luigibody:setLinearVelocity(x, -300)
 			end
 		end
@@ -486,22 +485,22 @@ function gameBmulti_update(dt)
 		end
 		
 		if winner == 1 then
-			if love.keyboard.isDown ("a") then
+			if love.keyboard.isDown("a") then
 				x, y = mariobody:getWorldCenter()
-				mariobody:applyForce( -30, 0, x, y-8 )
+				mariobody:applyForce(-30, 0, x, y - 8)
 			end
-			if love.keyboard.isDown ("d") then
+			if love.keyboard.isDown("d") then
 				x, y = mariobody:getWorldCenter()
-				mariobody:applyForce( 30, 0, x, y-8 )
+				mariobody:applyForce(30, 0, x, y - 8)
 			end
 		elseif winner == 2 then
-			if love.keyboard.isDown ("left") then
+			if love.keyboard.isDown("left") then
 				x, y = luigibody:getWorldCenter()
-				luigibody:applyForce( -30, 0, x, y-8 )
+				luigibody:applyForce(-30, 0, x, y - 8)
 			end
-			if love.keyboard.isDown ("right") then
+			if love.keyboard.isDown("right") then
 				x, y = luigibody:getWorldCenter()
-				luigibody:applyForce( 30, 0, x, y-8 )
+				luigibody:applyForce(30, 0, x, y - 8)
 			end
 		end
 	end
@@ -522,7 +521,7 @@ function startgame()
 	end
 	
 	----------------
-	--FIRST "nextpiece" for p2 (Which gets immediately removed, duh)--
+	-- FIRST "nextpiece" for p2 (Which gets immediately removed, duh)--
 	nextpiecep2 = randomtable[1]
 	
 	----------------
@@ -553,7 +552,6 @@ function game_addTetriBmultip1()
 	else
 		nextpiecep1 = randomtable[counterp1]
 	end
-	
 end
 
 function game_addTetriBmultip2()
@@ -571,58 +569,57 @@ function game_addTetriBmultip2()
 end
 
 function createtetriBmultip1(i, uniqueid, x, y)
-	tetriimagesp1[uniqueid] = newPaddedImage( "graphics/pieces/"..i..".png", mpscale )
+	tetriimagesp1[uniqueid] = newPaddedImage("graphics/pieces/" .. i .. ".png", mpscale)
 	tetrikindp1[uniqueid] = i
 	tetrishapesp1[uniqueid] = {}
 	if i == 1 then --I
 		tetribodiesp1[uniqueid] = love.physics.newBody(world, x, y, 0, blockrot)
-		tetrishapesp1[uniqueid][1] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], -48,0, 32, 32)
-		tetrishapesp1[uniqueid][2] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], -16,0, 32, 32)
-		tetrishapesp1[uniqueid][3] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], 16,0, 32, 32)
-		tetrishapesp1[uniqueid][4] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], 48,0, 32, 32)
-		
+		tetrishapesp1[uniqueid][1] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], -48, 0, 32, 32)
+		tetrishapesp1[uniqueid][2] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], -16, 0, 32, 32)
+		tetrishapesp1[uniqueid][3] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], 16, 0, 32, 32)
+		tetrishapesp1[uniqueid][4] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], 48, 0, 32, 32)
+	
 	elseif i == 2 then --J
 		tetribodiesp1[uniqueid] = love.physics.newBody(world, x, y, 0, blockrot)
-		tetrishapesp1[uniqueid][1] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], -32,-16, 32, 32)
-		tetrishapesp1[uniqueid][2] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], 0,-16, 32, 32)
-		tetrishapesp1[uniqueid][3] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], 32,-16, 32, 32)
-		tetrishapesp1[uniqueid][4] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], 32,16, 32, 32)
-		
+		tetrishapesp1[uniqueid][1] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], -32, -16, 32, 32)
+		tetrishapesp1[uniqueid][2] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], 0, -16, 32, 32)
+		tetrishapesp1[uniqueid][3] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], 32, -16, 32, 32)
+		tetrishapesp1[uniqueid][4] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], 32, 16, 32, 32)
+	
 	elseif i == 3 then --L
 		tetribodiesp1[uniqueid] = love.physics.newBody(world, x, y, 0, blockrot)
-		tetrishapesp1[uniqueid][1] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], -32,-16, 32, 32)
-		tetrishapesp1[uniqueid][2] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], 0,-16, 32, 32)
-		tetrishapesp1[uniqueid][3] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], 32,-16, 32, 32)
-		tetrishapesp1[uniqueid][4] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], -32,16, 32, 32)
-		
+		tetrishapesp1[uniqueid][1] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], -32, -16, 32, 32)
+		tetrishapesp1[uniqueid][2] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], 0, -16, 32, 32)
+		tetrishapesp1[uniqueid][3] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], 32, -16, 32, 32)
+		tetrishapesp1[uniqueid][4] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], -32, 16, 32, 32)
+	
 	elseif i == 4 then --O
 		tetribodiesp1[uniqueid] = love.physics.newBody(world, x, y, 0, blockrot)
-		tetrishapesp1[uniqueid][1] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], -16,-16, 32, 32)
-		tetrishapesp1[uniqueid][2] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], -16,16, 32, 32)
-		tetrishapesp1[uniqueid][3] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], 16,16, 32, 32)
-		tetrishapesp1[uniqueid][4] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], 16,-16, 32, 32)
-		
+		tetrishapesp1[uniqueid][1] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], -16, -16, 32, 32)
+		tetrishapesp1[uniqueid][2] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], -16, 16, 32, 32)
+		tetrishapesp1[uniqueid][3] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], 16, 16, 32, 32)
+		tetrishapesp1[uniqueid][4] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], 16, -16, 32, 32)
+	
 	elseif i == 5 then --S
 		tetribodiesp1[uniqueid] = love.physics.newBody(world, x, y, 0, blockrot)
-		tetrishapesp1[uniqueid][1] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], -32,16, 32, 32)
-		tetrishapesp1[uniqueid][2] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], 0,-16, 32, 32)
-		tetrishapesp1[uniqueid][3] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], 32,-16, 32, 32)
-		tetrishapesp1[uniqueid][4] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], 0,16, 32, 32)
-		
+		tetrishapesp1[uniqueid][1] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], -32, 16, 32, 32)
+		tetrishapesp1[uniqueid][2] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], 0, -16, 32, 32)
+		tetrishapesp1[uniqueid][3] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], 32, -16, 32, 32)
+		tetrishapesp1[uniqueid][4] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], 0, 16, 32, 32)
+	
 	elseif i == 6 then --T
 		tetribodiesp1[uniqueid] = love.physics.newBody(world, x, y, 0, blockrot)
-		tetrishapesp1[uniqueid][1] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], -32,-16, 32, 32)
-		tetrishapesp1[uniqueid][2] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], 0,-16, 32, 32)
-		tetrishapesp1[uniqueid][3] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], 32,-16, 32, 32)
-		tetrishapesp1[uniqueid][4] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], 0,16, 32, 32)
-		
+		tetrishapesp1[uniqueid][1] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], -32, -16, 32, 32)
+		tetrishapesp1[uniqueid][2] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], 0, -16, 32, 32)
+		tetrishapesp1[uniqueid][3] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], 32, -16, 32, 32)
+		tetrishapesp1[uniqueid][4] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], 0, 16, 32, 32)
+	
 	elseif i == 7 then --Z
 		tetribodiesp1[uniqueid] = love.physics.newBody(world, x, y, 0, blockrot)
-		tetrishapesp1[uniqueid][1] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], 0,16, 32, 32)
-		tetrishapesp1[uniqueid][2] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], 0,-16, 32, 32)
-		tetrishapesp1[uniqueid][3] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], 32,16, 32, 32)
-		tetrishapesp1[uniqueid][4] = love.physics.newRectangleShape( tetribodiesp1[uniqueid], -32,-16, 32, 32)
-
+		tetrishapesp1[uniqueid][1] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], 0, 16, 32, 32)
+		tetrishapesp1[uniqueid][2] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], 0, -16, 32, 32)
+		tetrishapesp1[uniqueid][3] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], 32, 16, 32, 32)
+		tetrishapesp1[uniqueid][4] = love.physics.newRectangleShape(tetribodiesp1[uniqueid], -32, -16, 32, 32)
 	end
 	
 	tetribodiesp1[uniqueid]:setLinearDamping(0.5)
@@ -630,64 +627,63 @@ function createtetriBmultip1(i, uniqueid, x, y)
 	tetribodiesp1[uniqueid]:setBullet(true)
 	
 	for i, v in pairs(tetrishapesp1[uniqueid]) do
-		v:setData("p1-"..uniqueid)
+		v:setData("p1-" .. uniqueid)
 		v:setMask(3)
 	end
 end
 
 function createtetriBmultip2(i, uniqueid, x, y)
-	tetriimagesp2[uniqueid] = newPaddedImage( "graphics/pieces/"..i..".png", mpscale )
+	tetriimagesp2[uniqueid] = newPaddedImage("graphics/pieces/" .. i .. ".png", mpscale)
 	tetrikindp2[uniqueid] = i
 	tetrishapesp2[uniqueid] = {}
 	if i == 1 then --I
 		tetribodiesp2[uniqueid] = love.physics.newBody(world, x, y, 0, blockrot)
-		tetrishapesp2[uniqueid][1] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], -48,0, 32, 32)
-		tetrishapesp2[uniqueid][2] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], -16,0, 32, 32)
-		tetrishapesp2[uniqueid][3] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], 16,0, 32, 32)
-		tetrishapesp2[uniqueid][4] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], 48,0, 32, 32)
-		
+		tetrishapesp2[uniqueid][1] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], -48, 0, 32, 32)
+		tetrishapesp2[uniqueid][2] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], -16, 0, 32, 32)
+		tetrishapesp2[uniqueid][3] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], 16, 0, 32, 32)
+		tetrishapesp2[uniqueid][4] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], 48, 0, 32, 32)
+	
 	elseif i == 2 then --J
 		tetribodiesp2[uniqueid] = love.physics.newBody(world, x, y, 0, blockrot)
-		tetrishapesp2[uniqueid][1] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], -32,-16, 32, 32)
-		tetrishapesp2[uniqueid][2] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], 0,-16, 32, 32)
-		tetrishapesp2[uniqueid][3] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], 32,-16, 32, 32)
-		tetrishapesp2[uniqueid][4] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], 32,16, 32, 32)
-		
+		tetrishapesp2[uniqueid][1] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], -32, -16, 32, 32)
+		tetrishapesp2[uniqueid][2] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], 0, -16, 32, 32)
+		tetrishapesp2[uniqueid][3] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], 32, -16, 32, 32)
+		tetrishapesp2[uniqueid][4] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], 32, 16, 32, 32)
+	
 	elseif i == 3 then --L
 		tetribodiesp2[uniqueid] = love.physics.newBody(world, x, y, 0, blockrot)
-		tetrishapesp2[uniqueid][1] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], -32,-16, 32, 32)
-		tetrishapesp2[uniqueid][2] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], 0,-16, 32, 32)
-		tetrishapesp2[uniqueid][3] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], 32,-16, 32, 32)
-		tetrishapesp2[uniqueid][4] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], -32,16, 32, 32)
-		
+		tetrishapesp2[uniqueid][1] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], -32, -16, 32, 32)
+		tetrishapesp2[uniqueid][2] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], 0, -16, 32, 32)
+		tetrishapesp2[uniqueid][3] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], 32, -16, 32, 32)
+		tetrishapesp2[uniqueid][4] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], -32, 16, 32, 32)
+	
 	elseif i == 4 then --O
 		tetribodiesp2[uniqueid] = love.physics.newBody(world, x, y, 0, blockrot)
-		tetrishapesp2[uniqueid][1] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], -16,-16, 32, 32)
-		tetrishapesp2[uniqueid][2] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], -16,16, 32, 32)
-		tetrishapesp2[uniqueid][3] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], 16,16, 32, 32)
-		tetrishapesp2[uniqueid][4] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], 16,-16, 32, 32)
-		
+		tetrishapesp2[uniqueid][1] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], -16, -16, 32, 32)
+		tetrishapesp2[uniqueid][2] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], -16, 16, 32, 32)
+		tetrishapesp2[uniqueid][3] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], 16, 16, 32, 32)
+		tetrishapesp2[uniqueid][4] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], 16, -16, 32, 32)
+	
 	elseif i == 5 then --S
 		tetribodiesp2[uniqueid] = love.physics.newBody(world, x, y, 0, blockrot)
-		tetrishapesp2[uniqueid][1] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], -32,16, 32, 32)
-		tetrishapesp2[uniqueid][2] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], 0,-16, 32, 32)
-		tetrishapesp2[uniqueid][3] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], 32,-16, 32, 32)
-		tetrishapesp2[uniqueid][4] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], 0,16, 32, 32)
-		
+		tetrishapesp2[uniqueid][1] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], -32, 16, 32, 32)
+		tetrishapesp2[uniqueid][2] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], 0, -16, 32, 32)
+		tetrishapesp2[uniqueid][3] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], 32, -16, 32, 32)
+		tetrishapesp2[uniqueid][4] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], 0, 16, 32, 32)
+	
 	elseif i == 6 then --T
 		tetribodiesp2[uniqueid] = love.physics.newBody(world, x, y, 0, blockrot)
-		tetrishapesp2[uniqueid][1] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], -32,-16, 32, 32)
-		tetrishapesp2[uniqueid][2] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], 0,-16, 32, 32)
-		tetrishapesp2[uniqueid][3] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], 32,-16, 32, 32)
-		tetrishapesp2[uniqueid][4] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], 0,16, 32, 32)
-		
+		tetrishapesp2[uniqueid][1] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], -32, -16, 32, 32)
+		tetrishapesp2[uniqueid][2] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], 0, -16, 32, 32)
+		tetrishapesp2[uniqueid][3] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], 32, -16, 32, 32)
+		tetrishapesp2[uniqueid][4] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], 0, 16, 32, 32)
+	
 	elseif i == 7 then --Z
 		tetribodiesp2[uniqueid] = love.physics.newBody(world, x, y, 0, blockrot)
-		tetrishapesp2[uniqueid][1] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], 0,16, 32, 32)
-		tetrishapesp2[uniqueid][2] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], 0,-16, 32, 32)
-		tetrishapesp2[uniqueid][3] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], 32,16, 32, 32)
-		tetrishapesp2[uniqueid][4] = love.physics.newRectangleShape( tetribodiesp2[uniqueid], -32,-16, 32, 32)
-
+		tetrishapesp2[uniqueid][1] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], 0, 16, 32, 32)
+		tetrishapesp2[uniqueid][2] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], 0, -16, 32, 32)
+		tetrishapesp2[uniqueid][3] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], 32, 16, 32, 32)
+		tetrishapesp2[uniqueid][4] = love.physics.newRectangleShape(tetribodiesp2[uniqueid], -32, -16, 32, 32)
 	end
 	
 	tetribodiesp2[uniqueid]:setLinearDamping(0.5)
@@ -695,18 +691,18 @@ function createtetriBmultip2(i, uniqueid, x, y)
 	tetribodiesp2[uniqueid]:setBullet(true)
 	
 	for i, v in pairs(tetrishapesp2[uniqueid]) do
-		v:setData("p2-"..uniqueid)
+		v:setData("p2-" .. uniqueid)
 		v:setMask(2)
 	end
 end
 
 function collideBmulti(a, b)
-	if (a == "p1-"..counterp1 and b ~= "p2-"..counterp2) or (b == "p1-"..counterp1 and b ~= "p2-"..counterp2) then --One of the pieces is the current piece and the other isn't the other player's one
-		if p1fail == false and a ~= "leftp1" and a ~= "rightp1" and b ~= "leftp1" and b ~= "rightp1" then 
+	if (a == "p1-" .. counterp1 and b ~= "p2-" .. counterp2) or (b == "p1-" .. counterp1 and b ~= "p2-" .. counterp2) then --One of the pieces is the current piece and the other isn't the other player's one
+		if p1fail == false and a ~= "leftp1" and a ~= "rightp1" and b ~= "leftp1" and b ~= "rightp1" then
 			endblockp1()
 		end
-	elseif (a == "p2-"..counterp2 and b ~= "p1-"..counterp1) or (b == "p2-"..counterp2 and a ~= "p1-"..counterp1) then
-		if p2fail == false and a ~= "leftp2" and a ~= "rightp2" and b ~= "leftp2" and b ~= "rightp2" then 
+	elseif (a == "p2-" .. counterp2 and b ~= "p1-" .. counterp1) or (b == "p2-" .. counterp2 and a ~= "p1-" .. counterp1) then
+		if p2fail == false and a ~= "leftp2" and a ~= "rightp2" and b ~= "leftp2" and b ~= "rightp2" then
 			endblockp2()
 		end
 	elseif gamestate == "gameBmulti_results" then
