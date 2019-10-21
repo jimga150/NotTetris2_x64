@@ -459,7 +459,7 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 	local ioffset = 0
 	tetribodies[1] = "dummy :D"
 	for i = 2, numberofbodies do --every body
-		local v = tetribodies[i - ioffset] -- TODO: rename this
+		local thisbody = tetribodies[i - ioffset] -- TODO: rename this
 		if i - ioffset > numberofbodies then
 			print("oh yeah")
 			break
@@ -519,21 +519,21 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 					end
 				end
 				if above == true and inside == true and below == false then
-					tetrishapescopy[#tetrishapescopy + 1] = refineshape(upperline, 1, i - ioffset, v, j, w)
+					tetrishapescopy[#tetrishapescopy + 1] = refineshape(upperline, 1, i - ioffset, thisbody, j, w)
 					refined = true
 				elseif above == true and inside == true and below == true then
-					tetrishapescopy[#tetrishapescopy + 1] = refineshape(upperline, 1, i - ioffset, v, j, w)
-					tetrishapescopy[#tetrishapescopy + 1] = refineshape(lowerline, -1, i - ioffset, v, j, w)
+					tetrishapescopy[#tetrishapescopy + 1] = refineshape(upperline, 1, i - ioffset, thisbody, j, w)
+					tetrishapescopy[#tetrishapescopy + 1] = refineshape(lowerline, -1, i - ioffset, thisbody, j, w)
 					refined = true
 				elseif above == false and inside == true and below == false then
 					--nothing because it'll get removed (don't delete the elseif though cause it'll go though the "else")
 					refined = true
 				elseif above == false and inside == true and below == true then
-					tetrishapescopy[#tetrishapescopy + 1] = refineshape(lowerline, -1, i - ioffset, v, j, w)
+					tetrishapescopy[#tetrishapescopy + 1] = refineshape(lowerline, -1, i - ioffset, thisbody, j, w)
 					refined = true
 				elseif above == true and inside == false and below == true then
-					tetrishapescopy[#tetrishapescopy + 1] = refineshape(upperline, 1, i - ioffset, v, j, w)
-					tetrishapescopy[#tetrishapescopy + 1] = refineshape(lowerline, -1, i - ioffset, v, j, w)
+					tetrishapescopy[#tetrishapescopy + 1] = refineshape(upperline, 1, i - ioffset, thisbody, j, w)
+					tetrishapescopy[#tetrishapescopy + 1] = refineshape(lowerline, -1, i - ioffset, thisbody, j, w)
 					refined = true
 				else
 					local cotable = getPoints2table(tetrishapes[i - ioffset][j])
