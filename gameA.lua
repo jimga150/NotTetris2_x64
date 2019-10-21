@@ -644,7 +644,7 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 							cutimage(i - ioffset, numberofgroups)
 							
 							--mass confusion
-							calcMassInertia(tetribodies[i - ioffset])
+							calcMassInertia(tetrifixtures[i - ioffset], tetribodies[i - ioffset])
 							
 							local mass = tetribodies[i - ioffset]:getMass()
 							if mass < minmass then
@@ -652,7 +652,7 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 									v:setDensity(minmass / mass)
 								end
 								
-								tetribodies[i - ioffset]:setMassFromShapes()
+								calcMassInertia(tetrifixtures[i - ioffset], tetribodies[i - ioffset])
 								
 								for i, v in pairs(tetrifixtures[i - ioffset]) do
 									v:setDensity(1)
