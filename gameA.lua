@@ -717,7 +717,9 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 			
 			--clean up the tables..
 			for a, b in pairs(tetrifixturescopy) do
-				tetrifixturescopy[a]:destroy()
+				if not tetrifixturescopy[a]:isDestroyed() then
+					tetrifixturescopy[a]:destroy()
+				end
 				tetrifixturescopy[a] = nil
 			end
 			
