@@ -1180,13 +1180,9 @@ function love.keypressed(key, unicode)
 				--noinspection GlobalCreationOutsideO
 				volume = 1
 				changevolume(volume)
-			elseif optionsselection == 2 then -- TODO: load these images beforehand?
+			elseif optionsselection == 2 then
 				--noinspection GlobalCreationOutsideO
 				hue = 0.08
-				--noinspection GlobalCreationOutsideO
-				optionsmenu = newPaddedImage("graphics/options.png"); optionsmenu:setFilter("nearest", "nearest")
-				--noinspection GlobalCreationOutsideO
-				volumeslider = newPaddedImage("graphics/volumeslider.png"); volumeslider:setFilter("nearest", "nearest")
 			elseif optionsselection == 3 then
 				if fullscreen == false then
 					if scale ~= suggestedscale then
