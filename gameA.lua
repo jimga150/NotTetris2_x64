@@ -1,5 +1,4 @@
 function gameA_load()
-	--noinspection GlobalCreationOutsideO
 	gamestate = "gameA"
 	
 	--noinspection GlobalCreationOutsideO
@@ -1228,7 +1227,6 @@ function collideA(a, b, coll) --box2d callback. calls endblock.
 		if a[1] ~= "left" and a[1] ~= "right" and b[1] ~= "left" and b[1] ~= "right" then
 			if gamestate == "gameA" then
 				if tetribodies[1]:getY() < losingY then
-					--noinspection GlobalCreationOutsideO
 					gamestate = "failingA"
 					if musicno < 4 then
 						love.audio.stop(music[musicno])

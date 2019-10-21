@@ -1,5 +1,4 @@
 function failed_load()
-	--noinspection GlobalCreationOutsideO
 	gamestate = "failed"
 	--noinspection GlobalCreationOutsideO
 	tetribodies = {} -- CLEAR ALL

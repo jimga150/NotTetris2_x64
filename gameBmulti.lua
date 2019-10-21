@@ -3,7 +3,6 @@ function gameBmulti_load()
 		love.audio.stop(music[musicno])
 	end
 	
-	--noinspection GlobalCreationOutsideO
 	gamestate = "gameBmulti"
 	--noinspection GlobalCreationOutsideO
 	gamestarted = false
@@ -463,7 +462,6 @@ function gameBmulti_update(dt)
 		--noinspection GlobalCreationOutsideO
 		timepassed = love.timer.getTime() - colorizetimer
 		if timepassed > colorizeduration then
-			--noinspection GlobalCreationOutsideO
 			gamestate = "failedBmulti"
 			
 			wallshapesp1["groundp1"]:destroy()
@@ -490,7 +488,6 @@ function gameBmulti_update(dt)
 		end
 		
 		if clearcheck then --RESULTS SCREEN INI!--
-			--noinspection GlobalCreationOutsideO
 			gamestate = "gameBmulti_results"
 			--noinspection GlobalCreationOutsideO
 			jumptimer = love.timer.getTime()
@@ -870,7 +867,6 @@ end
 function endgame()
 	--noinspection GlobalCreationOutsideO
 	colorizetimer = love.timer.getTime()
-	--noinspection GlobalCreationOutsideO
 	gamestate = "failingBmulti"
 	
 	if musicno < 4 then

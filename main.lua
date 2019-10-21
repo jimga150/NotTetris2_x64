@@ -930,7 +930,6 @@ end
 function love.keypressed(key, unicode)
 	if gamestate == nil then
 		if key == "return" then
-			--noinspection GlobalCreationOutsideO
 			gamestate = "title"
 			love.graphics.setBackgroundColor(0, 0, 0)
 			love.audio.play(musictitle)
@@ -938,7 +937,6 @@ function love.keypressed(key, unicode)
 	
 	elseif gamestate == "logo" then
 		if key == "return" then
-			--noinspection GlobalCreationOutsideO
 			gamestate = "title"
 			love.graphics.setBackgroundColor(0, 0, 0)
 			love.audio.play(musictitle)
@@ -946,7 +944,6 @@ function love.keypressed(key, unicode)
 	
 	elseif gamestate == "credits" then
 		if key == "return" then
-			--noinspection GlobalCreationOutsideO
 			gamestate = "title"
 			love.graphics.setBackgroundColor(0, 0, 0)
 			love.audio.play(musictitle)
@@ -963,13 +960,10 @@ function love.keypressed(key, unicode)
 				end
 			end
 			if playerselection == 1 then
-				--noinspection GlobalCreationOutsideO
 				gamestate = "menu"
 			elseif playerselection == 2 then
-				--noinspection GlobalCreationOutsideO
 				gamestate = "multimenu"
 			else
-				--noinspection GlobalCreationOutsideO
 				gamestate = "options"
 				if soundenabled then
 					love.audio.stop(musictitle)
@@ -995,7 +989,6 @@ function love.keypressed(key, unicode)
 			if musicno < 4 then
 				love.audio.stop(music[musicno])
 			end
-			--noinspection GlobalCreationOutsideO
 			gamestate = "title"
 			if soundenabled then
 				love.audio.stop(musictitle)
@@ -1100,7 +1093,6 @@ function love.keypressed(key, unicode)
 			end
 			saveoptions()
 			loadimages()
-			--noinspection GlobalCreationOutsideO
 			gamestate = "title"
 		elseif key == "down" then
 			--noinspection GlobalCreationOutsideO
@@ -1206,7 +1198,6 @@ function love.keypressed(key, unicode)
 			if musicno < 4 then
 				love.audio.stop(music[musicno])
 			end
-			--noinspection GlobalCreationOutsideO
 			gamestate = "title"
 			love.audio.stop(musictitle)
 			love.audio.play(musictitle)
@@ -1316,7 +1307,6 @@ function love.keypressed(key, unicode)
 			if key == "escape" then
 				--noinspection GlobalCreationOutsideO
 				oldtime = love.timer.getTime()
-				--noinspection GlobalCreationOutsideO
 				gamestate = "menu"
 			end
 			
@@ -1338,7 +1328,6 @@ function love.keypressed(key, unicode)
 			if not fullscreen then
 				love.graphics.setMode(game_sp_width_pixels * scale, game_height_pixels * scale, false, vsync, 0)
 			end
-			--noinspection GlobalCreationOutsideO
 			gamestate = "multimenu"
 			if musicno < 4 then
 				love.audio.play(music[musicno])
@@ -1349,7 +1338,6 @@ function love.keypressed(key, unicode)
 			if not fullscreen then
 				love.graphics.setMode(game_sp_width_pixels * scale, game_height_pixels * scale, false, vsync, 0)
 			end
-			--noinspection GlobalCreationOutsideO
 			gamestate = "multimenu"
 		end
 		if key == "a" or key == "d" then
@@ -1375,7 +1363,6 @@ function love.keypressed(key, unicode)
 			if not fullscreen then
 				love.graphics.setMode(game_sp_width_pixels * scale, game_height_pixels * scale, false, vsync, 0)
 			end
-			--noinspection GlobalCreationOutsideO
 			gamestate = "multimenu"
 		end
 	
@@ -1386,7 +1373,6 @@ function love.keypressed(key, unicode)
 		end
 	elseif gamestate == "highscoreentry" then
 		if key == "return" then
-			--noinspection GlobalCreationOutsideO
 			gamestate = "menu"
 			savehighscores()
 			if musicchanged == true then

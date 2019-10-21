@@ -1,5 +1,4 @@
 function gameB_load()
-	--noinspection GlobalCreationOutsideO
 	gamestate = "gameB"
 	
 	--noinspection GlobalCreationOutsideO
@@ -291,7 +290,6 @@ end
 function endblockB()
 	if tetribodies[1]:getY() < losingY then
 		--LOSE--
-		--noinspection GlobalCreationOutsideO
 		gamestate = "failingB"
 		if musicno < 4 then
 			love.audio.stop(music[musicno])
