@@ -167,7 +167,7 @@ function calcMassInertia(fixtureArray, body)
 	for i, fixture in pairs(fixtureArray) do
 		-- print(shape)
 		local x, y, mass, inertia = fixture:getShape():computeMass(1)
-		totalInertia = totalInertia + inertia + mass * math.sqrt(x * x, y * y)
+		totalInertia = totalInertia + inertia + mass * ((x*x) + (y*y))
 		totalMass = totalMass + mass
 		center_x = center_x + mass * x
 		center_y = center_y + mass * y
