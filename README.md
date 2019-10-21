@@ -12,3 +12,72 @@ Instead of trial and error with the original source straight onto 11.2, i'm goin
 4. Repeat steps 2 and 3 until i get 11.2 working
 
 64-bit support begins in LOVE 0.9.0, which is great, but i'd prefer to get it up to date.
+
+<table>
+    <tr>
+        <td>Version</td>
+        <td>Status</td>
+        <td>Working</td>
+        <td>Cleaned up</td>
+    </tr>
+    <tr>
+        <td>0.7.2</td>
+        <td>Current</td>
+        <td>Yes</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>0.8.0</td>
+        <td>Planned</td>
+        <td>No</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>0.9.0</td>
+        <td>Planned</td>
+        <td>No</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>0.9.1</td>
+        <td>Planned</td>
+        <td>No</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>0.9.2</td>
+        <td>Planned</td>
+        <td>No</td>
+        <td>No</td>
+    </tr>
+    <tr>
+         <td>0.10.1</td>
+         <td>Planned</td>
+         <td>No</td>
+         <td>No</td>
+     </tr>
+    <tr>
+        <td>0.10.2</td>
+        <td>Planned</td>
+        <td>No</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>11.0</td>
+        <td>Planned</td>
+        <td>No</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>11.1</td>
+        <td>Planned</td>
+        <td>No</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>11.2</td>
+        <td>Planned</td>
+        <td>No</td>
+        <td>No</td>
+    </tr>             
+</table>
