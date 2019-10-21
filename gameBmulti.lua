@@ -13,7 +13,7 @@ function gameBmulti_load()
 	while game_mp_width_pixels * mpscale > desktopwidth do
 		mpscale = mpscale - 1
 	end
-	physicsmpscale = mpscale / 4
+	physicsmpscale = mpscale / physics_scale_factor
 	
 	mpfullscreenoffsetX = (desktopwidth - game_mp_width_pixels * mpscale) / 2
 	mpfullscreenoffsetY = (desktopheight - game_height_pixels * mpscale) / 2

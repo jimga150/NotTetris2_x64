@@ -24,6 +24,9 @@ function love.load()
 	game_mp_width_pixels = 274 --number of pixels in the game width for multiplayer mode
 	
 	--noinspection GlobalCreationOutsideO
+	physics_scale_factor = 4 -- factor by which to divide the scale by to get the physics scale, purely a visual fix
+	
+	--noinspection GlobalCreationOutsideO
 	heightcorrection = 0
 	--noinspection GlobalCreationOutsideO
 	widthcorrection = 0
@@ -66,7 +69,7 @@ function love.load()
 	end
 	
 	--noinspection GlobalCreationOutsideO
-	physicsscale = scale / 4
+	physicsscale = scale / physics_scale_factor
 	
 	--pieces--
 	tetriimages = {}
@@ -598,7 +601,7 @@ function togglefullscreen(fullscr)
 	love.mouse.setVisible(not fullscreen)
 	if fullscr == false then
 		scale = suggestedscale
-		physicsscale = scale / 4
+		physicsscale = scale / physics_scale_factor
 		love.graphics.setMode(game_sp_width_pixels * scale, game_height_pixels * scale, false, vsync, fsaa)
 	else
 		love.graphics.setMode(0, 0, true, vsync, fsaa)
@@ -611,7 +614,7 @@ function togglefullscreen(fullscr)
 		maxscale = math.min(math.floor(desktopheight / game_height_pixels), math.floor(desktopwidth / game_sp_width_pixels))
 		
 		scale = maxscale
-		physicsscale = scale / 4
+		physicsscale = scale / physics_scale_factor
 		
 		fullscreenoffsetX = (desktopwidth - game_sp_width_pixels * scale) / 2
 		fullscreenoffsetY = (desktopheight - game_height_pixels * scale) / 2
@@ -680,7 +683,7 @@ function changescale(i)
 	for j = 1, 7 do
 		nextpieceimg[j] = newPaddedImage("graphics/pieces/" .. j .. ".png", i)
 	end
-	physicsscale = i / 4
+	physicsscale = i / physics_scale_factor
 end
 
 function string:split(delimiter)
