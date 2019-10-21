@@ -7,17 +7,22 @@ function love.load()
 	require "failed.lua"
 	require "rocket.lua"
 	
+	--noinspection GlobalCreationOutsideO
 	oldtime = love.timer.getTime()
 	
+	--noinspection GlobalCreationOutsideO
 	vsync = true
 	
-	autosize()
+	--noinspection GlobalCreationOutsideO
 	fsaa = 16
 	
 	--noinspection GlobalCreationOutsideO
 	game_height_pixels = 144
 	--noinspection GlobalCreationOutsideO
 	game_width_pixels = 160
+	
+	autosize() -- sets desktopheight and desktopwidth to the first possible mode that appears
+
 	suggestedscale = math.min(math.floor((desktopheight - 50) / game_height_pixels), math.floor((desktopwidth - 10) / game_width_pixels))
 	if suggestedscale > 5 then
 		suggestedscale = 5

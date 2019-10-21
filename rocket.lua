@@ -53,7 +53,7 @@ function rocket_draw()
 		love.graphics.translate(fullscreenoffsetX, fullscreenoffsetY)
 		
 		--scissor
-		love.graphics.setScissor(fullscreenoffsetX, fullscreenoffsetY, 160 * scale, 144 * scale)
+		love.graphics.setScissor(fullscreenoffsetX, fullscreenoffsetY, game_width_pixels * scale, game_height_pixels * scale)
 	end
 	
 	currenttime = love.timer.getTime()

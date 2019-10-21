@@ -7,7 +7,7 @@ function gameBmulti_load()
 	gamestarted = false
 	
 	beeped = { false, false, false }
-	
+		
 	--figure out the multiplayer scale
 	mpscale = scale
 	while 274 * mpscale > desktopwidth do
