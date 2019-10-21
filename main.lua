@@ -7,6 +7,8 @@ function love.load()
 	require "failed.lua"
 	require "rocket.lua"
 	
+	oldtime = love.timer.getTime()
+	
 	vsync = true
 	
 	autosize()
