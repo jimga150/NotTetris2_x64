@@ -11,7 +11,7 @@ function love.conf(t)
 	t.modules.sound = true -- Enable the sound module
 	
 	t.modules.keyboard = true -- Enable the keyboard module
-	t.modules.mouse = false -- Disable the mouse module
+	t.modules.mouse = true -- Disable the mouse module
 	
 	t.modules.image = true -- Enable the image module
 	t.modules.graphics = true -- Enable the graphics module
