@@ -355,7 +355,7 @@ function loadimages()
 	
 	--rockets--
 	--noinspection GlobalCreationOutsideO
-	rocket1 = newPaddedImage("graphics/rocket1.png"); rocket1:setFilter("nearest", "nearest")
+	rocket1 = newPaddedImage("graphics/rocket1.png")
 	--noinspection GlobalCreationOutsideO
 	rocket2 = newPaddedImage("graphics/rocket2.png")
 	--noinspection GlobalCreationOutsideO
@@ -432,6 +432,7 @@ function loadimages()
 	luigijump:setFilter("nearest", "nearest")
 	luigicry1:setFilter("nearest", "nearest")
 	luigicry2:setFilter("nearest", "nearest")
+	rocket1:setFilter("nearest", "nearest")
 	rocket2:setFilter("nearest", "nearest")
 	rocket3:setFilter("nearest", "nearest")
 	spaceshuttle:setFilter("nearest", "nearest")
