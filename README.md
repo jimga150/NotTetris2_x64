@@ -8,6 +8,12 @@ Todo:
 
 --many many errors in the Stack gamemode
 
---Normal gamemode only drops 1 piece
+--only top line cuts
 
---error when exiting normal gamemode
+--no line cut progress bars
+
+--pieces not cut correctly
+
+--cut pieces still act like they were before (whole)
+
+--gravity acts weird on cut pieces
