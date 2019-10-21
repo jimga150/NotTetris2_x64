@@ -580,7 +580,7 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 						tetrifixtures[i-ioffset] = {}
 						for b, c in pairs(tetrifixturescopy) do
 							if shapegroups[b] == a then
-								cotable = getPoints2table(tetrifixturescopy[b])
+								cotable = getPoints2table(tetrifixturescopy[b]:getShape())
 								for var = 1, #cotable, 2 do
 									cotable[var], cotable[var+1] = tetribodies[i-ioffset]:getLocalPoint(cotable[var], cotable[var+1])
 								end
@@ -623,7 +623,7 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 						
 						for b, c in pairs(tetrifixturescopy) do
 							if shapegroups[b] == a then
-								cotable = getPoints2table(tetrifixturescopy[b])
+								cotable = getPoints2table(tetrifixturescopy[b]:getShape())
 								for var = 1, #cotable, 2 do
 									cotable[var], cotable[var+1] = tetribodies[i-ioffset]:getLocalPoint(cotable[var], cotable[var+1])
 								end
