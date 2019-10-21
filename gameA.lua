@@ -473,7 +473,7 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 	local ioffset = 0
 	tetribodies[1] = "dummy :D"
 	for i = 2, numberofbodies do --every body
-		local v = tetribodies[i - ioffset] --TODO: rename this
+		local body = tetribodies[i - ioffset]
 		if i - ioffset > numberofbodies then
 			print("oh yeah")
 			break
@@ -529,21 +529,21 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 					end
 				end
 				if above == true and inside == true and below == false then
-					tetrifixturescopy[#tetrifixturescopy + 1] = refineshape(upperline, 1, i - ioffset, v, j, w:getShape())
+					tetrifixturescopy[#tetrifixturescopy + 1] = refineshape(upperline, 1, i - ioffset, body, j, w:getShape())
 					refined = true
 				elseif above == true and inside == true and below == true then
-					tetrifixturescopy[#tetrifixturescopy + 1] = refineshape(upperline, 1, i - ioffset, v, j, w:getShape())
-					tetrifixturescopy[#tetrifixturescopy + 1] = refineshape(lowerline, -1, i - ioffset, v, j, w:getShape())
+					tetrifixturescopy[#tetrifixturescopy + 1] = refineshape(upperline, 1, i - ioffset, body, j, w:getShape())
+					tetrifixturescopy[#tetrifixturescopy + 1] = refineshape(lowerline, -1, i - ioffset, body, j, w:getShape())
 					refined = true
 				elseif above == false and inside == true and below == false then
 					--nothing because it'll get removed (don't delete the elseif though cause it'll go though the "else")
 					refined = true
 				elseif above == false and inside == true and below == true then
-					tetrifixturescopy[#tetrifixturescopy + 1] = refineshape(lowerline, -1, i - ioffset, v, j, w:getShape())
+					tetrifixturescopy[#tetrifixturescopy + 1] = refineshape(lowerline, -1, i - ioffset, body, j, w:getShape())
 					refined = true
 				elseif above == true and inside == false and below == true then
-					tetrifixturescopy[#tetrifixturescopy + 1] = refineshape(upperline, 1, i - ioffset, v, j, w:getShape())
-					tetrifixturescopy[#tetrifixturescopy + 1] = refineshape(lowerline, -1, i - ioffset, v, j, w:getShape())
+					tetrifixturescopy[#tetrifixturescopy + 1] = refineshape(upperline, 1, i - ioffset, body, j, w:getShape())
+					tetrifixturescopy[#tetrifixturescopy + 1] = refineshape(lowerline, -1, i - ioffset, body, j, w:getShape())
 					refined = true
 				else
 					local cotable = getPoints2table(tetrifixtures[i - ioffset][j]:getShape())
@@ -551,7 +551,7 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 						cotable[var], cotable[var + 1] = tetribodies[i - ioffset]:getLocalPoint(cotable[var], cotable[var + 1])
 					end
 					tetrifixturescopy[#tetrifixturescopy + 1] = love.physics.newFixture(
-						tetribodies[i - ioffset],
+						body, --NOTE: was tetribodies[i - ioffset]
 						love.physics.newPolygonShape(unpack(cotable)),
 						1
 					)
