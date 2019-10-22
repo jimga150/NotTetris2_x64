@@ -4,25 +4,18 @@ function gameBmulti_load()
 	end
 	
 	gamestate = "gameBmulti"
-	-- TODO: Justify global
 	gamestarted = false
 	
-	-- TODO: Justify global
 	beeped = { false, false, false }
 	
 	--figure out the multiplayer scale
-	-- TODO: Justify global
 	mpscale = scale
 	while game_mp_width_pixels * mpscale > desktopwidth do
-		-- TODO: Justify global
 		mpscale = mpscale - 1
 	end
-	-- TODO: Justify global
 	physicsmpscale = mpscale / physics_scale_factor
 	
-	-- TODO: Justify global
 	mpfullscreenoffsetX = (desktopwidth - game_mp_width_pixels * mpscale) / 2
-	-- TODO: Justify global
 	mpfullscreenoffsetY = (desktopheight - game_height_pixels * mpscale) / 2
 	
 	if not fullscreen then
@@ -30,90 +23,59 @@ function gameBmulti_load()
 	end
 	
 	--nextpieces
-	-- TODO: Justify global
 	nextpieceimgmp = {}
 	for i = 1, 7 do
 		nextpieceimgmp[i] = newPaddedImage("graphics/pieces/" .. i .. ".png", mpscale)
 	end
 	
-	-- TODO: Justify global
 	difficulty_speed = 100
 	
-	-- TODO: Justify global
 	p1fail = false
-	-- TODO: Justify global
 	p2fail = false
 	
-	-- TODO: Justify global
 	p1color = { 255, 50, 50 }
-	-- TODO: Justify global
 	p2color = { 50, 255, 50 }
 	
 	--p1color = {116, 92, 73}
 	--p2color = {209, 174, 145}
 	
-	-- TODO: Justify global
 	scorescorep1 = 0
-	-- TODO: Justify global
 	linesscorep1 = 0
 	
-	-- TODO: Justify global
 	scorescorep2 = 0
-	-- TODO: Justify global
 	linesscorep2 = 0
 	
-	-- TODO: Justify global
 	counterp1 = 0 --first piece is 1
-	-- TODO: Justify global
 	counterp2 = 0 --first piece is 1
 	
-	-- TODO: Justify global
 	tetrikindp1 = {}
-	-- TODO: Justify global
 	tetriimagedatap1 = {}
-	-- TODO: Justify global
 	tetriimagesp1 = {}
 	
-	-- TODO: Justify global
 	tetrikindp2 = {}
-	-- TODO: Justify global
 	tetriimagedatap2 = {}
-	-- TODO: Justify global
 	tetriimagesp2 = {}
 	
-	-- TODO: Justify global
 	randomtable = {}
-	-- TODO: Justify global
 	nextpiecep1 = nil
-	-- TODO: Justify global
 	nextpiecep2 = nil
 	
-	-- TODO: Justify global
 	nextpiecerot = 0
 	
 	--PHYSICS--
-	-- TODO: Justify global
 	meter = 30 -- TODO: rename to pixelspermeter
-	-- TODO: Justify global
 	world = love.physics.newWorld(0, -720, 960, 1050, 0, 500, true)
 	
 	
-	-- TODO: Justify global
 	wallshapesp1 = {}
-	-- TODO: Justify global
 	tetrishapesp1 = {}
-	-- TODO: Justify global
 	tetribodiesp1 = {}
 	
-	-- TODO: Justify global
 	wallshapesp2 = {}
-	-- TODO: Justify global
 	tetrishapesp2 = {}
-	-- TODO: Justify global
 	tetribodiesp2 = {}
 	
 	--WALLS P1--
-	-- TODO: Justify global
 	wallbodiesp1 = love.physics.newBody(world, 32, -64, 0, 0)
 
 	wallshapesp1["leftp1"] = love.physics.newPolygonShape(wallbodiesp1, 164, 0, 164, 672, 196, 672, 196, 0)
@@ -129,7 +91,6 @@ function gameBmulti_load()
 	wallshapesp1["groundp1"]:setData("groundp1")
 	
 	--WALLS P2--
-	-- TODO: Justify global
 	wallbodiesp2 = love.physics.newBody(world, 32, -64, 0, 0)
 
 	wallshapesp2["leftp2"] = love.physics.newPolygonShape(wallbodiesp2, 484, 0, 484, 672, 516, 672, 516, 0)
@@ -148,7 +109,6 @@ function gameBmulti_load()
 	-----------
 	
 	randomtable[1] = math.random(7)
-	-- TODO: Justify global
 	starttimer = love.timer.getTime()
 	--first piece! hooray.
 end
@@ -185,7 +145,6 @@ function gameBmulti_draw()
 		love.graphics.setColor(255, 255, 255)
 		--set color:
 		if gamestate == "failingBmulti" or gamestate == "failedBmulti" then
-			-- TODO: Justify global
 			timepassed = love.timer.getTime() - colorizetimer
 			if v:getY() > 576 - (576 * (timepassed / colorizeduration)) then
 				love.graphics.setColor(unpack(p1color))
@@ -206,7 +165,6 @@ function gameBmulti_draw()
 		love.graphics.setColor(255, 255, 255)
 		--set color:
 		if gamestate == "failingBmulti" or gamestate == "failedBmulti" then
-			-- TODO: Justify global
 			timepassed = love.timer.getTime() - colorizetimer
 			if v:getY() > 576 - (576 * (timepassed / colorizeduration)) then
 				love.graphics.setColor(unpack(p2color))
@@ -224,25 +182,19 @@ function gameBmulti_draw()
 	--SCORES P1---------------------------------------
 	
 	--"score"--
-	-- TODO: Justify global
 	offsetX = 0
 	
-	-- TODO: Justify global
 	scorestring = tostring(scorescorep1)
 	for i = 1, scorestring:len() - 1 do
-		-- TODO: Justify global
 		offsetX = offsetX - 8 * mpscale
 	end
 	love.graphics.print(scorescorep1, 36 * mpscale + offsetX, 24 * mpscale, 0, mpscale)
 	
 	--"tiles"--
-	-- TODO: Justify global
 	offsetX = 0
 	
-	-- TODO: Justify global
 	scorestring = tostring(linesscorep1)
 	for i = 1, scorestring:len() - 1 do
-		-- TODO: Justify global
 		offsetX = offsetX - 8 * mpscale
 	end
 	love.graphics.print(linesscorep1, 28 * mpscale + offsetX, 80 * mpscale, 0, mpscale)
@@ -250,25 +202,19 @@ function gameBmulti_draw()
 	
 	--SCORES P2---------------------------------------
 	--"score"--
-	-- TODO: Justify global
 	offsetX = 0
 	
-	-- TODO: Justify global
 	scorestring = tostring(scorescorep2)
 	for i = 1, scorestring:len() - 1 do
-		-- TODO: Justify global
 		offsetX = offsetX - 8 * mpscale
 	end
 	love.graphics.print(scorescorep2, 262 * mpscale + offsetX, 24 * mpscale, 0, mpscale)
 	
 	--"tiles"--
-	-- TODO: Justify global
 	offsetX = 0
 	
-	-- TODO: Justify global
 	scorestring = tostring(linesscorep2)
 	for i = 1, scorestring:len() - 1 do
-		-- TODO: Justify global
 		offsetX = offsetX - 8 * mpscale
 	end
 	love.graphics.print(linesscorep2, 254 * mpscale + offsetX, 80 * mpscale, 0, mpscale)
@@ -353,15 +299,12 @@ end
 function gameBmulti_update(dt)
 	
 	--NEXTPIECE ROTATION (rotating allday erryday)
-	-- TODO: Justify global
 	nextpiecerot = nextpiecerot + nextpiecerotspeed * dt
 	while nextpiecerot > math.pi * 2 do
-		-- TODO: Justify global
 		nextpiecerot = nextpiecerot - math.pi * 2
 	end
 	
 	world:update(dt)
-	-- TODO: Justify global
 	newtime = love.timer.getTime()
 	if gamestarted == false then
 		if newtime - starttimer > 3 then
@@ -369,7 +312,6 @@ function gameBmulti_update(dt)
 				love.audio.play(music[musicno])
 			end
 			startgame()
-			-- TODO: Justify global
 			gamestarted = true
 		elseif newtime - starttimer > 2 and beeped[3] == false then
 			beeped[3] = true
@@ -459,7 +401,6 @@ function gameBmulti_update(dt)
 			end
 		end
 	elseif gamestate == "failingBmulti" then
-		-- TODO: Justify global
 		timepassed = love.timer.getTime() - colorizetimer
 		if timepassed > colorizeduration then
 			gamestate = "failedBmulti"
@@ -471,50 +412,39 @@ function gameBmulti_update(dt)
 			love.audio.play(gameover2)
 		end
 	elseif gamestate == "failedBmulti" then
-		-- TODO: Justify global
 		clearcheck = true
 		for i, v in pairs(tetribodiesp1) do
 			if v:getY() < 162 * mpscale then
-				-- TODO: Justify global
 				clearcheck = false
 			end
 		end
 		
 		for i, v in pairs(tetribodiesp2) do
 			if v:getY() < 162 * mpscale then
-				-- TODO: Justify global
 				clearcheck = false
 			end
 		end
 		
 		if clearcheck then --RESULTS SCREEN INI!--
 			gamestate = "gameBmulti_results"
-			-- TODO: Justify global
 			jumptimer = love.timer.getTime()
-			-- TODO: Justify global
 			crytimer = love.timer.getTime()
 			
 			love.audio.play(musicresults)
 			
-			-- TODO: Justify global
 			resultsfloorbody = love.physics.newBody(world, 32, -64, 0, 0)
-			-- TODO: Justify global
 			resultsfloorshape = love.physics.newPolygonShape(resultsfloorbody, 196, 448, 196, 480, 836, 480, 836, 448)
 			resultsfloorshape:setData("resultsfloor")
 			
 			if winner == 1 then
-				-- TODO: Justify global
 				mariobody = love.physics.newBody(world, 388, 320, 0, 0)
-				-- TODO: Justify global
 				marioshape = love.physics.newRectangleShape(mariobody, 0, 0, 64, 108)
 				marioshape:setMask(3)
 				marioshape:setData("mario")
 				mariobody:setLinearDamping(0.5)
 				mariobody:setMassFromShapes()
 			elseif winner == 2 then
-				-- TODO: Justify global
 				luigibody = love.physics.newBody(world, 704, 320, 0, 0)
-				-- TODO: Justify global
 				luigishape = love.physics.newRectangleShape(luigibody, 0, 0, 64, 124)
 				luigishape:setMask(2)
 				luigishape:setData("luigi")
@@ -531,16 +461,12 @@ function gameBmulti_update(dt)
 				local x, y = luigibody:getLinearVelocity()
 				luigibody:setLinearVelocity(x, -300)
 			end
-			-- TODO: Justify global
 			jumpframe = true
 		end
 	elseif gamestate == "gameBmulti_results" then
-		-- TODO: Justify global
 		jumptimepassed = love.timer.getTime() - jumptimer
 		if jumptimepassed > 2 then
-			-- TODO: Justify global
 			jumptimer = love.timer.getTime()
-			-- TODO: Justify global
 			jumpframe = true
 			if winner == 1 then
 				mariobody:setY(mariobody:getY() - 1)
@@ -553,12 +479,9 @@ function gameBmulti_update(dt)
 			end
 		end
 		
-		-- TODO: Justify global
 		crytimepassed = love.timer.getTime() - crytimer
 		if crytimepassed > 0.4 then
-			-- TODO: Justify global
 			cryframe = not cryframe
-			-- TODO: Justify global
 			crytimer = love.timer.getTime()
 		end
 		
@@ -587,26 +510,20 @@ end
 function startgame()
 	--FIRST "nextpiece" for p1 (Which gets immediately removed, duh)--
 	if randomtable[1] == 2 then
-		-- TODO: Justify global
 		nextpiecep1 = 3
 	elseif randomtable[1] == 3 then
-		-- TODO: Justify global
 		nextpiecep1 = 2
 	elseif randomtable[1] == 5 then
-		-- TODO: Justify global
 		nextpiecep1 = 7
 	elseif randomtable[1] == 7 then
-		-- TODO: Justify global
 		nextpiecep1 = 5
 	else
-		-- TODO: Justify global
 		nextpiecep1 = randomtable[1]
 	end
 	
 	----------------
 	-- FIRST "nextpiece" for p2 (Which gets immediately removed, duh)--
 
-	-- TODO: Justify global
 	nextpiecep2 = randomtable[1]
 	
 	----------------
@@ -615,10 +532,8 @@ function startgame()
 end
 
 function game_addTetriBmultip1()
-	-- TODO: Justify global
 	counterp1 = counterp1 + 1
 	--NEW BLOCK--
-	-- TODO: Justify global
 	randomblockp1 = nextpiecep1
 	createtetriBmultip1(randomblockp1, counterp1, 388, blockstartY)
 	tetribodiesp1[counterp1]:setLinearVelocity(0, difficulty_speed)
@@ -629,28 +544,21 @@ function game_addTetriBmultip1()
 	end
 	--MIRROR PIECES
 	if randomtable[counterp1] == 2 then
-		-- TODO: Justify global
 		nextpiecep1 = 3
 	elseif randomtable[counterp1] == 3 then
-		-- TODO: Justify global
 		nextpiecep1 = 2
 	elseif randomtable[counterp1] == 5 then
-		-- TODO: Justify global
 		nextpiecep1 = 7
 	elseif randomtable[counterp1] == 7 then
-		-- TODO: Justify global
 		nextpiecep1 = 5
 	else
-		-- TODO: Justify global
 		nextpiecep1 = randomtable[counterp1]
 	end
 end
 
 function game_addTetriBmultip2()
-	-- TODO: Justify global
 	counterp2 = counterp2 + 1
 	--NEW BLOCK--
-	-- TODO: Justify global
 	randomblockp2 = nextpiecep2
 	createtetriBmultip2(randomblockp2, counterp2, 708, blockstartY)
 	tetribodiesp2[counterp2]:setLinearVelocity(0, difficulty_speed)
@@ -659,7 +567,6 @@ function game_addTetriBmultip2()
 	if counterp2 > #randomtable then
 		table.insert(randomtable, math.random(7))
 	end
-	-- TODO: Justify global
 	nextpiecep2 = randomtable[counterp2]
 end
 
@@ -802,10 +709,8 @@ function collideBmulti(a, b)
 		end
 	elseif gamestate == "gameBmulti_results" then
 		if (a == "mario" and b == "resultsfloor") or (b == "mario" and a == "resultsfloor") then
-			-- TODO: Justify global
 			jumpframe = false
 		elseif (a == "luigi" and b == "resultsfloor") or (b == "luigi" and a == "resultsfloor") then
-			-- TODO: Justify global
 			jumpframe = false
 		end
 	end
@@ -820,7 +725,6 @@ function endblockp1()
 	
 	if tetribodiesp1[counterp1]:getY() < losingY then --P1 hit the top
 		--FAIL P1--
-		-- TODO: Justify global
 		p1fail = true
 		
 		
@@ -830,9 +734,7 @@ function endblockp1()
 	else --P1 didn't hit the top yet
 		love.audio.stop(blockfall)
 		love.audio.play(blockfall)
-		-- TODO: Justify global
 		linesscorep1 = linesscorep1 + 1
-		-- TODO: Justify global
 		scorescorep1 = linesscorep1 * 100
 		game_addTetriBmultip1()
 	end
@@ -847,7 +749,6 @@ function endblockp2()
 	
 	if tetribodiesp2[counterp2]:getY() < losingY then --P2 hit the top
 		--FAIL P2--
-		-- TODO: Justify global
 		p2fail = true
 		
 		if p1fail == true then --Both players have hit the top
@@ -856,16 +757,13 @@ function endblockp2()
 	else --P2 didn't hit the top yet
 		love.audio.stop(blockfall)
 		love.audio.play(blockfall)
-		-- TODO: Justify global
 		linesscorep2 = linesscorep2 + 1
-		-- TODO: Justify global
 		scorescorep2 = linesscorep2 * 100
 		game_addTetriBmultip2()
 	end
 end
 
 function endgame()
-	-- TODO: Justify global
 	colorizetimer = love.timer.getTime()
 	gamestate = "failingBmulti"
 	
@@ -877,25 +775,18 @@ function endgame()
 	love.audio.play(gameover1)
 	
 	if scorescorep1 > scorescorep2 then
-		-- TODO: Justify global
 		p1wins = p1wins + 1
-		-- TODO: Justify global
 		winner = 1
 	elseif scorescorep1 < scorescorep2 then
-		-- TODO: Justify global
 		p2wins = p2wins + 1
-		-- TODO: Justify global
 		winner = 2
 	else
-		-- TODO: Justify global
 		winner = 3
 	end
 	if p1wins > 99 then
-		-- TODO: Justify global
 		p1wins = math.mod(p1wins, 100)
 	end
 	if p2wins > 99 then
-		-- TODO: Justify global
 		p2wins = math.mod(p2wins, 100)
 	end
 end

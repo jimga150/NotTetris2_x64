@@ -1,39 +1,25 @@
 function gameB_load()
 	gamestate = "gameB"
 	
-	-- TODO: Justify global
 	pause = false
 	
-	-- TODO: Justify global
 	difficulty_speed = 100
 	
-	-- TODO: Justify global
 	scorescore = 0
-	-- TODO: Justify global
 	levelscore = 0
-	-- TODO: Justify global
 	linesscore = 0
-	-- TODO: Justify global
 	nextpiecerot = 0
 	
 	--PHYSICS--
-	-- TODO: Justify global
 	meter = 30
-	-- TODO: Justify global
 	world = love.physics.newWorld(0, -720, 960, 1050, 0, 500, true)
 	
-	-- TODO: Justify global
 	tetrikind = {}
-	-- TODO: Justify global
 	wallshapes = {}
-	-- TODO: Justify global
 	tetrishapes = {}
-	-- TODO: Justify global
 	tetribodies = {}
-	-- TODO: Justify global
 	offsetshapes = {}
 	
-	-- TODO: Justify global
 	wallbodies = love.physics.newBody(world, 32, -64, 0, 0) --WALLS
 	wallshapes["left"] = love.physics.newPolygonShape(wallbodies, 0, -64, 0, 672, 32, 672, 32, -64)
 	wallshapes["left"]:setData("left")
@@ -50,7 +36,6 @@ function gameB_load()
 	-----------
 	
 	--FIRST "nextpiece"-
-	-- TODO: Justify global
 	nextpiece = math.random(7)
 	
 	game_addTetriB()
@@ -59,13 +44,11 @@ end
 
 function game_addTetriB()
 	--NEW BLOCK--
-	-- TODO: Justify global
 	randomblock = nextpiece
 	createtetriB(randomblock, 1, 224, blockstartY)
 	tetribodies[1]:setLinearVelocity(0, difficulty_speed)
 	
 	--RANDOMIZE
-	-- TODO: Justify global
 	nextpiece = math.random(7)
 end
 
@@ -166,38 +149,29 @@ function gameB_draw()
 	
 	--SCORES---------------------------------------
 	--"score"--
-	-- TODO: Justify global
 	offsetX = 0
 	
-	-- TODO: Justify global
 	scorestring = tostring(scorescore)
 	for i = 1, scorestring:len() - 1 do
-		-- TODO: Justify global
 		offsetX = offsetX - 8 * scale
 	end
 	love.graphics.print(scorescore, game_height_pixels * scale + offsetX, 24 * scale, 0, scale)
 	
 	
 	--"level"--
-	-- TODO: Justify global
 	offsetX = 0
 	
-	-- TODO: Justify global
 	scorestring = tostring(levelscore)
 	for i = 1, scorestring:len() - 1 do
-		-- TODO: Justify global
 		offsetX = offsetX - 8 * scale
 	end
 	love.graphics.print(levelscore, 136 * scale + offsetX, 56 * scale, 0, scale)
 	
 	--"tiles"--
-	-- TODO: Justify global
 	offsetX = 0
 	
-	-- TODO: Justify global
 	scorestring = tostring(linesscore)
 	for i = 1, scorestring:len() - 1 do
-		-- TODO: Justify global
 		offsetX = offsetX - 8 * scale
 	end
 	love.graphics.print(linesscore, 136 * scale + offsetX, 80 * scale, 0, scale)
@@ -215,10 +189,8 @@ end
 
 function gameB_update(dt)
 	--NEXTPIECE ROTATION (rotating allday erryday)
-	-- TODO: Justify global
 	nextpiecerot = nextpiecerot + nextpiecerotspeed * dt
 	while nextpiecerot > math.pi * 2 do
-		-- TODO: Justify global
 		nextpiecerot = nextpiecerot - math.pi * 2
 	end
 	
@@ -262,11 +234,9 @@ function gameB_update(dt)
 	world:update(dt)
 	
 	if gamestate == "failingB" then
-		-- TODO: Justify global
 		clearcheck = true
 		for _, v in pairs(tetribodies) do
 			if v:getY() < 648 then
-				-- TODO: Justify global
 				clearcheck = false
 			end
 		end
@@ -315,9 +285,7 @@ function endblockB()
 		
 		tetribodies[1] = nil
 	
-		-- TODO: Justify global
 		linesscore = linesscore + 1
-		-- TODO: Justify global
 		scorescore = linesscore * 100
 		
 		love.audio.stop(blockfall)

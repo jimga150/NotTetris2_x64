@@ -1,8 +1,6 @@
 function failed_load()
 	gamestate = "failed"
-	-- TODO: Justify global
 	tetribodies = {} -- CLEAR ALL
-	-- TODO: Justify global
 	tetrishapes = {} -- PIECES
 	love.audio.play(gameover2)
 end
@@ -26,38 +24,29 @@ function failed_draw()
 	
 	--SCORES---------------------------------------
 	--"score"--
-	-- TODO: Justify global
 	offsetX = 0
 	
-	-- TODO: Justify global
 	scorestring = tostring(scorescore)
 	for i = 1, scorestring:len() - 1 do
-		-- TODO: Justify global
 		offsetX = offsetX - 8 * scale
 	end
 	love.graphics.print(scorescore, game_height_pixels * scale + offsetX, 24 * scale, 0, scale)
 	
 	
 	--"level"--
-	-- TODO: Justify global
 	offsetX = 0
 	
-	-- TODO: Justify global
 	scorestring = tostring(levelscore)
 	for i = 1, scorestring:len() - 1 do
-		-- TODO: Justify global
 		offsetX = offsetX - 8 * scale
 	end
 	love.graphics.print(levelscore, 136 * scale + offsetX, 56 * scale, 0, scale)
 	
 	--"tiles"--
-	-- TODO: Justify global
 	offsetX = 0
 	
-	-- TODO: Justify global
 	scorestring = tostring(linesscore)
 	for i = 1, scorestring:len() - 1 do
-		-- TODO: Justify global
 		offsetX = offsetX - 8 * scale
 	end
 	love.graphics.print(linesscore, 136 * scale + offsetX, 80 * scale, 0, scale)
@@ -77,9 +66,7 @@ function failed_update()
 end
 
 function failed_checkhighscores()
-	-- TODO: Justify global
 	highscoreno = 0
-	-- TODO: Justify global
 	selectblink = true
 	oldtime = love.timer.getTime()
 	for i = 1, 3 do
@@ -94,23 +81,18 @@ function failed_checkhighscores()
 				highscorename[3] = highscorename[2]
 			end
 			
-			-- TODO: Justify global
 			highscoreno = i
 			highscorename[i] = ""
 			highscore[i] = scorescore
-			-- TODO: Justify global
 			cursorblink = true
 			love.audio.play(highscoreintro)
-			-- TODO: Justify global
 			highscoremusicstart = love.timer.getTime()
-			-- TODO: Justify global
 			musicchanged = false
 			gamestate = "highscoreentry"
 			break
 		end
 	end
 	if highscoreno == 0 then --no new highscore
-		-- TODO: Justify global
 		gamestate = "menu"
 		if musicno < 4 then
 			love.audio.play(music[musicno])

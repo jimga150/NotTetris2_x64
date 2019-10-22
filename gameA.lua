@@ -1,59 +1,36 @@
 function gameA_load()
 	gamestate = "gameA"
 	
-	-- TODO: Justify global
 	pause = false
-	-- TODO: Justify global
 	skipupdate = true
 	
-	-- TODO: Justify global
 	difficulty_speed = 100
 	
-	-- TODO: Justify global
 	cuttingtimer = lineclearduration
 	
-	-- TODO: Justify global
 	scorescore = 0
-	-- TODO: Justify global
 	levelscore = 0
-	-- TODO: Justify global
 	linesscore = 0
 	
-	-- TODO: Justify global
 	linescleared = 0
-	-- TODO: Justify global
 	lastscoreadd = 0
-	-- TODO: Justify global
 	scoreaddtimer = scoreaddtime
-	-- TODO: Justify global
 	densityupdatetimer = 0
-	-- TODO: Justify global
 	nextpiecerot = 0
-	-- TODO: Justify global
 	newlevelbeep = false
 	
 	--PHYSICS--
-	-- TODO: Justify global
 	meter = 30
-	-- TODO: Justify global
 	world = love.physics.newWorld(0, -720, 960, 1050, 0, 500, true)
 	
-	-- TODO: Justify global
 	tetrikind = {}
-	-- TODO: Justify global
 	wallshapes = {}
-	-- TODO: Justify global
 	tetrishapes = {}
-	-- TODO: Justify global
 	tetribodies = {}
-	-- TODO: Justify global
 	offsetshapes = {}
-	-- TODO: Justify global
 	tetrishapescopy = {}
-	-- TODO: Justify global
 	data = {}
 	
-	-- TODO: Justify global
 	wallbodies = love.physics.newBody(world, 32, -64, 0, 0) --WALLS
 	wallshapes["left"] = love.physics.newPolygonShape(wallbodies, -8, -64, -8, 672, 24, 672, 24, -64)
 	wallshapes["left"]:setData({ "left" })
@@ -70,19 +47,16 @@ function gameA_load()
 	-----------
 	
 	--FIRST "nextpiece"-
-	-- TODO: Justify global
 	nextpiece = math.random(7)
 	
 	checklinedensity(false)
 	game_addTetriA()
-	-- TODO: Justify global
 	nextpiece = math.random(7)
 	----------------
 end
 
 function game_addTetriA() --creates new block (using createtetriA) at 1 and sets its velocity
 	--NEW BLOCK--
-	-- TODO: Justify global
 	randomblock = nextpiece
 	createtetriA(randomblock, 1, 224, blockstartY)
 	tetribodies[1]:setLinearVelocity(0, difficulty_speed)
@@ -263,38 +237,29 @@ function gameA_draw()
 	
 	--SCORES---------------------------------------
 	--"score"--
-	-- TODO: Justify global
 	offsetX = 0
 	
-	-- TODO: Justify global
 	scorestring = tostring(scorescore)
 	for i = 1, scorestring:len() - 1 do
-		-- TODO: Justify global
 		offsetX = offsetX - 8 * scale
 	end
 	love.graphics.print(scorescore, game_height_pixels * scale + offsetX, 24 * scale, 0, scale, scale)
 	
 	
 	--"level"--
-	-- TODO: Justify global
 	offsetX = 0
 	
-	-- TODO: Justify global
 	scorestring = tostring(levelscore)
 	for i = 1, scorestring:len() - 1 do
-		-- TODO: Justify global
 		offsetX = offsetX - 8 * scale
 	end
 	love.graphics.print(levelscore, 136 * scale + offsetX, 56 * scale, 0, scale, scale)
 	
 	--"tiles"--
-	-- TODO: Justify global
 	offsetX = 0
 	
-	-- TODO: Justify global
 	scorestring = tostring(linesscore)
 	for i = 1, scorestring:len() - 1 do
-		-- TODO: Justify global
 		offsetX = offsetX - 8 * scale
 	end
 	love.graphics.print(linesscore, 136 * scale + offsetX, 80 * scale, 0, scale, scale)
@@ -313,34 +278,26 @@ end
 function gameA_update(dt)
 	--NEXTPIECE ROTATION (rotating allday erryday)
 	if cuttingtimer == lineclearduration then
-		-- TODO: Justify global
 		nextpiecerot = nextpiecerot + nextpiecerotspeed * dt
 		while nextpiecerot > math.pi * 2 do
-			-- TODO: Justify global
 			nextpiecerot = nextpiecerot - math.pi * 2
 		end
 	end
 	
 	--CUTTING TIMER
 	if cuttingtimer < lineclearduration then
-		-- TODO: Justify global
 		cuttingtimer = cuttingtimer + dt
 		if cuttingtimer >= lineclearduration then
 			--RANDOMIZE NEXT PIECE
-			-- TODO: Justify global
 			nextpiece = math.random(7)
 			
-			-- TODO: Justify global
 			cuttingtimer = lineclearduration
-			-- TODO: Justify global
 			skipupdate = true
-			-- TODO: Justify global
 			scoreaddtimer = 0
 			
 			if newlevelbeep then
 				love.audio.stop(newlevel)
 				love.audio.play(newlevel)
-				-- TODO: Justify global
 				newlevelbeep = false
 			end
 		end
@@ -350,10 +307,8 @@ function gameA_update(dt)
 	--SCOREADD TIMER
 	if cuttingtimer == lineclearduration then
 		if scoreaddtimer < scoreaddtime then
-			-- TODO: Justify global
 			scoreaddtimer = scoreaddtimer + dt
 			if scoreaddtimer > scoreaddtime then
-				-- TODO: Justify global
 				scoreaddtimer = scoreaddtime
 			end
 		end
@@ -396,7 +351,6 @@ function gameA_update(dt)
 		end
 	end
 	
-	-- TODO: Justify global
 	endblock = false
 	
 	world:update(dt)
@@ -410,19 +364,15 @@ function gameA_update(dt)
 	if densityupdatetimer >= densityupdateinterval then
 		while densityupdatetimer >= densityupdateinterval and cuttingtimer == lineclearduration do
 			checklinedensity(false)
-			-- TODO: Justify global
 			densityupdatetimer = densityupdatetimer - densityupdateinterval
 		end
 	end
-	-- TODO: Justify global
 	densityupdatetimer = densityupdatetimer + dt
 	
 	if gamestate == "failingA" then
-		-- TODO: Justify global
 		clearcheck = true
 		for i, v in pairs(tetribodies) do
 			if v:getY() < 648 then
-				-- TODO: Justify global
 				clearcheck = false
 			end
 		end
@@ -446,13 +396,9 @@ function getintersectX(shape, y) --returns left and right collision points to a 
 end
 
 function removeline(lineno) --Does all necessary things to clear a line. Refineshape and cutimage included.
-	-- TODO: Justify global
 	upperline = (lineno - 1) * 32
-	-- TODO: Justify global
 	lowerline = lineno * 32
-	-- TODO: Justify global
 	globaline = lineno
-	-- TODO: Justify global
 	coordinateproperties = {}
 	local numberofbodies = highestbody()
 	local ioffset = 0
@@ -466,17 +412,12 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 		if i - ioffset > 1 then
 			local refined = false
 			coordinateproperties[i - ioffset] = {}
-			-- TODO: Justify global
 			tetrishapescopy = {}
 			
-			-- TODO: Justify global
 			upperleftx = 640
-			-- TODO: Justify global
 			lowerleftx = 640
 			
-			--[[-- TODO: Justify global
-			upperrightx = 0
-			-- TODO: Justify global
+			--[[upperrightx = 0
 			lowerrightx = 0
 			for j, w in pairs(tetrishapes[i - ioffset]) do
 				local x1, x2 = getintersectX(tetrishapes[i - ioffset][j], upperline)
@@ -572,7 +513,6 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 					local numberofgroups = 0
 					for a, b in pairs(tetrishapescopy) do --through all shapes
 						shapegroups[a] = 0
-						-- TODO: Justify global
 						currentcoords = getPoints2table(b)
 						for shapecounter = 1, a - 1 do --Through all previously set groups
 							local coords = getPoints2table(tetrishapescopy[shapecounter])
@@ -612,7 +552,6 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 							end
 							
 							--save old imagedata to local var first in case we create a new bodyid..
-							-- TODO: Justify global
 							backupimagedata = love.image.newImageData(tetriimagedata[i - ioffset]:getWidth(), tetriimagedata[i - ioffset]:getHeight())
 							backupimagedata:paste(tetriimagedata[i - ioffset], 0, 0, 0, 0, tetriimagedata[i - ioffset]:getWidth(), tetriimagedata[i - ioffset]:getHeight())
 							-- TODO: do we need this^?
@@ -694,7 +633,6 @@ function removeline(lineno) --Does all necessary things to clear a line. Refines
 				tetrishapescopy[a]:destroy()
 				tetrishapescopy[a] = nil
 			end
-			-- TODO: Justify global
 			tetrishapescopy = {}
 		end --if i-ioffset > 1
 	end
@@ -862,7 +800,6 @@ end
 
 function checklinedensity(active) --checks all 18 lines and, if active == true, calls removeline. Also does scoring, sounds and stuff.
 	--loop through every shape and add each area to a nax
-	-- TODO: Justify global
 	linearea = {}
 	
 	for i = 1, 18 do
@@ -960,25 +897,19 @@ function checklinedensity(active) --checks all 18 lines and, if active == true, 
 	if active then
 		local removedlines = false
 		local numberoflines = 0
-		-- TODO: Justify global
 		linesremoved = {}
 		
 		for i = 1, 18 do
 			if linearea[i] > 1024 * lineclearthreshold then
 				if removedlines == false then
-					-- TODO: Justify global
 					cuttingtimer = 0
 					removedlines = true
 					
 					--Save position, image, kind and image of each kind so I can draw them even after changing the actual parts.
 					
-					-- TODO: Justify global
 					tetricutpos = {}
-					-- TODO: Justify global
 					tetricutang = {}
-					-- TODO: Justify global
 					tetricutkind = {}
-					-- TODO: Justify global
 					tetricutimg = {}
 					
 					for i, v in pairs(tetribodies) do -- = 2, #tetribodies do
@@ -1001,7 +932,6 @@ function checklinedensity(active) --checks all 18 lines and, if active == true, 
 				
 				linesremoved[i] = true
 				numberoflines = numberoflines + 1
-				-- TODO: Justify global
 				linesscore = linesscore + 1
 			end
 		end
@@ -1043,24 +973,17 @@ function checklinedensity(active) --checks all 18 lines and, if active == true, 
 			averagearea = averagearea / numberoflines / 10240
 			
 			local scoreadd = math.ceil((numberoflines * 3) ^ (averagearea ^ 10) * 20 + numberoflines ^ 2 * 40)
-			-- TODO: Justify global
 			scorescore = scorescore + scoreadd
 			
-			-- TODO: Justify global
 			lastscoreadd = scoreadd
-			-- TODO: Justify global
 			scoreaddtimer = 0
 			
 			--Level
-			-- TODO: Justify global
 			linescleared = linescleared + numberoflines
 			
 			if math.floor(linescleared / 10) > levelscore then
-				-- TODO: Justify global
 				levelscore = levelscore + 1
-				-- TODO: Justify global
 				difficulty_speed = 100 + levelscore * 7
-				-- TODO: Justify global
 				newlevelbeep = true
 			end
 			
@@ -1254,7 +1177,6 @@ function collideA(a, b, coll) --box2d callback. calls endblock.
 					
 					tetribodies[1] = nil
 					
-					-- TODO: Justify global
 					endblock = true
 				end
 			end
@@ -1268,7 +1190,6 @@ function endblockA() --handles failing, moving the current block to the end of t
 	else
 		game_addTetriA()
 		--RANDOMIZE NEXT PIECE
-		-- TODO: Justify global
 		nextpiece = math.random(7)
 	end
 end
