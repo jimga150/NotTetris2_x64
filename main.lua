@@ -111,8 +111,11 @@ function love.load()
 	lineclearblinks = 7 --i
 	lineclearthreshold = 8.1 --in blocks
 	densityupdateinterval = 1 / 30 --in seconds
-	nextpiecerotspeed = 1 --rad per seconnd
-	minfps = 1 / 50 --dt doesn't go higher than this
+	nextpiecerotspeed = 1 --rad per second
+
+	minfps = 50
+	maxspf = 1 / minfps --dt doesn't go higher than this
+
 	scoreaddtime = 0.5
 	startdelaytime = 0
 	
@@ -281,7 +284,7 @@ function love.update(dt)
 	end
 	
 	if cuttingtimer ~= 0 then
-		dt = math.min(dt, minfps)
+		dt = math.min(dt, maxspf)
 	end
 	
 	if gamestate == "logo" or gamestate == "credits" or gamestate == "title" or gamestate == "menu" or gamestate == "multimenu" or gamestate == "highscoreentry" or gamestate == "options" then
