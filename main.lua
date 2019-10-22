@@ -7,7 +7,6 @@ function love.load()
 	require "failed.lua"
 	require "rocket.lua"
 	
-	-- TODO: Justify global
 	vsync = true
 	
 	-- TODO: Justify global
