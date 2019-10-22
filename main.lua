@@ -27,7 +27,6 @@ function love.load()
 	
 	loadoptions()
 	
-	-- TODO: Justify global
 	maxscale = math.min(math.floor(desktopheight / game_height_pixels), math.floor(desktopwidth / game_sp_width_pixels))
 	
 	if fullscreen == false then
@@ -43,7 +42,6 @@ function love.load()
 		
 		calculateSuggestedScale()
 	
-		-- TODO: Justify global
 		maxscale = math.min(math.floor(desktopheight / game_height_pixels), math.floor(desktopwidth / game_sp_width_pixels))
 		
 		-- TODO: Justify global
@@ -714,7 +712,6 @@ function togglefullscreen(fullscr)
 		
 		calculateSuggestedScale()
 		
-		-- TODO: Justify global
 		maxscale = math.min(math.floor(desktopheight / game_height_pixels), math.floor(desktopwidth / game_sp_width_pixels))
 		
 		-- TODO: Justify global
