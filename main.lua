@@ -22,13 +22,8 @@ function love.load()
 	max_initial_suggestedscale = 5
 	
 	autosize() -- sets desktopheight and desktopwidth to the first possible mode that appears
-
-	-- scale to default to, based on the desktop width and height
-	-- TODO: Justify global
-	suggestedscale = math.min(math.floor((desktopheight - heightcorrection) / game_height_pixels), math.floor((desktopwidth - widthcorrection) / game_sp_width_pixels))
-	if suggestedscale > max_initial_suggestedscale then
-		suggestedscale = max_initial_suggestedscale
-	end
+	
+	calculateSuggestedScale()
 	
 	loadoptions()
 	
@@ -48,11 +43,8 @@ function love.load()
 		desktopwidth, desktopheight = love.graphics.getWidth(), love.graphics.getHeight()
 		saveoptions()
 		
-		-- TODO: Justify global
-		suggestedscale = math.floor((desktopheight - heightcorrection) / game_height_pixels)
-		if suggestedscale > max_initial_suggestedscale then
-			suggestedscale = max_initial_suggestedscale
-		end
+		calculateSuggestedScale()
+	
 		-- TODO: Justify global
 		maxscale = math.min(math.floor(desktopheight / game_height_pixels), math.floor(desktopwidth / game_sp_width_pixels))
 		
@@ -671,7 +663,6 @@ function loadoptions()
 		end
 		
 		if scale == nil then
-			-- TODO: Justify global
 			scale = suggestedscale
 		end
 	
@@ -684,7 +675,6 @@ function loadoptions()
 	
 		autosize()
 	
-		-- TODO: Justify global
 		scale = suggestedscale
 		-- TODO: Justify global
 		fullscreen = false
@@ -715,7 +705,6 @@ function togglefullscreen(fullscr)
 	fullscreen = fullscr
 	love.mouse.setVisible(not fullscreen)
 	if fullscr == false then
-		-- TODO: Justify global
 		scale = suggestedscale
 		-- TODO: Justify global
 		physicsscale = scale / physics_scale_factor
@@ -724,13 +713,9 @@ function togglefullscreen(fullscr)
 		love.graphics.setMode(0, 0, true, vsync, fsaa)
 		-- TODO: Justify global
 		desktopwidth, desktopheight = love.graphics.getWidth(), love.graphics.getHeight()
-		-- TODO: Justify global
-		suggestedscale = math.min(math.floor((desktopheight - heightcorrection) / game_height_pixels), math.floor((desktopwidth - widthcorrection) / game_sp_width_pixels))
-		-- TODO: Justify global
-		suggestedscale = math.min(math.floor((desktopheight - heightcorrection) / game_height_pixels), math.floor((desktopwidth - widthcorrection) / game_sp_width_pixels))
-		if suggestedscale > max_initial_suggestedscale then
-			suggestedscale = max_initial_suggestedscale
-		end
+		
+		calculateSuggestedScale()
+		
 		-- TODO: Justify global
 		maxscale = math.min(math.floor(desktopheight / game_height_pixels), math.floor(desktopwidth / game_sp_width_pixels))
 		
@@ -1153,7 +1138,6 @@ function love.keypressed(key, unicode)
 			elseif optionsselection == 3 then
 				if fullscreen == false then
 					if scale ~= suggestedscale then
-						-- TODO: Justify global
 						scale = suggestedscale
 						changescale(scale)
 					end
@@ -1370,5 +1354,12 @@ function love.keypressed(key, unicode)
 			love.audio.stop(musicrocket4)
 			failed_checkhighscores()
 		end
+	end
+end
+
+function calculateSuggestedScale()
+	suggestedscale = math.floor((desktopheight - heightcorrection) / game_height_pixels)
+	if suggestedscale > max_initial_suggestedscale then
+		suggestedscale = max_initial_suggestedscale
 	end
 end
