@@ -1,4 +1,5 @@
 function menu_load()
+	oldtime = love.timer.getTime()
 	-- TODO: Justify global
 	gamestate = "logo"
 	-- TODO: Justify global
@@ -24,8 +25,6 @@ function menu_load()
 	logotime = 0
 	-- TODO: Justify global
 	bootsoundplayed = false
-	-- TODO: Justify global
-	oldtime = love.timer.getTime()
 end
 
 function menu_draw()

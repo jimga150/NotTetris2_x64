@@ -8,9 +8,6 @@ function love.load()
 	require "rocket.lua"
 	
 	-- TODO: Justify global
-	oldtime = love.timer.getTime()
-	
-	-- TODO: Justify global
 	vsync = true
 	
 	-- TODO: Justify global
