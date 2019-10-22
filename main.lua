@@ -1,4 +1,8 @@
 function love.load()
+	--[[
+	Initializes a metric tonne of global constants and populates memory with resources.
+	calculates graphical scale, loads options, etc
+	]]
 	--requires--
 	require "gameB.lua"
 	require "gameBmulti.lua"
@@ -271,6 +275,9 @@ function loadimages()
 end
 
 function love.update(dt)
+	--[[
+	
+	]]
 	if gamestate == nil then
 		startdelaytime = startdelaytime + dt
 		if startdelaytime >= startdelay then
@@ -279,6 +286,7 @@ function love.update(dt)
 	end
 	
 	if skipupdate then
+		-- some functions dictate that love.update be skipped only once, they will have set skipupdate by now.
 		skipupdate = false
 		return
 	end

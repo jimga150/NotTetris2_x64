@@ -295,7 +295,7 @@ function gameA_update(dt)
 			skipupdate = true
 			scoreaddtimer = 0
 			
-			if newlevelbeep then
+			if newlevelbeep then -- set to true when this line clear also heralds a new level
 				love.audio.stop(newlevel)
 				love.audio.play(newlevel)
 				newlevelbeep = false
