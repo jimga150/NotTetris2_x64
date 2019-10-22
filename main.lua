@@ -9,6 +9,8 @@ function love.load()
 	
 	vsync = true
 	fsaa = 16
+
+	initial_volume_level = 0.6
 	
 	game_height_pixels = 144 --number of pixels in the game height, to be scaled by an integer factor before display
 	game_sp_width_pixels = 160 --number of pixels in the game width
@@ -57,64 +59,8 @@ function love.load()
 	
 	tetriimages = {}
 	tetriimagedata = {}
-	
-	--SOUND--
-	music = {}
-	
-	music[1] = love.audio.newSource("sounds/themeA.ogg", "stream")
-	music[1]:setVolume(0.6)
-	music[1]:setLooping(true)
-	
-	music[2] = love.audio.newSource("sounds/themeB.ogg", "stream")
-	music[2]:setVolume(0.6)
-	music[2]:setLooping(true)
-	
-	music[3] = love.audio.newSource("sounds/themeC.ogg", "stream")
-	music[3]:setVolume(0.6)
-	music[3]:setLooping(true)
-	
-	musictitle = love.audio.newSource("sounds/titlemusic.ogg", "stream")
-	musictitle:setVolume(0.6)
-	musictitle:setLooping(true)
-	
-	musichighscore = love.audio.newSource("sounds/highscoremusic.ogg", "stream")
-	musichighscore:setVolume(0.6)
-	musichighscore:setLooping(true)
-	
-	musicrocket4 = love.audio.newSource("sounds/rocket4.ogg", "stream")
-	musicrocket4:setVolume(0.6)
-	musicrocket4:setLooping(false)
-	
-	musicrocket1to3 = love.audio.newSource("sounds/rocket1to3.ogg", "stream")
-	musicrocket1to3:setVolume(0.6)
-	musicrocket1to3:setLooping(false)
-	
-	musicresults = love.audio.newSource("sounds/resultsmusic.ogg", "stream")
-	musicresults:setVolume(1)
-	musicresults:setLooping(false)
-	
-	highscoreintro = love.audio.newSource("sounds/highscoreintro.ogg", "stream")
-	highscoreintro:setVolume(0.6)
-	highscoreintro:setLooping(false)
-	
-	musicoptions = love.audio.newSource("sounds/musicoptions.ogg", "stream")
-	musicoptions:setVolume(1)
-	musicoptions:setLooping(true)
-	
-	boot = love.audio.newSource("sounds/boot.ogg")
-	blockfall = love.audio.newSource("sounds/blockfall.ogg", "stream")
-	blockturn = love.audio.newSource("sounds/turn.ogg", "stream")
-	blockmove = love.audio.newSource("sounds/move.ogg", "stream")
-	lineclear = love.audio.newSource("sounds/lineclear.ogg", "stream")
-	fourlineclear = love.audio.newSource("sounds/4lineclear.ogg", "stream")
-	gameover1 = love.audio.newSource("sounds/gameover1.ogg", "stream")
-	gameover2 = love.audio.newSource("sounds/gameover2.ogg", "stream")
-	pausesound = love.audio.newSource("sounds/pause.ogg", "stream")
-	highscorebeep = love.audio.newSource("sounds/highscorebeep.ogg", "stream")
-	newlevel = love.audio.newSource("sounds/newlevel.ogg", "stream")
-	newlevel:setVolume(0.6)
-	
-	changevolume(volume)
+
+	loadsound()
 	
 	--IMAGES THAT WON'T CHANGE HUE:
 	rainbowgradient = love.graphics.newImage("graphics/rainbow.png") rainbowgradient:setFilter("nearest", "nearest")
@@ -480,15 +426,15 @@ function scaleImagedata(imagedata, i)
 end
 
 function changevolume(i)
-	music[1]:setVolume(0.6 * i)
-	music[2]:setVolume(0.6 * i)
-	music[3]:setVolume(0.6 * i)
-	musictitle:setVolume(0.6 * i)
-	musichighscore:setVolume(0.6 * i)
-	musicrocket4:setVolume(0.6 * i)
-	musicrocket1to3:setVolume(0.6 * i)
+	music[1]:setVolume(initial_volume_level * i)
+	music[2]:setVolume(initial_volume_level * i)
+	music[3]:setVolume(initial_volume_level * i)
+	musictitle:setVolume(initial_volume_level * i)
+	musichighscore:setVolume(initial_volume_level * i)
+	musicrocket4:setVolume(initial_volume_level * i)
+	musicrocket1to3:setVolume(initial_volume_level * i)
 	musicresults:setVolume(i)
-	highscoreintro:setVolume(0.6 * i)
+	highscoreintro:setVolume(initial_volume_level * i)
 	musicoptions:setVolume(i)
 	boot:setVolume(i)
 	blockfall:setVolume(i)
@@ -500,7 +446,7 @@ function changevolume(i)
 	gameover2:setVolume(i)
 	pausesound:setVolume(i)
 	highscorebeep:setVolume(i)
-	newlevel:setVolume(0.6 * i)
+	newlevel:setVolume(initial_volume_level * i)
 end
 
 function loadoptions()
@@ -1161,4 +1107,63 @@ function calculateSuggestedScale()
 	if suggestedscale > max_initial_suggestedscale then
 		suggestedscale = max_initial_suggestedscale
 	end
+end
+
+function loadsound()
+	music = {}
+	
+	music[1] = love.audio.newSource("sounds/themeA.ogg", "stream")
+	music[1]:setVolume(initial_volume_level)
+	music[1]:setLooping(true)
+	
+	music[2] = love.audio.newSource("sounds/themeB.ogg", "stream")
+	music[2]:setVolume(initial_volume_level)
+	music[2]:setLooping(true)
+	
+	music[3] = love.audio.newSource("sounds/themeC.ogg", "stream")
+	music[3]:setVolume(initial_volume_level)
+	music[3]:setLooping(true)
+	
+	musictitle = love.audio.newSource("sounds/titlemusic.ogg", "stream")
+	musictitle:setVolume(initial_volume_level)
+	musictitle:setLooping(true)
+	
+	musichighscore = love.audio.newSource("sounds/highscoremusic.ogg", "stream")
+	musichighscore:setVolume(initial_volume_level)
+	musichighscore:setLooping(true)
+	
+	musicrocket4 = love.audio.newSource("sounds/rocket4.ogg", "stream")
+	musicrocket4:setVolume(initial_volume_level)
+	musicrocket4:setLooping(false)
+	
+	musicrocket1to3 = love.audio.newSource("sounds/rocket1to3.ogg", "stream")
+	musicrocket1to3:setVolume(initial_volume_level)
+	musicrocket1to3:setLooping(false)
+	
+	musicresults = love.audio.newSource("sounds/resultsmusic.ogg", "stream")
+	musicresults:setVolume(1)
+	musicresults:setLooping(false)
+	
+	highscoreintro = love.audio.newSource("sounds/highscoreintro.ogg", "stream")
+	highscoreintro:setVolume(initial_volume_level)
+	highscoreintro:setLooping(false)
+	
+	musicoptions = love.audio.newSource("sounds/musicoptions.ogg", "stream")
+	musicoptions:setVolume(1)
+	musicoptions:setLooping(true)
+	
+	boot = love.audio.newSource("sounds/boot.ogg")
+	blockfall = love.audio.newSource("sounds/blockfall.ogg", "stream")
+	blockturn = love.audio.newSource("sounds/turn.ogg", "stream")
+	blockmove = love.audio.newSource("sounds/move.ogg", "stream")
+	lineclear = love.audio.newSource("sounds/lineclear.ogg", "stream")
+	fourlineclear = love.audio.newSource("sounds/4lineclear.ogg", "stream")
+	gameover1 = love.audio.newSource("sounds/gameover1.ogg", "stream")
+	gameover2 = love.audio.newSource("sounds/gameover2.ogg", "stream")
+	pausesound = love.audio.newSource("sounds/pause.ogg", "stream")
+	highscorebeep = love.audio.newSource("sounds/highscorebeep.ogg", "stream")
+	newlevel = love.audio.newSource("sounds/newlevel.ogg", "stream")
+	newlevel:setVolume(initial_volume_level)
+	
+	changevolume(volume)
 end
