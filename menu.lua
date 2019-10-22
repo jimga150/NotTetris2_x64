@@ -235,7 +235,6 @@ function menu_update(dt)
 		if logotime >= logoduration + logodelay then
 			-- TODO: Justify global
 			oldtime = love.timer.getTime()
-			-- TODO: Justify global
 			gamestate = "credits"
 		end
 	end
@@ -244,7 +243,6 @@ function menu_update(dt)
 		-- TODO: Justify global
 		currenttime = love.timer.getTime()
 		if currenttime - oldtime > creditsdelay then
-			-- TODO: Justify global
 			gamestate = "title"
 			love.graphics.setBackgroundColor(0, 0, 0)
 			love.audio.play(musictitle)

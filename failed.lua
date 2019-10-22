@@ -106,7 +106,6 @@ function failed_checkhighscores()
 			highscoremusicstart = love.timer.getTime()
 			-- TODO: Justify global
 			musicchanged = false
-			-- TODO: Justify global
 			gamestate = "highscoreentry"
 			break
 		end
