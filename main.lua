@@ -1005,7 +1005,6 @@ function love.keypressed(key, unicode)
 				selection = selection - 1
 				-- TODO: Justify global
 				selectblink = true
-				-- TODO: Justify global
 				oldtime = love.timer.getTime()
 			end
 		elseif key == "right" then
@@ -1014,7 +1013,6 @@ function love.keypressed(key, unicode)
 				selection = selection + 1
 				-- TODO: Justify global
 				selectblink = true
-				-- TODO: Justify global
 				oldtime = love.timer.getTime()
 			end
 		elseif key == "up" then
@@ -1023,14 +1021,12 @@ function love.keypressed(key, unicode)
 				selection = selection - 2
 				-- TODO: Justify global
 				selectblink = true
-				-- TODO: Justify global
 				oldtime = love.timer.getTime()
 				if selection < 3 then
 					-- TODO: Justify global
 					selection = gameno
 					-- TODO: Justify global
 					selectblink = false
-					-- TODO: Justify global
 					oldtime = love.timer.getTime()
 				end
 			elseif selection == 1 or selection == 2 then
@@ -1038,7 +1034,6 @@ function love.keypressed(key, unicode)
 				selection = musicno + 2
 				-- TODO: Justify global
 				selectblink = false
-				-- TODO: Justify global
 				oldtime = love.timer.getTime()
 			end
 		elseif key == "down" then
@@ -1047,14 +1042,12 @@ function love.keypressed(key, unicode)
 				selection = selection + 2
 				-- TODO: Justify global
 				selectblink = true
-				-- TODO: Justify global
 				oldtime = love.timer.getTime()
 				if selection > 2 and selection < 5 then
 					-- TODO: Justify global
 					selection = musicno + 2
 					-- TODO: Justify global
 					selectblink = false
-					-- TODO: Justify global
 					oldtime = love.timer.getTime()
 				end
 			elseif selection == 5 or selection == 6 then
@@ -1062,7 +1055,6 @@ function love.keypressed(key, unicode)
 				selection = gameno
 				-- TODO: Justify global
 				selectblink = false
-				-- TODO: Justify global
 				oldtime = love.timer.getTime()
 			end
 		end
@@ -1100,7 +1092,6 @@ function love.keypressed(key, unicode)
 			end
 			-- TODO: Justify global
 			selectblink = true
-			-- TODO: Justify global
 			oldtime = love.timer.getTime()
 		
 		elseif key == "up" then
@@ -1112,7 +1103,6 @@ function love.keypressed(key, unicode)
 			end
 			-- TODO: Justify global
 			selectblink = true
-			-- TODO: Justify global
 			oldtime = love.timer.getTime()
 		
 		elseif key == "left" then
@@ -1206,7 +1196,6 @@ function love.keypressed(key, unicode)
 				selection = selection - 1
 				-- TODO: Justify global
 				selectblink = true
-				-- TODO: Justify global
 				oldtime = love.timer.getTime()
 			end
 		elseif key == "right" or key == "d" then
@@ -1215,7 +1204,6 @@ function love.keypressed(key, unicode)
 				selection = selection + 1
 				-- TODO: Justify global
 				selectblink = true
-				-- TODO: Justify global
 				oldtime = love.timer.getTime()
 			end
 		elseif key == "up" or key == "w" then
@@ -1224,14 +1212,12 @@ function love.keypressed(key, unicode)
 				selection = selection - 2
 				-- TODO: Justify global
 				selectblink = true
-				-- TODO: Justify global
 				oldtime = love.timer.getTime()
 				if selection < 3 then
 					-- TODO: Justify global
 					selection = gameno
 					-- TODO: Justify global
 					selectblink = false
-					-- TODO: Justify global
 					oldtime = love.timer.getTime()
 				end
 			elseif selection == 1 or selection == 2 then
@@ -1239,7 +1225,6 @@ function love.keypressed(key, unicode)
 				selection = musicno + 2
 				-- TODO: Justify global
 				selectblink = false
-				-- TODO: Justify global
 				oldtime = love.timer.getTime()
 			end
 		elseif key == "down" or key == "s" then
@@ -1248,14 +1233,12 @@ function love.keypressed(key, unicode)
 				selection = selection + 2
 				-- TODO: Justify global
 				selectblink = true
-				-- TODO: Justify global
 				oldtime = love.timer.getTime()
 				if selection > 2 and selection < 5 then
 					-- TODO: Justify global
 					selection = musicno + 2
 					-- TODO: Justify global
 					selectblink = false
-					-- TODO: Justify global
 					oldtime = love.timer.getTime()
 				end
 			elseif selection == 5 or selection == 6 then
@@ -1263,7 +1246,6 @@ function love.keypressed(key, unicode)
 				selection = gameno
 				-- TODO: Justify global
 				selectblink = false
-				-- TODO: Justify global
 				oldtime = love.timer.getTime()
 			end
 		end
@@ -1302,7 +1284,6 @@ function love.keypressed(key, unicode)
 		end
 		if gamestate == "gameA" or gamestate == "gameB" then
 			if key == "escape" then
-				-- TODO: Justify global
 				oldtime = love.timer.getTime()
 				gamestate = "menu"
 			end

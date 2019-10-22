@@ -81,7 +81,6 @@ function failed_checkhighscores()
 	highscoreno = 0
 	-- TODO: Justify global
 	selectblink = true
-	-- TODO: Justify global
 	oldtime = love.timer.getTime()
 	for i = 1, 3 do
 		if scorescore > highscore[i] then

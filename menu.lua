@@ -232,7 +232,6 @@ function menu_update(dt)
 		end
 		
 		if logotime >= logoduration + logodelay then
-			-- TODO: Justify global
 			oldtime = love.timer.getTime()
 			gamestate = "credits"
 		end
@@ -254,7 +253,6 @@ function menu_update(dt)
 		if currenttime - oldtime > selectblinkrate then
 			-- TODO: Justify global
 			selectblink = not selectblink
-			-- TODO: Justify global
 			oldtime = currenttime
 		end
 	end
@@ -289,7 +287,6 @@ function menu_update(dt)
 		if currenttime - oldtime > cursorblinkrate then
 			-- TODO: Justify global
 			cursorblink = not cursorblink
-			-- TODO: Justify global
 			oldtime = currenttime
 		end
 		if currenttime - highscoremusicstart > 1.2 then
