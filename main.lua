@@ -29,8 +29,6 @@ function love.load()
 	
 	-- TODO: Justify global
 	maxscale = math.min(math.floor(desktopheight / game_height_pixels), math.floor(desktopwidth / game_sp_width_pixels))
-	-- TODO: Justify global
-	maxmpscale = math.min(math.floor(desktopheight / game_height_pixels), math.floor(desktopwidth / game_mp_width_pixels))
 	
 	if fullscreen == false then
 		if scale ~= max_initial_suggestedscale then
