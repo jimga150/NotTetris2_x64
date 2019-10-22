@@ -10,22 +10,15 @@ function love.load()
 	vsync = true
 	fsaa = 16
 	
-	-- TODO: Justify global
 	game_height_pixels = 144 --number of pixels in the game height, to be scaled by an integer factor before display
-	-- TODO: Justify global
 	game_sp_width_pixels = 160 --number of pixels in the game width
-	-- TODO: Justify global
 	game_mp_width_pixels = 274 --number of pixels in the game width for multiplayer mode
 	
-	-- TODO: Justify global
 	physics_scale_factor = 4 -- factor by which to divide the scale by to get the physics scale, purely a visual fix
 	
-	-- TODO: Justify global
 	heightcorrection = 0
-	-- TODO: Justify global
 	widthcorrection = 0
 	
-	-- TODO: Justify global
 	max_initial_suggestedscale = 5
 	
 	autosize() -- sets desktopheight and desktopwidth to the first possible mode that appears
@@ -34,7 +27,6 @@ function love.load()
 	-- TODO: Justify global
 	suggestedscale = math.min(math.floor((desktopheight - heightcorrection) / game_height_pixels), math.floor((desktopwidth - widthcorrection) / game_sp_width_pixels))
 	if suggestedscale > max_initial_suggestedscale then
-		-- TODO: Justify global
 		suggestedscale = max_initial_suggestedscale
 	end
 	
@@ -59,7 +51,6 @@ function love.load()
 		-- TODO: Justify global
 		suggestedscale = math.floor((desktopheight - heightcorrection) / game_height_pixels)
 		if suggestedscale > max_initial_suggestedscale then
-			-- TODO: Justify global
 			suggestedscale = max_initial_suggestedscale
 		end
 		-- TODO: Justify global
@@ -738,7 +729,6 @@ function togglefullscreen(fullscr)
 		-- TODO: Justify global
 		suggestedscale = math.min(math.floor((desktopheight - heightcorrection) / game_height_pixels), math.floor((desktopwidth - widthcorrection) / game_sp_width_pixels))
 		if suggestedscale > max_initial_suggestedscale then
-			-- TODO: Justify global
 			suggestedscale = max_initial_suggestedscale
 		end
 		-- TODO: Justify global
