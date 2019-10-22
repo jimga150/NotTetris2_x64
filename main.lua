@@ -8,8 +8,6 @@ function love.load()
 	require "rocket.lua"
 	
 	vsync = true
-	
-	-- TODO: Justify global
 	fsaa = 16
 	
 	-- TODO: Justify global
